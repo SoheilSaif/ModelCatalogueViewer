@@ -9,11 +9,11 @@ addons:
 before_script:
   - npm install -g bower
   - bower install
-script: "bower install && ./grailsw refresh-dependencies && ./grailsw test-app unit: && ./grailsw test-app integration: && ./grailsw test-app functional: -Dgeb.env=sauceChrome"
+script: "bower install && ./grailsw refresh-dependencies && ./grailsw test-app unit: && ./grailsw test-app integration: && ./grailsw test-app functional: -Dgeb.env=sauceChrome "
 env:
   global:
-  - secure: "N4EJHKFrkWbuiErvU+3hYJFKCV/DbEvx6ZYs7Y0KUPk6V+1/H7XfXw93KutErdxGbQkfK8mirqaI8sFxYqZbM9HBfBAzez16miLmWRRjOtnHoZH2Xvni8keN/9DY5plK1j5Gyo160xGQ5KplRsvLd6q7FhuYo0Z1IC/7oOne9p8="
-  - secure: "U3HITe3Vjlg7Mycl/OYVULbUSBrcjO5kilGDPGGlUoMowKyKEVq9ao4uTEXkVj60RQOtt06r1yIu/DkgJtyqPFGocIV4cMFaC8VwTcF+qAOYvoWvnY43Dx7Ur8ya2XSizUyJHZHwRfHEV2vJa0sgFjGokcX0+/FN/b3ktF8x9XQ="
+  - secure: N4EJHKFrkWbuiErvU+3hYJFKCV/DbEvx6ZYs7Y0KUPk6V+1/H7XfXw93KutErdxGbQkfK8mirqaI8sFxYqZbM9HBfBAzez16miLmWRRjOtnHoZH2Xvni8keN/9DY5plK1j5Gyo160xGQ5KplRsvLd6q7FhuYo0Z1IC/7oOne9p8=
+  - secure: U3HITe3Vjlg7Mycl/OYVULbUSBrcjO5kilGDPGGlUoMowKyKEVq9ao4uTEXkVj60RQOtt06r1yIu/DkgJtyqPFGocIV4cMFaC8VwTcF+qAOYvoWvnY43Dx7Ur8ya2XSizUyJHZHwRfHEV2vJa0sgFjGokcX0+/FN/b3ktF8x9XQ=
 branches:
   only:
   - master
