@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="2" failures="1" hostname="Soheils-MacBook-Pro.local" name="modelcatalogueviewer.DataElementControllerSpec" tests="7" time="4.997" timestamp="2014-04-06T13:42:13">
+  <properties />
+  <testcase classname="modelcatalogueviewer.DataElementControllerSpec" name="Test the index action returns the correct model" time="3.417" />
+  <testcase classname="modelcatalogueviewer.DataElementControllerSpec" name="Test the create action returns the correct model" time="0.281" />
+  <testcase classname="modelcatalogueviewer.DataElementControllerSpec" name="Test the save action correctly persists an instance" time="0.642">
+    <error message="Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead " type="org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException">org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+</error>
+  </testcase>
+  <testcase classname="modelcatalogueviewer.DataElementControllerSpec" name="Test that the show action returns the correct model" time="0.13" />
+  <testcase classname="modelcatalogueviewer.DataElementControllerSpec" name="Test that the edit action returns the correct model" time="0.078" />
+  <testcase classname="modelcatalogueviewer.DataElementControllerSpec" name="Test the update action performs an update on a valid domain instance" time="0.325">
+    <error message="Cannot get property &apos;id&apos; on null object" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot get property &apos;id&apos; on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+</error>
+  </testcase>
+  <testcase classname="modelcatalogueviewer.DataElementControllerSpec" name="Test that the delete action deletes an instance if it exists" time="0.096">
+    <failure message="Condition not satisfied:&#xa;&#xa;DataElement.count() == 1&#xa;            |       |&#xa;            0       false&#xa;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+</failure>
+  </testcase>
+  <system-out><![CDATA[--Output from Test the index action returns the correct model--
+--Output from Test the create action returns the correct model--
+--Output from Test the save action correctly persists an instance--
+--Output from Test that the show action returns the correct model--
+--Output from Test that the edit action returns the correct model--
+--Output from Test the update action performs an update on a valid domain instance--
+--Output from Test that the delete action deletes an instance if it exists--
+]]></system-out>
+  <system-err><![CDATA[--Output from Test the index action returns the correct model--
+--Output from Test the create action returns the correct model--
+--Output from Test the save action correctly persists an instance--
+--Output from Test that the show action returns the correct model--
+--Output from Test that the edit action returns the correct model--
+--Output from Test the update action performs an update on a valid domain instance--
+--Output from Test that the delete action deletes an instance if it exists--
+]]></system-err>
+</testsuite>

@@ -1,0 +1,12 @@
+language: groovy
+jdk:
+- oraclejdk7
+- openjdk7
+before_script:
+  - npm install -g bower
+  - bower install
+script: "bower install && ./grailsw refresh-dependencies && ./grailsw test-app unit: && ./grailsw test-app integration:"
+branches:
+  only:
+  - master
+  - develop
