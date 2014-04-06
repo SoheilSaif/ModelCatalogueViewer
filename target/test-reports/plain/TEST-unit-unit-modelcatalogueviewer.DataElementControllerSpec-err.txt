@@ -1,0 +1,2 @@
+--Output from Test the index action returns the correct model--
+--Output from Test the create action returns the correct model--

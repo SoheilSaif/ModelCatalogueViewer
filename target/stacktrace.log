@@ -1,0 +1,570 @@
+2014-04-06 14:42:17,782 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at org.codehaus.groovy.grails.plugins.web.api.ControllersApi.redirect(ControllersApi.java:274)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.GroovyObjectSupport.invokeMethod(GroovyObjectSupport.java:44)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:405)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.getResponseForFormat(MimeTypesApiSupport.groovy:142)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormatInternal(MimeTypesApiSupport.groovy:57)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormat(MimeTypesApiSupport.groovy:40)
+	at org.codehaus.groovy.grails.plugins.web.api.RequestMimeTypesApi.withFormat(RequestMimeTypesApi.groovy:95)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementController.save_closure4(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate$1.doInTransaction(GrailsTransactionTemplate.groovy:62)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:131)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate.execute(GrailsTransactionTemplate.groovy:59)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:42:17,786 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:42:17,788 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:42:17,788 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:42:17,796 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:42:17,796 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:42:18,335 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:42:18,335 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:42:18,336 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:42:18,336 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:42:18,336 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:42:18,336 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:42:18,426 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:42:18,428 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:42:18,428 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:42:18,428 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:42:18,429 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:42:18,429 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:55:59,558 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at org.codehaus.groovy.grails.plugins.web.api.ControllersApi.redirect(ControllersApi.java:274)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.GroovyObjectSupport.invokeMethod(GroovyObjectSupport.java:44)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:405)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.getResponseForFormat(MimeTypesApiSupport.groovy:142)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormatInternal(MimeTypesApiSupport.groovy:57)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormat(MimeTypesApiSupport.groovy:40)
+	at org.codehaus.groovy.grails.plugins.web.api.RequestMimeTypesApi.withFormat(RequestMimeTypesApi.groovy:95)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementController.save_closure4(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate$1.doInTransaction(GrailsTransactionTemplate.groovy:62)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:131)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate.execute(GrailsTransactionTemplate.groovy:59)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:55:59,563 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:55:59,566 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:55:59,567 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:55:59,573 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:55:59,573 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:56:00,345 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:56:00,345 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:56:00,345 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:56:00,346 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:56:00,346 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:56:00,346 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:56:00,477 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:56:00,479 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:56:00,480 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:56:00,480 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:56:00,480 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:56:00,480 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:57:38,186 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at org.codehaus.groovy.grails.plugins.web.api.ControllersApi.redirect(ControllersApi.java:274)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.GroovyObjectSupport.invokeMethod(GroovyObjectSupport.java:44)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:405)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.getResponseForFormat(MimeTypesApiSupport.groovy:142)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormatInternal(MimeTypesApiSupport.groovy:57)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormat(MimeTypesApiSupport.groovy:40)
+	at org.codehaus.groovy.grails.plugins.web.api.RequestMimeTypesApi.withFormat(RequestMimeTypesApi.groovy:95)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementController.save_closure4(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate$1.doInTransaction(GrailsTransactionTemplate.groovy:62)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:131)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate.execute(GrailsTransactionTemplate.groovy:59)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:57:38,190 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:57:38,193 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:57:38,193 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:57:38,199 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:57:38,199 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:57:38,988 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:57:38,988 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:57:38,988 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:57:38,988 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:57:38,989 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:57:38,989 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:57:39,145 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:57:39,147 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:57:39,147 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:57:39,148 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:57:39,148 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:57:39,149 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:58:34,119 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at org.codehaus.groovy.grails.plugins.web.api.ControllersApi.redirect(ControllersApi.java:274)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.GroovyObjectSupport.invokeMethod(GroovyObjectSupport.java:44)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:405)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.getResponseForFormat(MimeTypesApiSupport.groovy:142)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormatInternal(MimeTypesApiSupport.groovy:57)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormat(MimeTypesApiSupport.groovy:40)
+	at org.codehaus.groovy.grails.plugins.web.api.RequestMimeTypesApi.withFormat(RequestMimeTypesApi.groovy:95)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementController.save_closure4(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate$1.doInTransaction(GrailsTransactionTemplate.groovy:62)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:131)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate.execute(GrailsTransactionTemplate.groovy:59)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:58:34,123 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:58:34,124 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:58:34,124 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:58:34,129 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:58:34,129 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:58:34,765 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:58:34,765 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:58:34,765 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:58:34,765 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:58:34,766 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:58:34,766 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:58:34,882 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:58:34,884 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:58:34,884 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:58:34,885 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:58:34,885 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:58:34,886 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:59:51,337 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at org.codehaus.groovy.grails.plugins.web.api.ControllersApi.redirect(ControllersApi.java:274)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.GroovyObjectSupport.invokeMethod(GroovyObjectSupport.java:44)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:405)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.getResponseForFormat(MimeTypesApiSupport.groovy:142)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormatInternal(MimeTypesApiSupport.groovy:57)
+	at org.codehaus.groovy.grails.plugins.web.api.MimeTypesApiSupport.withFormat(MimeTypesApiSupport.groovy:40)
+	at org.codehaus.groovy.grails.plugins.web.api.RequestMimeTypesApi.withFormat(RequestMimeTypesApi.groovy:95)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementController.save_closure4(DataElementController.groovy)
+	at org.springsource.loaded.ri.ReflectiveInterceptor.jlrMethodInvoke(ReflectiveInterceptor.java:1254)
+	at groovy.lang.Closure.call(Closure.java:411)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate$1.doInTransaction(GrailsTransactionTemplate.groovy:62)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:131)
+	at org.codehaus.groovy.grails.orm.support.GrailsTransactionTemplate.execute(GrailsTransactionTemplate.groovy:59)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:59:51,341 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:59:51,345 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:59:51,345 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:59:51,362 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:59:51,362 [main] ERROR StackTrace  - Full Stack Trace:
+org.codehaus.groovy.grails.web.servlet.mvc.exceptions.CannotRedirectException: Cannot redirect for object [modelcatalogueviewer.DataElement : (unsaved)] it is not a domain or has no identifier. Use an explicit redirect instead 
+	at modelcatalogueviewer.DataElementController.tt__save_closure9_closure14(DataElementController.groovy:43)
+	at modelcatalogueviewer.DataElementController.$tt__save(DataElementController.groovy:40)
+	at modelcatalogueviewer.DataElementControllerSpec.Test the save action correctly persists an instance(DataElementControllerSpec.groovy:53)
+2014-04-06 14:59:51,959 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:59:51,959 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:59:51,960 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:59:51,960 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:59:51,960 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:59:51,960 [main] ERROR StackTrace  - Full Stack Trace:
+java.lang.NullPointerException: Cannot get property 'id' on null object
+	at modelcatalogueviewer.DataElementControllerSpec.Test the update action performs an update on a valid domain instance(DataElementControllerSpec.groovy:120)
+2014-04-06 14:59:52,083 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:59:52,085 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:59:52,086 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:59:52,086 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:59:52,086 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 14:59:52,087 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+DataElement.count() == 1
+            |       |
+            0       false
+
+	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
