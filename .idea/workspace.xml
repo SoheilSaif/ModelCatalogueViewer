@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="076d0d50-ea1e-4a29-9c0b-e68fc4114143" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/functional/specs/DataElementListSpec.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/functional/pages/DataElementPage.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/functional/GebConfig.groovy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-reports/TEST-unit-unit-modelcatalogueviewer.DataElementControllerSpec.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-reports/html/modelcatalogueviewer/0_DataElementControllerSpec.html" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-reports/plain/TEST-unit-unit-modelcatalogueviewer.DataElementControllerSpec-err.txt" afterPath="" />
@@ -31,14 +27,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugin-classes/org/grails/plugins/tomcat/fork/TomcatExecutionContext.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/work/plugin-classes/org/grails/plugins/tomcat/fork/TomcatWarRunner.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ModelCatalogueViewer-grailsPlugins.iml" afterPath="$PROJECT_DIR$/ModelCatalogueViewer-grailsPlugins.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ModelCatalogueViewer.iml" afterPath="$PROJECT_DIR$/ModelCatalogueViewer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-reports/TESTS-TestSuites.xml" afterPath="$PROJECT_DIR$/target/test-reports/TESTS-TestSuites.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-reports/html/all.html" afterPath="$PROJECT_DIR$/target/test-reports/html/all.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-reports/html/failed.html" afterPath="$PROJECT_DIR$/target/test-reports/html/failed.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-reports/html/index.html" afterPath="$PROJECT_DIR$/target/test-reports/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/stacktrace.log" afterPath="$PROJECT_DIR$/target/stacktrace.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ModelCatalogueViewer.iws" />
@@ -104,30 +92,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DataElementListSpec.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/functional/specs/DataElementListSpec.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
-              <folding>
-                <element signature="e#15#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataElementPage.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/functional/pages/DataElementPage.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="22" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GebConfig.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/functional/GebConfig.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="62" selection-start="1868" selection-end="1873" vertical-scroll-proportion="0.0" vertical-offset="433" max-vertical-offset="1035">
+            <state line="64" column="5" selection-start="2146" selection-end="2146" vertical-scroll-proportion="0.0" vertical-offset="734" max-vertical-offset="1035">
               <folding>
                 <element signature="e#108#143#0" expanded="true" />
               </folding>
@@ -138,7 +106,7 @@
       <file leaf-file-name=".travis.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="175" selection-start="368" selection-end="368" vertical-scroll-proportion="0.32101166" vertical-offset="0" max-vertical-offset="514">
+            <state line="19" column="11" selection-start="799" selection-end="799" vertical-scroll-proportion="0.6875" vertical-offset="87" max-vertical-offset="375">
               <folding />
             </state>
           </provider>
@@ -688,12 +656,12 @@
       <workItem from="1396790819923" duration="25000" />
       <workItem from="1396791488180" duration="248000" />
       <workItem from="1396791757343" duration="738000" />
-      <workItem from="1396793073376" duration="8948000" />
+      <workItem from="1396793073376" duration="9442000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9985000" />
+    <option name="totallyTimeSpent" value="10479000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="724" extended-state="6" />
@@ -715,7 +683,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1720517" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12183544" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47943038" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -849,14 +817,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/functional/pages/DataElementPage.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="22" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+        <state line="13" column="22" selection-start="229" selection-end="229" vertical-scroll-proportion="0.64784056" vertical-offset="0" max-vertical-offset="360">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/functional/specs/DataElementListSpec.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="553" selection-end="553" vertical-scroll-proportion="0.0" vertical-offset="230" max-vertical-offset="495">
+        <state line="27" column="0" selection-start="553" selection-end="553" vertical-scroll-proportion="1.3455149" vertical-offset="0" max-vertical-offset="495">
           <folding>
             <element signature="e#15#33#0" expanded="true" />
           </folding>
@@ -865,7 +833,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/functional/GebConfig.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="62" selection-start="1868" selection-end="1873" vertical-scroll-proportion="0.0" vertical-offset="508" max-vertical-offset="1035">
+        <state line="64" column="5" selection-start="2146" selection-end="2146" vertical-scroll-proportion="0.0" vertical-offset="734" max-vertical-offset="1035">
           <folding>
             <element signature="e#108#143#0" expanded="true" />
           </folding>
@@ -874,7 +842,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="175" selection-start="368" selection-end="368" vertical-scroll-proportion="0.32101166" vertical-offset="0" max-vertical-offset="514">
+        <state line="19" column="11" selection-start="799" selection-end="799" vertical-scroll-proportion="0.6875" vertical-offset="87" max-vertical-offset="375">
           <folding />
         </state>
       </provider>
