@@ -1,0 +1,10 @@
+Testsuite: specs.DataElementListSpec
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 4.367 sec
+------------- Standard Output ---------------
+--Output from go to DataElementList home screen and show DataElement list--
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+--Output from go to DataElementList home screen and show DataElement list--
+------------- ---------------- ---------------
+
+Testcase: go to DataElementList home screen and show DataElement list took 4.366 sec

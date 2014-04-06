@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="Soheils-MacBook-Pro.local" name="specs.DataElementListSpec" tests="1" time="4.367" timestamp="2014-04-06T16:18:57">
+  <properties />
+  <testcase classname="specs.DataElementListSpec" name="go to DataElementList home screen and show DataElement list" time="4.366" />
+  <system-out><![CDATA[--Output from go to DataElementList home screen and show DataElement list--
+]]></system-out>
+  <system-err><![CDATA[--Output from go to DataElementList home screen and show DataElement list--
+]]></system-err>
+</testsuite>

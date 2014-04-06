@@ -568,3 +568,166 @@ DataElement.count() == 1
             0       false
 
 	at modelcatalogueviewer.DataElementControllerSpec.Test that the delete action deletes an instance if it exists(DataElementControllerSpec.groovy:139)
+2014-04-06 17:17:18,837 [main] ERROR StackTrace  - Full Stack Trace:
+Assertion failed: 
+
+url == "dataElement/index" && title == "Data Element List"
+|   |                      |  |     |
+|   true                   |  |     false
+dataElement/index          |  DataElement List
+                           false
+
+	at pages.DataElementPage._clinit__closure1(DataElementPage.groovy:14)
+	at pages.DataElementPage._clinit__closure1(DataElementPage.groovy)
+	at geb.Page.verifyThisPageAtOnly(Page.groovy:165)
+	at geb.Page.verifyAt(Page.groovy:133)
+	at geb.Browser.doAt(Browser.groovy:358)
+	at geb.Browser.at(Browser.groovy:289)
+	at geb.Browser.to(Browser.groovy:436)
+	at geb.Browser.to(Browser.groovy:412)
+	at geb.spock.GebSpec.methodMissing(GebSpec.groovy:51)
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:20)
+2014-04-06 17:17:18,839 [main] ERROR StackTrace  - Full Stack Trace:
+Assertion failed: 
+
+url == "dataElement/index" && title == "Data Element List"
+|   |                      |  |     |
+|   true                   |  |     false
+dataElement/index          |  DataElement List
+                           false
+
+	at pages.DataElementPage._clinit__closure1(DataElementPage.groovy:14)
+	at geb.Page.verifyThisPageAtOnly(Page.groovy:165)
+	at geb.Page.verifyAt(Page.groovy:133)
+	at geb.Browser.doAt(Browser.groovy:358)
+	at geb.Browser.at(Browser.groovy:289)
+	at geb.Browser.to(Browser.groovy:436)
+	at geb.Browser.to(Browser.groovy:412)
+	at geb.spock.GebSpec.methodMissing(GebSpec.groovy:51)
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:20)
+2014-04-06 17:17:18,842 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Assertion failed: 
+
+url == "dataElement/index" && title == "Data Element List"
+|   |                      |  |     |
+|   true                   |  |     false
+dataElement/index          |  DataElement List
+                           false
+
+	at pages.DataElementPage._clinit__closure1(DataElementPage.groovy:14)
+	at geb.Page.verifyThisPageAtOnly(Page.groovy:165)
+	at geb.Page.verifyAt(Page.groovy:133)
+	at geb.Browser.doAt(Browser.groovy:358)
+	at geb.Browser.at(Browser.groovy:289)
+	at geb.Browser.to(Browser.groovy:436)
+	at geb.Browser.to(Browser.groovy:412)
+	at geb.spock.GebSpec.methodMissing(GebSpec.groovy:51)
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:20)
+2014-04-06 17:17:18,843 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Assertion failed: 
+
+url == "dataElement/index" && title == "Data Element List"
+|   |                      |  |     |
+|   true                   |  |     false
+dataElement/index          |  DataElement List
+                           false
+
+	at pages.DataElementPage._clinit__closure1(DataElementPage.groovy:14)
+	at geb.Page.verifyThisPageAtOnly(Page.groovy:165)
+	at geb.Page.verifyAt(Page.groovy:133)
+	at geb.Browser.doAt(Browser.groovy:358)
+	at geb.Browser.at(Browser.groovy:289)
+	at geb.Browser.to(Browser.groovy:436)
+	at geb.Browser.to(Browser.groovy:412)
+	at geb.spock.GebSpec.methodMissing(GebSpec.groovy:51)
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:20)
+2014-04-06 17:17:18,873 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Assertion failed: 
+
+url == "dataElement/index" && title == "Data Element List"
+|   |                      |  |     |
+|   true                   |  |     false
+dataElement/index          |  DataElement List
+                           false
+
+	at pages.DataElementPage._clinit__closure1(DataElementPage.groovy:14)
+	at geb.Page.verifyThisPageAtOnly(Page.groovy:165)
+	at geb.Page.verifyAt(Page.groovy:133)
+	at geb.Browser.doAt(Browser.groovy:358)
+	at geb.Browser.at(Browser.groovy:289)
+	at geb.Browser.to(Browser.groovy:436)
+	at geb.Browser.to(Browser.groovy:412)
+	at geb.spock.GebSpec.methodMissing(GebSpec.groovy:51)
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:20)
+2014-04-06 17:17:18,873 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Assertion failed: 
+
+url == "dataElement/index" && title == "Data Element List"
+|   |                      |  |     |
+|   true                   |  |     false
+dataElement/index          |  DataElement List
+                           false
+
+	at pages.DataElementPage._clinit__closure1(DataElementPage.groovy:14)
+	at geb.Page.verifyThisPageAtOnly(Page.groovy:165)
+	at geb.Page.verifyAt(Page.groovy:133)
+	at geb.Browser.doAt(Browser.groovy:358)
+	at geb.Browser.at(Browser.groovy:289)
+	at geb.Browser.to(Browser.groovy:436)
+	at geb.Browser.to(Browser.groovy:412)
+	at geb.spock.GebSpec.methodMissing(GebSpec.groovy:51)
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:20)
+2014-04-06 17:18:04,168 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+$("a[class='create']").value() == "New DataElement"
+|                      |       |
+|                      null    false
+[[[[[FirefoxDriver: firefox on MAC (a334091b-5c54-a547-bb48-cb326f6791d3)] -> tag name: html]] -> css selector: a[class='create']]]
+
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:24)
+2014-04-06 17:18:04,176 [main] ERROR StackTrace  - Full Stack Trace:
+Condition not satisfied:
+
+$("a[class='create']").value() == "New DataElement"
+|                      |       |
+|                      null    false
+[[[[[FirefoxDriver: firefox on MAC (a334091b-5c54-a547-bb48-cb326f6791d3)] -> tag name: html]] -> css selector: a[class='create']]]
+
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:24)
+2014-04-06 17:18:04,179 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+$("a[class='create']").value() == "New DataElement"
+|                      |       |
+|                      null    false
+[[[[[FirefoxDriver: firefox on MAC (a334091b-5c54-a547-bb48-cb326f6791d3)] -> tag name: html]] -> css selector: a[class='create']]]
+
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:24)
+2014-04-06 17:18:04,179 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+$("a[class='create']").value() == "New DataElement"
+|                      |       |
+|                      null    false
+[[[[[FirefoxDriver: firefox on MAC (a334091b-5c54-a547-bb48-cb326f6791d3)] -> tag name: html]] -> css selector: a[class='create']]]
+
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:24)
+2014-04-06 17:18:04,187 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+$("a[class='create']").value() == "New DataElement"
+|                      |       |
+|                      null    false
+[[[[[FirefoxDriver: firefox on MAC (a334091b-5c54-a547-bb48-cb326f6791d3)] -> tag name: html]] -> css selector: a[class='create']]]
+
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:24)
+2014-04-06 17:18:04,187 [main] ERROR StackTrace  - Full Stack Trace:
+junit.framework.AssertionFailedError: Condition not satisfied:
+
+$("a[class='create']").value() == "New DataElement"
+|                      |       |
+|                      null    false
+[[[[[FirefoxDriver: firefox on MAC (a334091b-5c54-a547-bb48-cb326f6791d3)] -> tag name: html]] -> css selector: a[class='create']]]
+
+	at specs.DataElementListSpec.go to DataElementList home screen and show DataElement list(DataElementListSpec.groovy:24)
