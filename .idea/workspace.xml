@@ -2,31 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="076d0d50-ea1e-4a29-9c0b-e68fc4114143" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/grails-app/controllers/modelcatalogueviewer/DataElementController.groovy" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/grails-app/views/dataElement/_form.gsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/grails-app/views/dataElement/create.gsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/grails-app/views/dataElement/edit.gsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/grails-app/views/dataElement/index.gsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/grails-app/views/dataElement/show.gsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/geb-reports/specs/DataElementListSpec/001-001-go to DataElementList home screen and show DataElement list-end.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/geb-reports/specs/DataElementListSpec/001-001-go to DataElementList home screen and show DataElement list-end.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-reports/TEST-functional-spock-specs.DataElementListSpec.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-reports/html/specs/0_DataElementListSpec.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-reports/plain/TEST-functional-spock-specs.DataElementListSpec-err.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-reports/plain/TEST-functional-spock-specs.DataElementListSpec-out.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-reports/plain/TEST-functional-spock-specs.DataElementListSpec.txt" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/grails-app/domain/modelcatalogueviewer/DataElement.groovy" afterPath="$PROJECT_DIR$/grails-app/domain/modelcatalogueviewer/DataElementLocal.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/test/functional/pages/DataElementPage.groovy" afterPath="$PROJECT_DIR$/test/functional/pages/DataElementLocalPage.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/test/functional/specs/DataElementListSpec.groovy" afterPath="$PROJECT_DIR$/test/functional/specs/DataElementLocalListSpec.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/test/unit/modelcatalogueviewer/DataElementControllerSpec.groovy" afterPath="$PROJECT_DIR$/test/unit/modelcatalogueviewer/DataElementLocalControllerSpec.groovy" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/test/unit/modelcatalogueviewer/DataElementSpec.groovy" afterPath="$PROJECT_DIR$/test/unit/modelcatalogueviewer/DataElementLocalSpec.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" afterPath="$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-reports/TESTS-TestSuites.xml" afterPath="$PROJECT_DIR$/target/test-reports/TESTS-TestSuites.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-reports/html/all.html" afterPath="$PROJECT_DIR$/target/test-reports/html/all.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-reports/html/failed.html" afterPath="$PROJECT_DIR$/target/test-reports/html/failed.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-reports/html/index.html" afterPath="$PROJECT_DIR$/target/test-reports/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/stacktrace.log" afterPath="$PROJECT_DIR$/target/stacktrace.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/controllers/modelcatalogueviewer/DataElementLocalController.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/dataElementLocal/_form.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/dataElementLocal/create.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/dataElementLocal/edit.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/dataElementLocal/index.gsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-app/views/dataElementLocal/show.gsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ModelCatalogueViewer.iws" />
@@ -101,19 +82,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataElementLocalSpec.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DataElementLocalSpec.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/unit/modelcatalogueviewer/DataElementLocalSpec.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="6" selection-start="237" selection-end="237" vertical-scroll-proportion="-5.2173915" vertical-offset="0" max-vertical-offset="375">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="21" selection-start="69" selection-end="69" vertical-scroll-proportion="0.049751244" vertical-offset="0" max-vertical-offset="603">
+            <state line="9" column="6" selection-start="237" selection-end="237" vertical-scroll-proportion="0.20689656" vertical-offset="0" max-vertical-offset="580">
               <folding />
             </state>
           </provider>
@@ -566,12 +538,12 @@
       <workItem from="1396791488180" duration="248000" />
       <workItem from="1396791757343" duration="738000" />
       <workItem from="1396793073376" duration="10450000" />
-      <workItem from="1396875203665" duration="2257000" />
+      <workItem from="1396875203665" duration="2667000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13744000" />
+    <option name="totallyTimeSpent" value="14154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="22" width="1920" height="1124" extended-state="6" />
@@ -791,16 +763,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/unit/modelcatalogueviewer/DataElementLocalSpec.groovy">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="6" selection-start="237" selection-end="237" vertical-scroll-proportion="-5.2173915" vertical-offset="0" max-vertical-offset="375">
+        <state line="4" column="26" selection-start="109" selection-end="109" vertical-scroll-proportion="0.09950249" vertical-offset="0" max-vertical-offset="603">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/test/unit/modelcatalogueviewer/DataElementLocalSpec.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="69" selection-end="69" vertical-scroll-proportion="0.049751244" vertical-offset="0" max-vertical-offset="603">
+        <state line="9" column="6" selection-start="237" selection-end="237" vertical-scroll-proportion="0.20689656" vertical-offset="0" max-vertical-offset="580">
           <folding />
         </state>
       </provider>
