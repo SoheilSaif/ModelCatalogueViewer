@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="Soheils-MacBook-Pro.local" id="0" name="DataElementListSpec" package="specs" tests="1" time="4.367" timestamp="2014-04-06T16:18:57">
+  <testsuite errors="0" failures="0" hostname="Soheils-MacBook-Pro.local" id="0" name="DataElementLocalListSpec" package="specs" tests="1" time="4.041" timestamp="2014-04-07T13:30:49">
       <properties />
 
-      <testcase classname="specs.DataElementListSpec" name="go to DataElementList home screen and show DataElement list" time="4.366" />
+      <testcase classname="specs.DataElementLocalListSpec" name="go to DataElementList home screen and show DataElement list" time="4.041" />
 
       <system-out><![CDATA[--Output from go to DataElementList home screen and show DataElement list--
 ]]></system-out>
 
       <system-err><![CDATA[--Output from go to DataElementList home screen and show DataElement list--
+]]></system-err>
+
+  </testsuite>
+  <testsuite errors="0" failures="0" hostname="Soheils-MacBook-Pro.local" id="1" name="DataElementLocalControllerSpec" package="modelcatalogueviewer" tests="2" time="2.767" timestamp="2014-04-07T13:30:32">
+      <properties />
+
+      <testcase classname="modelcatalogueviewer.DataElementLocalControllerSpec" name="Test the index action returns the correct model" time="2.585" />
+
+      <testcase classname="modelcatalogueviewer.DataElementLocalControllerSpec" name="Test the create action returns the correct model" time="0.16" />
+
+      <system-out><![CDATA[--Output from Test the index action returns the correct model--
+--Output from Test the create action returns the correct model--
+]]></system-out>
+
+      <system-err><![CDATA[--Output from Test the index action returns the correct model--
+--Output from Test the create action returns the correct model--
 ]]></system-err>
 
   </testsuite>

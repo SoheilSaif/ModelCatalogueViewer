@@ -49,6 +49,12 @@ grails.project.dependency.resolution = {
         mavenRepo "http://repo.grails.org/grails/core"
         mavenRepo 'http://repo.spring.io/milestone'
 
+        mavenRepo 'http://dl.bintray.com/modelcatalogue-core/ModelCatalogueCorePlugin/'
+        mavenRepo 'http://dl.bintray.com/modelcatalogue-core/ModelCatalogueElasticSearchPlugin/'
+
+        // Used for Vlad's fixtures plugin
+        mavenRepo 'http://dl.bintray.com/metadata/model-catalogue'
+
     }
 
     dependencies {
@@ -103,6 +109,11 @@ grails.project.dependency.resolution = {
         //compile ":handlebars-asset-pipeline:1.3.0.1"
 
         test ":geb:0.9.2"
+
+
+        compile "org.modelcatalogue.plugins:grails-model-catalogue-core-plugin:0.1"
+        compile "org.modelcatalogue.plugins:grails-model-catalogue-elastic-search-plugin:0.1"
+
 
     }
 }

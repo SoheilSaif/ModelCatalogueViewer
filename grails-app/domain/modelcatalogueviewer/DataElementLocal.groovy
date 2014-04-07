@@ -1,6 +1,6 @@
 package modelcatalogueviewer
 
-class DataElement {
+class DataElementLocal {
 
     String name
     String code

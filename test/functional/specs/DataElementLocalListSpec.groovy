@@ -7,7 +7,7 @@ import org.openqa.selenium.Dimension
 /**
  * Created by soheil on 06/04/2014.
  */
-class DataElementListSpec extends GebReportingSpec{
+class DataElementLocalListSpec extends GebReportingSpec{
 
 
     def setup(){
@@ -17,11 +17,11 @@ class DataElementListSpec extends GebReportingSpec{
     def "go to DataElementList home screen and show DataElement list"(){
 
         when: "At DataElementList"
-        to pages.DataElementPage
+        to pages.DataElementLocalPage
 
         then:
-        at pages.DataElementPage
-        $("a[class='create']").text() == "New DataElement"
+        at pages.DataElementLocalPage
+        $("a[class='create']").text() == "New DataElementLocal"
 
     }
 }

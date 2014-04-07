@@ -1,1 +1,0 @@
---Output from go to DataElementList home screen and show DataElement list--

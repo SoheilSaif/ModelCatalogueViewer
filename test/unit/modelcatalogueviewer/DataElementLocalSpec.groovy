@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(DataElement)
-class DataElementSpec extends Specification {
+@TestFor(DataElementLocal)
+class DataElementLocalSpec extends Specification {
 
     def setup() {
     }

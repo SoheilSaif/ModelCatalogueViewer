@@ -5,9 +5,9 @@ package modelcatalogueviewer
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(DataElementController)
-@Mock(DataElement)
-class DataElementControllerSpec extends Specification {
+@TestFor(DataElementLocalController)
+@Mock(DataElementLocal)
+class DataElementLocalControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -21,8 +21,8 @@ class DataElementControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.dataElementInstanceList
-            model.dataElementInstanceCount == 0
+            !model.dataElementLocalInstance
+            model.dataElementLocalInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -30,7 +30,7 @@ class DataElementControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.dataElementInstance!= null
+            model.dataElementLocalInstance!= null
     }
 
 }
