@@ -9,20 +9,61 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title><g:layoutTitle default="Grails"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
-		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
-		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
-		<g:layoutHead/>
-		<g:javascript library="application"/>		
-		<r:layoutResources />
+        <asset:stylesheet href="bootstrap/dist/css/bootstrap.css"/>
+        <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+        <g:layoutHead/>
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="http://grails.org"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/></a></div>
-		<g:layoutBody/>
-		<div class="footer" role="contentinfo"></div>
-		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+
+    <div class="container">
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">ModelCatalogue Viewer</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">DataElement</a></li>
+                        <li><a href="#">ValueDomain</a></li>
+                        <li><a href="#">DataTypes</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Action<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Import</a></li>
+                                <li><a href="#">Export</a></li>
+                                <li><a href="#">Data Visualization</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <h2>ModelCatalogue Viewer</h2>
+            <p>ModelCatalogue Viewer, Read-Only view of DataElements, ValueDoamins, Pahtways and ...</p>
+            <p>
+                <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs »</a>
+            </p>
+        </div>
+        <g:layoutBody/>
+    </div>
 		<r:layoutResources />
+
+
 	</body>
+
+<asset:javascript src="application.js"/>
+<asset:javascript src="test.js"/>
+<asset:javascript src="bootstrap/dist/js/bootstrap.js"/>
+
 </html>

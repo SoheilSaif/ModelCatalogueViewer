@@ -9,7 +9,7 @@ addons:
 before_script:
   - npm install -g bower
   - bower install
-script: "bower install && ./grailsw refresh-dependencies && ./grailsw test-app unit: && ./grailsw test-app integration: && ./grailsw test-app functional: -Dgeb.env=sauce"
+script: "npm install && bower install && ./grailsw refresh-dependencies && ./grailsw test-app unit: && ./grailsw test-app integration: && ./grailsw test-app functional: -Dgeb.env=sauceChromeLinux && ./grailsw test-app functional: -Dgeb.env=sauceChromeWindows "
 env:
   global:
   - secure: N4EJHKFrkWbuiErvU+3hYJFKCV/DbEvx6ZYs7Y0KUPk6V+1/H7XfXw93KutErdxGbQkfK8mirqaI8sFxYqZbM9HBfBAzez16miLmWRRjOtnHoZH2Xvni8keN/9DY5plK1j5Gyo160xGQ5KplRsvLd6q7FhuYo0Z1IC/7oOne9p8=
@@ -18,3 +18,10 @@ branches:
   only:
   - master
   - develop
+deploy:
+  provider: heroku
+   api_key:
+    secure: QAZ5gzVCG1Uv5N56dorKVyvaB8/FKJsmopuvedqFacpyN9dFP9nsnCFMmDywsTehDhm1WkIIraH8muY+onCaYw0RbLDPnShA4rxZA7BYA/Sn/3WPWZNbEPqOJgkcyCal5BBkruJtQu9BSPdtqN0oyXILOgg0yqAfGo397iJq8J4=
+   strategy: git
+   app:
+     develop: modelcatalogueviewer

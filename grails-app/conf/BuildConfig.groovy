@@ -115,5 +115,10 @@ grails.project.dependency.resolution = {
         compile "org.modelcatalogue.plugins:grails-model-catalogue-elastic-search-plugin:0.1"
 
 
+        compile ":coffee-asset-pipeline:1.5.0"
+        compile ":less-asset-pipeline:1.5.3"
+        compile ":famfamfam:1.0.1"
+        compile ':asset-pipeline:1.6.1'
+
     }
 }
