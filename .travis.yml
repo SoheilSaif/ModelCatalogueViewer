@@ -20,8 +20,8 @@ branches:
   - develop
 deploy:
   provider: heroku
-   api_key:
-    secure: QAZ5gzVCG1Uv5N56dorKVyvaB8/FKJsmopuvedqFacpyN9dFP9nsnCFMmDywsTehDhm1WkIIraH8muY+onCaYw0RbLDPnShA4rxZA7BYA/Sn/3WPWZNbEPqOJgkcyCal5BBkruJtQu9BSPdtqN0oyXILOgg0yqAfGo397iJq8J4=
-   strategy: git
-   app:
-     develop: modelcatalogueviewer
+  api_key:
+  - secure: QAZ5gzVCG1Uv5N56dorKVyvaB8/FKJsmopuvedqFacpyN9dFP9nsnCFMmDywsTehDhm1WkIIraH8muY+onCaYw0RbLDPnShA4rxZA7BYA/Sn/3WPWZNbEPqOJgkcyCal5BBkruJtQu9BSPdtqN0oyXILOgg0yqAfGo397iJq8J4=
+  strategy: git
+  app:
+  - develop: modelcatalogueviewer
