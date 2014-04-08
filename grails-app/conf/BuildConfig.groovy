@@ -12,7 +12,7 @@ grails.project.fork = [
     //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
         test:false,
 //        run: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256], // configure settings for the run-app JVM
-//        war: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256], // configure settings for the run-war JVM
+        war: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256], // configure settings for the run-war JVM
 ]
 
 grails.project.dependency.resolver = "maven" // or ivy
