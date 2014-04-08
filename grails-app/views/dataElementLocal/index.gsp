@@ -49,17 +49,17 @@
                 %{--<p>{{item}}</p>--}%
             %{--</div>--}%
 
-            <div ng-controller="myController">
-                <p><strong>Page:</strong> {{tableParams.page()}}</p>
-                <p><strong>Count per page:</strong> {{tableParams.count()}}</p>
-
-                <table ng-table="tableParams" class="table" >
-                    <tr ng-repeat="user in $data">
-                        <td data-title="'Name'" sortable="name" filter="{ 'name': 'text' }" >{{user.name}}</td>
-                        <td data-title="'Age'"  sortable="age">{{user.age}}</td>
-                    </tr>
-                </table>
-            </div>
+            %{--<div ng-controller="myController">--}%
+                %{--<p><strong>Page:</strong> {{tableParams.page()}}</p>--}%
+                %{--<p><strong>Count per page:</strong> {{tableParams.count()}}</p>--}%
+%{----}%
+                %{--<table ng-table="tableParams" class="table" >--}%
+                    %{--<tr ng-repeat="user in $data">--}%
+                        %{--<td data-title="'Name'" sortable="name" filter="{ 'name': 'text' }" >{{user.name}}</td>--}%
+                        %{--<td data-title="'Age'"  sortable="age">{{user.age}}</td>--}%
+                    %{--</tr>--}%
+                %{--</table>--}%
+            %{--</div>--}%
         </div>
 	</body>
 </html>
