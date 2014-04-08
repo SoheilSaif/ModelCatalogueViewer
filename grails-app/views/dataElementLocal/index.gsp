@@ -44,7 +44,7 @@
 			</div>
 		</div>
 
-        <div ng-app="viewerApp">
+        %{--<div ng-app="viewerApp">--}%
             %{--<div ng-controller="myController">--}%
                 %{--<p>{{item}}</p>--}%
             %{--</div>--}%
@@ -60,6 +60,10 @@
                     %{--</tr>--}%
                 %{--</table>--}%
             %{--</div>--}%
+<<<<<<< HEAD
         </div>
+=======
+        %{--</div>--}%
+>>>>>>> 306098a96d1c85d07997af1115f219f2bab2793e
 	</body>
 </html>
