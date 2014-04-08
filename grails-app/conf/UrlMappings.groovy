@@ -7,6 +7,10 @@ class UrlMappings {
             }
         }
 
+
+        "/api/models"(version:'1.0', resources:"model", namespace:'v1')
+
+
         "/"(view:"/index")
         "500"(view:'/error')
 	}

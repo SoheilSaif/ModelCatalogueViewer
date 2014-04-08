@@ -25,6 +25,7 @@ deploy:
   api_key:
     secure: SiUI5KcYAqf2mFbzdZ0+y5cwEZqHuoiLX2qASJPLTXThamxNWOKeAUZjFuiEcr2s5yEFHV8RBDt8SNttSqNwKwe8xW17pI/BuAXVmWpOR5EyxxEfkXUsFmcRWuXaIGd2YsV2LKbN9ynSf89kF/AM8Ml3EdSRR2s+PXQplFH1AQs=
   app: modelcatalogueviewer
+  strategy: git
   on:
     repo: SoheilSaif/ModelCatalogueViewer
     branch: develop

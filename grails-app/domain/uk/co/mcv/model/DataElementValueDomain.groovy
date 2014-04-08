@@ -1,4 +1,5 @@
-package model
+package uk.co.mcv.model
+
 
 class DataElementValueDomain   {
 
