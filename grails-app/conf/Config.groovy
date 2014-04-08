@@ -45,6 +45,7 @@ grails.views.default.codec = "html"
 // If unspecified, controllers are prototype scoped.
 grails.controllers.defaultScope = 'singleton'
 
+
 // GSP settings
 grails {
 

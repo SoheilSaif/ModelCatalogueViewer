@@ -9,4 +9,4 @@
 //= require_self
 //= require bootstrap
 
-console.log("This is my javascript manifestsss");
+console.log("This is my javascript test.js for testing if it works!");

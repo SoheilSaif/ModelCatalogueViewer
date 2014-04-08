@@ -23,11 +23,8 @@
 			<table>
 			<thead>
 					<tr>
-					
 						<g:sortableColumn property="code" title="${message(code: 'dataElementLocal.code.label', default: 'Code')}" />
-					
 						<g:sortableColumn property="name" title="${message(code: 'dataElementLocal.name.label', default: 'Name')}" />
-					
 					</tr>
 				</thead>
 				<tbody>
@@ -46,5 +43,23 @@
 				<g:paginate total="${dataElementLocalInstanceCount ?: 0}" />
 			</div>
 		</div>
+
+        <div ng-app="viewerApp">
+            %{--<div ng-controller="myController">--}%
+                %{--<p>{{item}}</p>--}%
+            %{--</div>--}%
+
+            <div ng-controller="myController">
+                <p><strong>Page:</strong> {{tableParams.page()}}</p>
+                <p><strong>Count per page:</strong> {{tableParams.count()}}</p>
+
+                <table ng-table="tableParams" class="table" >
+                    <tr ng-repeat="user in $data">
+                        <td data-title="'Name'" sortable="name" filter="{ 'name': 'text' }" >{{user.name}}</td>
+                        <td data-title="'Age'"  sortable="age">{{user.age}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 	</body>
 </html>

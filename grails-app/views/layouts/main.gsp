@@ -62,7 +62,7 @@
 
 	</body>
 
-<asset:javascript src="application.js"/>
+<asset:javascript src="angular/app.js"/>
 <asset:javascript src="test.js"/>
 <asset:javascript src="bootstrap/dist/js/bootstrap.js"/>
 
