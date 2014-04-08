@@ -47,6 +47,13 @@ grails.controllers.defaultScope = 'singleton'
 
 // GSP settings
 grails {
+
+    assets{
+        excludes = ["**/*.less"]
+        includes = ["/application.less"]
+        less.compiler='less4j' // faster than the default
+    }
+
     views {
         gsp {
             encoding = 'UTF-8'
