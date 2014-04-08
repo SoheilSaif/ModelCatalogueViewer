@@ -65,6 +65,9 @@ grails.project.dependency.resolution = {
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
 
 
+        compile 'com.googlecode.json-simple:json-simple:1.1.1'
+
+
         // Selenium WebDriver, for use in Geb
         def webDriverVersion = "2.41.0"
 
@@ -113,8 +116,9 @@ grails.project.dependency.resolution = {
         test ":geb:0.9.2"
 
 
-        compile "org.modelcatalogue.plugins:grails-model-catalogue-core-plugin:0.1"
-        compile "org.modelcatalogue.plugins:grails-model-catalogue-elastic-search-plugin:0.1"
+        //ModelCatalogue Core Pllugin
+        //compile "org.modelcatalogue.plugins:grails-model-catalogue-core-plugin:0.1"
+        //compile "org.modelcatalogue.plugins:grails-model-catalogue-elastic-search-plugin:0.1"
 
 
         compile ":coffee-asset-pipeline:1.5.0"
