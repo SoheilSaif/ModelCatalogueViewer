@@ -2,6 +2,7 @@ package specs
 
 import geb.Browser
 import geb.spock.GebReportingSpec
+import org.apache.tools.ant.taskdefs.WaitFor
 import org.openqa.selenium.Dimension
 
 /**
@@ -20,7 +21,9 @@ class DataElementLocalListSpec extends GebReportingSpec{
         to pages.DataElementLocalPage
 
         then:
-        at pages.DataElementLocalPage
+        waitFor {
+            at pages.DataElementLocalPage
+        }
         $("a[class='create']").text() == "New DataElementLocal"
 
     }
