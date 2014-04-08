@@ -1,0 +1,30 @@
+{
+  "name": "ModelCatalogueViewer",
+  "version": "1.0.0",
+  "description": "Model Catalogue Read-Only Viewer",
+  "dependencies": {
+    "bower": "~1.2.8"
+  },
+  "devDependencies": {
+    "karma": "~0.10",
+    "karma-coffee-preprocessor": "~0.1",
+    "karma-coverage": "~0.1.5",
+    "karma-safari-launcher": "~0.1.1",
+    "karma-junit-reporter": "~0.2.1",
+    "karma-ng-html2js-preprocessor": "~0.1.0",
+    "karma-osx-reporter": "0.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SoheilSaif/ModelCatalogueViewer.git"
+  },
+  "keywords": [
+    "metadata"
+  ],
+  "author": "Soheil Saifipour",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SoheilSaif/ModelCatalogueViewer/issues"
+  },
+  "homepage": "https://github.com/SoheilSaif/ModelCatalogueViewer/"
+}
