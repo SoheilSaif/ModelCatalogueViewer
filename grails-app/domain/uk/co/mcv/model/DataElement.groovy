@@ -6,7 +6,8 @@ class DataElement  {
 	String name
 	String description
 	String definition
-	String version
+	String catalogueVersion
+	String catalogueId
 
 
 	DataElement parent

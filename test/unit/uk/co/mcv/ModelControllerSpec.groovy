@@ -16,17 +16,21 @@ import uk.co.mcv.model.*
 @Mock([Model,ConceptualDomain])
 class ModelControllerSpec extends  Specification{
 
-    def setup()
-    {
-        //Create 18 sample Models
+
+
+	def setup()  {
+
+		def conDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain",catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
+
+		//Create 18 sample Models
         (1..18).each { index ->
-            new Model([name:"Model${index}"]).save(flush: true)
+            new Model(name:"Model${index}",catalogueId: "catId${index}",catalogueVersion: "version1",conceptualDomain: conDomain).save(failOnError: true)
+            new Model(name:"Model${index}",catalogueId: "catId${index}",catalogueVersion: "version2", conceptualDomain: conDomain).save(failOnError: true)
         }
     }
 
     @Unroll
-    def "index is called to get all Models for (total=#total , max=#max , offset=#offset , resultCount=#resultCount), it returns all Model"()
-    {
+    def "index is called to get all Models for (total=#total , max=#max , offset=#offset , resultCount=#resultCount), it returns all Model"()  {
         given:"A number of Model is available"
         Model.list().size() == 18
 
@@ -45,13 +49,12 @@ class ModelControllerSpec extends  Specification{
 
         where:
         total   | max   | offset    | resultCount
-        18      |  10   |   0       | 10
-        18      |  10   |   10      | 8
-        18      |  20   |   0       | 18
+        36      |  10   |   0       | 10
+        36      |  10   |   30      | 6
+        36      |  20   |   31      | 5
     }
 
-    def "Check if ModelController is a readOnly Controller"()
-    {
+    def "Check if ModelController is a readOnly Controller"() {
         when:"Save is called"
         controller.save()
 

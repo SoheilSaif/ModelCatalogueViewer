@@ -5,7 +5,8 @@ class DataType  {
 	String name
 	Boolean enumerated
 	Map enumerations
-	String version
+	String catalogueVersion
+	String catalogueId
 
 
 

@@ -12,6 +12,8 @@ import uk.co.mcv.model.Model
 class ModelController extends  BetterRestfulController{
     static namespace = "v1"
 
+	def modelService
+
     ModelController(){
         super(Model,true)
     }

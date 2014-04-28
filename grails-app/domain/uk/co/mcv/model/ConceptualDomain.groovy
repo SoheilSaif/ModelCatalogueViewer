@@ -4,7 +4,9 @@ class ConceptualDomain   {
 
 	String name
 	String description
-	String version
+	String catalogueId
+	String catalogueVersion
+
 
 	static hasMany = [valueDomains: ValueDomain, models:Model]
 

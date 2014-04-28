@@ -11,7 +11,8 @@ class ValueDomain  {
     DataType dataType
     Set dataElements = []
     ConceptualDomain conceptualDomain
-	String version
+	String catalogueVersion
+	String catalogueId
 
 
 	static hasMany = [dataElement: DataElement]
