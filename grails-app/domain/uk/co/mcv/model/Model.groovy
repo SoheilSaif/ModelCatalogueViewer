@@ -2,12 +2,15 @@ package uk.co.mcv.model
 
 class Model   {
 	
-	Integer conceptId;
 	String name;
 	String description;
+	String version
+
 
 	static hasMany = [dataElements: DataElement, valueDomains: ValueDomain]
 			
     static constraints = {
+        name nullable:false
+        description nullable: true
     }
 }

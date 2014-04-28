@@ -1,0 +1,12 @@
+ <div class="panel-body">
+     <div >
+            <!--<div ng-controller="ngTableController">-->
+                <table ng-table="tableParams" class="table" show-filter="true" show-sort="true">
+                    <tr ng-repeat="model in $data">
+                        <td data-title="'Name'" sortable="name" filter="{ 'name': 'text' }" sortable="'name'">{{model.name}}</td>
+                        <td data-title="'Description'" sortable="description" filter="{ 'description': 'text' }" sortable="'description'">{{model.description}}</td>
+                    </tr>
+                </table>
+            <!--</div>-->
+        </div>
+    </div>

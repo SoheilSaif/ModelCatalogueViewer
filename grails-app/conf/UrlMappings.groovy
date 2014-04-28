@@ -7,8 +7,15 @@ class UrlMappings {
             }
         }
 
+        "/api/models"(version:'1.0', resources:"Model", namespace:'v1')
 
-        "/api/models"(version:'1.0', resources:"model", namespace:'v1')
+
+        "/api/dataelements"(version:'1.0', resources:"DataElement", namespace:'v1')
+//
+        "/api/models"(version:'1.0', resources:"Model", namespace:'v1') {
+            "/dataelements"(version:'1.0', resources:"DataElement", namespace:'v1')
+        }
+
 
 
         "/"(view:"/index")

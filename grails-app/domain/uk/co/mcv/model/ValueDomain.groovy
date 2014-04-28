@@ -9,11 +9,12 @@ class ValueDomain  {
     String format
     String description
     DataType dataType
-    Set dataElementValueDomains = []
+    Set dataElements = []
     ConceptualDomain conceptualDomain
+	String version
 
 
-    static hasMany = [dataElementValueDomains: DataElementValueDomain]
+	static hasMany = [dataElement: DataElement]
 
     static belongsTo = [conceptualDomain: ConceptualDomain]
 

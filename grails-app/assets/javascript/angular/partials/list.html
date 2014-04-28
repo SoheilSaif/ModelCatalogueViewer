@@ -1,0 +1,17 @@
+<div>
+    {{resourceName}}
+    {{columns}}
+
+    <div class="panel-body">
+        <div >
+            <table ng-table="tableParams" class="table" show-filter="true" show-sort="true">
+                <tr ng-repeat="item in $data">
+                    <td data-title="'Name'" sortable="name" filter="{ 'name': 'text' }" sortable="'name'">{{item.name}}</td>
+                    <td data-title="'Description'" sortable="description" filter="{ 'description': 'text' }" sortable="'description'">{{item.description}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+</div>

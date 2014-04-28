@@ -6,14 +6,27 @@ class DataElement  {
 	String name
 	String description
 	String definition
+	String version
+
 
 	DataElement parent
-	
+	ValueDomain valueDomain
 
-	static hasMany = [ subElements: DataElement, dataElementValueDomains: DataElementValueDomain]
+
+    Set synonyms
+
+    static auditable = true
+
+    static searchable = {
+        content: spellCheck 'include'
+        except = ["extension"]
+    }
+
+    static hasMany = [ subElements: DataElement]
 	
 	
-	static belongsTo = [parent: DataElement]
+	static belongsTo = [parent: DataElement,model:Model]
+
 	
     static constraints = {
 		parent nullable: true

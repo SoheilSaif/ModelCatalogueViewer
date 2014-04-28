@@ -1,5 +1,6 @@
-package modelcatalogueviewer
+package uk.co.mcv
 
+import uk.co.mcv.model.ConceptualDomain
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -11,19 +12,19 @@ class DataElementLocalController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond DataElementLocal.list(params), model:[dataElementLocalInstanceCount: DataElementLocal.count()]
+        respond ConceptualDomain.DataElementLocal.list(params), model:[dataElementLocalInstanceCount: ConceptualDomain.DataElementLocal.count()]
     }
 
-    def show(DataElementLocal dataElementLocalInstance) {
+    def show(ConceptualDomain.DataElementLocal dataElementLocalInstance) {
         respond dataElementLocalInstance
     }
 
     def create() {
-        respond new DataElementLocal(params)
+        respond new ConceptualDomain.DataElementLocal(params)
     }
 
     @Transactional
-    def save(DataElementLocal dataElementLocalInstance) {
+    def save(ConceptualDomain.DataElementLocal dataElementLocalInstance) {
         if (dataElementLocalInstance == null) {
             notFound()
             return
@@ -45,12 +46,12 @@ class DataElementLocalController {
         }
     }
 
-    def edit(DataElementLocal dataElementLocalInstance) {
+    def edit(ConceptualDomain.DataElementLocal dataElementLocalInstance) {
         respond dataElementLocalInstance
     }
 
     @Transactional
-    def update(DataElementLocal dataElementLocalInstance) {
+    def update(ConceptualDomain.DataElementLocal dataElementLocalInstance) {
         if (dataElementLocalInstance == null) {
             notFound()
             return
@@ -73,7 +74,7 @@ class DataElementLocalController {
     }
 
     @Transactional
-    def delete(DataElementLocal dataElementLocalInstance) {
+    def delete(ConceptualDomain.DataElementLocal dataElementLocalInstance) {
 
         if (dataElementLocalInstance == null) {
             notFound()

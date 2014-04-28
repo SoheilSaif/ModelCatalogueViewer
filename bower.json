@@ -20,7 +20,8 @@
     "jquery.layout": "*",
     "font-awesome": "~4.0.3",
     "ng-table": "~0.3.1",
-    "angular-ui-router": "~0.2.9"
+    "angular-ui-router": "~0.2.9",
+    "angular-bootstrap-nav-tree":""
   },
   "resolutions": {
     "jquery": ">= 1.9.0",

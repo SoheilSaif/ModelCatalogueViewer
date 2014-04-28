@@ -1,5 +1,5 @@
 
-<%@ page import="modelcatalogueviewer.DataElementLocal" %>
+<%@ page import="uk.co.mcv.model.ConceptualDomain.DataElementLocal" %>
 <!DOCTYPE html>
 <html>
 	<head>

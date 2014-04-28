@@ -1,12 +1,13 @@
-package modelcatalogueviewer
+package uk.co.mcv
 
 
 
 import grails.test.mixin.*
 import spock.lang.*
+import uk.co.mcv.model.*
 
 @TestFor(DataElementLocalController)
-@Mock(DataElementLocal)
+@Mock(ConceptualDomain.DataElementLocal)
 class DataElementLocalControllerSpec extends Specification {
 
     def populateValidParams(params) {

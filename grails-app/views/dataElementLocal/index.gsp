@@ -1,5 +1,5 @@
 
-<%@ page import="modelcatalogueviewer.DataElementLocal" %>
+<%@ page import="uk.co.mcv.model.ConceptualDomain.DataElementLocal" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -44,22 +44,23 @@
 			</div>
 		</div>
 
-        %{--<div ng-app="viewerApp">--}%
-            %{--<div ng-controller="myController">--}%
-                %{--<p>{{item}}</p>--}%
-            %{--</div>--}%
+    <g:set var="grailsParams" value="${params.collect{ it.key + '=\'' + it.value + '\''}.join('; ')}" />
+    <div ng-app="viewerApp" ng-init="${grailsParams}">
+            <div ng-controller="ngTableController" ng-init="init('/ModelCatalogueViewer/api/models.json')">
+                <p><strong>Filter:</strong> {{tableParams.filter()|json}}
+                <p><strong>Page:</strong> {{tableParams.page()}}</p>
+                <p><strong>Count per page:</strong> {{tableParams.count()}}</p>
+                <table ng-table="tableParams" class="table" show-filter="true" >
+                    <tr ng-repeat="user in $data">
+                        <td data-title="'Name'" sortable="name" filter="{ 'name': 'text' }" >{{user.name}}</td>
+                        <td data-title="'Description'"  sortable="description" filter="{ 'description': 'text' }">{{user.description}}</td>
+                    </tr>
+                </table>
+            </div>
+    </div>
+    <div fundoo-rating>
+        <p> Directive Area </p>
+    </div>
 
-            %{--<div ng-controller="myController">--}%
-                %{--<p><strong>Page:</strong> {{tableParams.page()}}</p>--}%
-                %{--<p><strong>Count per page:</strong> {{tableParams.count()}}</p>--}%
-%{----}%
-                %{--<table ng-table="tableParams" class="table" >--}%
-                    %{--<tr ng-repeat="user in $data">--}%
-                        %{--<td data-title="'Name'" sortable="name" filter="{ 'name': 'text' }" >{{user.name}}</td>--}%
-                        %{--<td data-title="'Age'"  sortable="age">{{user.age}}</td>--}%
-                    %{--</tr>--}%
-                %{--</table>--}%
-            %{--</div>--}%
-        %{--</div>--}%
-	</body>
+    </body>
 </html>
