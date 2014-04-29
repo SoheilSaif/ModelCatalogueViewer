@@ -12,7 +12,9 @@ class ModelMarshaller {
             return [
                     id : model.id,
                     name : model.name,
-                    description : model.description
+                    description : model.description,
+					catalogueVersion: model.catalogueVersion,
+					catalogueId: model.catalogueId
             ]
         }
     }

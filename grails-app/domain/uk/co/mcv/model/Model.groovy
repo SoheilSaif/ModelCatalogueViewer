@@ -9,8 +9,13 @@ class Model   {
 
 	static belongsTo = [conceptualDomain: ConceptualDomain]
 
-	static hasMany = [dataElements: DataElement, valueDomains: ValueDomain]
-			
+	static hasMany = [dataElements: DataElement]
+
+
+	static mapping = {
+		dataElements cascade: 'all-delete-orphan'
+	}
+
     static constraints = {
 		conceptualDomain nullable: false
         name nullable:false

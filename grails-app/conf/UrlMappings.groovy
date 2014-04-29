@@ -8,7 +8,7 @@ class UrlMappings {
         }
 
 
-		//returns all models
+		//Model REST API
         "/api/models"(version:'1.0', resources:"Model", namespace:'v1')
 
 
@@ -20,7 +20,7 @@ class UrlMappings {
 
 		}
 
-		//returns all dataElements
+		//DataElements REST API
         "/api/dataelements"(version:'1.0', resources:"DataElement", namespace:'v1')
 
 

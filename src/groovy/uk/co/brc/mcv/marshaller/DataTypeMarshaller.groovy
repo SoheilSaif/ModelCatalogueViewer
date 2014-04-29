@@ -14,7 +14,9 @@ class DataTypeMarshaller {
                     id : dataType.id,
 					name: dataType.name,
 					enumerated: dataType.enumerated,
-					enumerations: dataType.enumerations
+					enumerations: dataType.enumerations,
+					catalogueVersion: dataType.catalogueVersion,
+					catalogueId: dataType.catalogueId
 			]
         }
     }

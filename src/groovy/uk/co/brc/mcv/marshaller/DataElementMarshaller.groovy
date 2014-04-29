@@ -15,8 +15,10 @@ class DataElementMarshaller {
                     name : dataElement.name,
                     description : dataElement.description,
 					definition: dataElement.definition,
-					valueDomain : dataElement.valueDomain
-            ]
+					valueDomain : dataElement?.valueDomain,
+					catalogueVersion: dataElement.catalogueVersion,
+					catalogueId: dataElement.catalogueId
+			]
         }
     }
 }

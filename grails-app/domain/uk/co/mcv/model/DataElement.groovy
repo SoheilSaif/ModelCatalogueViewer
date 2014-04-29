@@ -13,16 +13,6 @@ class DataElement  {
 	DataElement parent
 	ValueDomain valueDomain
 
-
-    Set synonyms
-
-    static auditable = true
-
-    static searchable = {
-        content: spellCheck 'include'
-        except = ["extension"]
-    }
-
     static hasMany = [ subElements: DataElement]
 	
 	

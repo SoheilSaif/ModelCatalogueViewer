@@ -19,7 +19,9 @@ class ValueDomainMarshaller {
 					regexDef: valueDomain.regexDef,
 					format: valueDomain.format,
 					description: valueDomain.description,
-					dataType: valueDomain?.dataType
+					dataType: valueDomain?.dataType,
+					catalogueVersion: valueDomain.catalogueVersion,
+					catalogueId: valueDomain.catalogueId
 			]
         }
     }
