@@ -3,12 +3,13 @@
 #= require angular-xeditable/dist/js/xeditable.js
 #= require angular-ui-router/release/angular-ui-router.js
 #= require ng-table/ng-table.js
-#= require angular/ngTableController.js
+#= require angular/controllers.js
 #= require angular/ngThemeController.js
 #= require angular/testController.js
 #= require angular/services.js
 #= require angular/directives.js
 #= require angular-bootstrap-nav-tree/dist/abn_tree_directive.js
+
 
 simpleFunction = ->
 	console.log "In app.coffee and just for test if coffee file works fine!"
@@ -30,7 +31,7 @@ mainApp.config ($stateProvider, $urlRouterProvider) ->
 
 
 	dataElementList =
-		name:'dataElementListStatus',
+		name:'dataElementList',
 		url:"/model/:id/dataelement",
 		templateUrl: '/' + grailsAppName + '/assets/angular/partials/list.html'
 		controller : "ngTableController",
@@ -41,17 +42,28 @@ mainApp.config ($stateProvider, $urlRouterProvider) ->
 		}
 
 
-#	model =
-#		name: 'modelStatus',
-#		url: '/model',
-#		templateUrl: '/' + grailsAppName + '/assets/angular/partials/model.html'
-#		controller : "ngTableController",
-#		resolve: {
-#			RestURI: ($stateParams, UserService) ->
-#		 		"api/models"
-#		}
+	dataElement =
+		name:'dataElement',
+		url:"/dataelements/:id",
+		templateUrl: '/' + grailsAppName + '/assets/angular/partials/dataElement.html'
+		controller : "dataElementController",
+		resolve: {
+			catalogueElementId: ($stateParams) ->
+				return $stateParams.id
+		}
+
+
+	modelList =
+		name: 'modelList',
+		url: '/model',
+		templateUrl: '/' + grailsAppName + '/assets/angular/partials/list.html'
+		controller : "ngTableController",
+		resolve: {
+			resourceURLs: ($stateParams) ->
+				return {resource1:'models',id1:null,resource2:null,id2:null}
+		}
 
 	$stateProvider.state(home)
 	$stateProvider.state(dataElementList)
-
-#	$stateProvider.state(model)
+	$stateProvider.state(dataElement)
+	$stateProvider.state(modelList)

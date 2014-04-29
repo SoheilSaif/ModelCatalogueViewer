@@ -29,7 +29,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">DataElements</a></li>
+                    <li><a href="#about">Data Model</a></li>
                     <li><a href="#about">Pathways</a></li>
                     <li><a href="#contact">Search</a></li>
                     <li class="dropdown">

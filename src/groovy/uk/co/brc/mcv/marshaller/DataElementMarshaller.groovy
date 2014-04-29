@@ -17,7 +17,9 @@ class DataElementMarshaller {
 					definition: dataElement.definition,
 					valueDomain : dataElement?.valueDomain,
 					catalogueVersion: dataElement.catalogueVersion,
-					catalogueId: dataElement.catalogueId
+					catalogueId: dataElement.catalogueId,
+					modelId: dataElement?.model.id,
+					modelName: dataElement?.model?.name
 			]
         }
     }

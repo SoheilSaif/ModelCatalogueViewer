@@ -23,7 +23,7 @@ angular.module('ngThemeControllerModule',['ngResource','viewerServices'])
 				onSelect: (branch) ->
 					$scope.currentTheme = branch.model
 
-					$state.go("dataElementListStatus",{id:branch.model.id})
+					$state.go("dataElementList",{id:branch.model.id})
 
 #					alert branch.label + ' ' +branch.model.id
 					return

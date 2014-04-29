@@ -45,7 +45,7 @@ class DataElementControllerSpec extends  Specification{
 		(1..5).each { index ->
 			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
 			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",dataType: dataType,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def dataElement = new DataElement(name:"DE${index}",version: "1",description:"Desc${index}",valueDomain:valueDomain,catalogueId:"Model${index}",catalogueVersion:"v1" )
+			def dataElement = new DataElement(name:"DEM1-${index}",version: "1",description:"Desc${index}",valueDomain:valueDomain,catalogueId:"Model${index}",catalogueVersion:"v1" )
 			Model.list()[0].addToDataElements(dataElement).save(failOnError: true)
 		}
 
@@ -69,8 +69,7 @@ class DataElementControllerSpec extends  Specification{
 
 
 	@Unroll
-	def "index is called to get all DataElements (total=#total , max=#max , offset=#offset , resultCount=#resultCount), it returns all DataElements in JSON"()
-	{
+	def "index is called to get all DataElements (total=#total , max=#max , offset=#offset , resultCount=#resultCount), it returns all DataElements in JSON"() {
 		given:"A number of dataElements is available"
 		DataElement.list().size() == 10
 
@@ -95,8 +94,7 @@ class DataElementControllerSpec extends  Specification{
 	}
 
 	@Unroll
-	def "index is called to get all DataElements of a Model by passing ModelId - nested RestPath"()
-	{
+	def "index is called to get all DataElements of a Model by passing ModelId - nested RestPath"()	{
 		when:"index is called with modelId params"
 		def mcModel = Model.list()[modelIndex]
 		params.ModelId = mcModel.id
@@ -117,23 +115,19 @@ class DataElementControllerSpec extends  Specification{
 
 
 	@Unroll
-	def "index is called to get all DataElements of a Model by passing ModelId and a filter"()
-	{
+	def "index called by a filter returns filtered DataElements"() {
 		when:"index is called with modelId params"
-		def mcModel = Model.list()[0]
-		params.ModelId = mcModel.id
-		params["filters"] = "{name:'DE1'}"
+		params["filters"] = "{name:'DEM1'}"
 		controller.index()
 		def model = controller.modelAndView.model
 
-
 		then:"returns a list of dataElements of that specific model with that filter"
-		model.pagedResultListInstanceMap.total == 1
+		model.pagedResultListInstanceMap.total == 5
+		model.pagedResultListInstanceMap.objects[0].name.startsWith("DEM1")
 	}
 
 
- 	def "index returns no DataElements when called with ModelId which is not available"()
-	{
+ 	def "index returns no DataElements when called with ModelId which is not available"() {
 		when:"index is called with no modelId params"
 		params.ModelId = 9999400 //an unavailable-model
 		controller.index()
@@ -142,4 +136,15 @@ class DataElementControllerSpec extends  Specification{
 		then:"returns no dataElements"
 		model.arrayListInstanceMap.objects.size() == 0
 	}
+
+	def "index sorts results based on name order 'asc' by default"(){
+
+		when:"index is called"
+		def des = DataElement.listOrderByName()
+		controller.index()
+
+		then:"result is sorted based on name order 'asc' by default "
+		model.pagedResultListInstanceMap.objects[0].name == des.first().name
+	}
+
 }

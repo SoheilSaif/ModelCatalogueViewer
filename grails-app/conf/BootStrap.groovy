@@ -48,12 +48,22 @@ class BootStrap {
 		def valueDomain = new ValueDomain(name:"TestValueDomain", dataType: dataType,catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
 
 		(1..30).each {index ->
-			def dataElement = new DataElement(name:"Name${index}", description:"Description${index}", definition:"A${index}", valueDomain:valueDomain,catalogueId: "1",catalogueVersion: "1")
+			def dataElement = new DataElement(name:"M1-Name${index}", description:"Description${index}", definition:"A${index}", valueDomain:valueDomain,catalogueId: "1",catalogueVersion: "1")
 			model1.addToDataElements(dataElement)
 		}
-
-
         model1.save(failOnError: true)
+
+
+
+		(1..30).each {index ->
+			def dataElement = new DataElement(name:"M2-Name${index}", description:"Description${index}", definition:"A${index}", valueDomain:valueDomain,catalogueId: "1",catalogueVersion: "1")
+			model2.addToDataElements(dataElement)
+		}
+		model2.save(failOnError: true)
+
+
+
+
   }
 
 }
