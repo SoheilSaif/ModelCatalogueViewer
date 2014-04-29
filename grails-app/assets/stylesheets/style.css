@@ -10,3 +10,24 @@ html, body{
     min-height: 100%;
     margin: 10px;
 }
+
+.ngTable th {
+	background: #FFF;
+	cursor: default;
+}
+.ngTable {
+	border: 1px solid #dddddd;
+}
+
+.ngTable tr:nth-child(odd) {
+	background: #f9f9f9
+}
+.ngTable tr:nth-child(even) {
+	background: #FFF
+}
+
+.ngTable tr:hover {
+	cursor: pointer;
+	background: #f9f9f9
+
+}
