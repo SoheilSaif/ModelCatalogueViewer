@@ -47,14 +47,23 @@ class BootStrap {
 		def dataType = new DataType(name:"TestDataType", enumerated: false,catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
 		def valueDomain = new ValueDomain(name:"TestValueDomain", dataType: dataType,catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
 
-        def dataElement1 = new DataElement(name:"A", description:"A", definition:"A", valueDomain:valueDomain,catalogueId: "1",catalogueVersion: "1")
-
-        def dataElement2 = new DataElement(name:"B", description:"B", definition:"B", valueDomain:valueDomain,catalogueId: "2",catalogueVersion: "1")
-
-		model1.addToDataElements(dataElement1)
-		model1.addToDataElements(dataElement2)
-
+		(1..30).each {index ->
+			def dataElement = new DataElement(name:"M1-Name${index}", description:"Description${index}", definition:"A${index}", valueDomain:valueDomain,catalogueId: "1",catalogueVersion: "1")
+			model1.addToDataElements(dataElement)
+		}
         model1.save(failOnError: true)
+
+
+
+		(1..30).each {index ->
+			def dataElement = new DataElement(name:"M2-Name${index}", description:"Description${index}", definition:"A${index}", valueDomain:valueDomain,catalogueId: "1",catalogueVersion: "1")
+			model2.addToDataElements(dataElement)
+		}
+		model2.save(failOnError: true)
+
+
+
+
   }
 
 }

@@ -25,6 +25,10 @@ class DataElementController extends BetterRestfulController{
 		params.max = Math.min(max ?: 10, 100)
 		params.offset = offset ?: 0
 
+
+		params.sort  = "name"
+		params.order = "asc"
+
 		def returnValue = [
 				objects: listAllResources(params),
 				max: params.max,
@@ -33,8 +37,6 @@ class DataElementController extends BetterRestfulController{
 		]
 		respond returnValue as Object, model: [("${resourceName}Count".toString()): countResources(params)]
 	}
-
-
 
 	/*
 	* Returns a list of objects,in a filtered and paged format
@@ -49,29 +51,35 @@ class DataElementController extends BetterRestfulController{
 		if(params["filters"])
 			filters = JSON.parse(params.filters);
 
+		params.sort  = "name"
+		params.order = "asc"
+
 		Model  parentModel = null
 		if(params["ModelId"]){
 				parentModel = Model.get(params?.ModelId)
 				//can not find the Model, so returns no dataElement
 				if(parentModel == null)
 					return  []
-			}
+		}
 
-		DataElement.findAll(params,{
 
-			if(filters.size()>0){
+
+		resource.findAll(params,{
+			if(filters.size()>0)
+			{
 				filters.each{
 					key, value ->
 						ilike(key,"%"+value+"%")
 				}
 			}
+
 			if(parentModel){
-						model.id == parentModel.id
-			}
+				model{
+					eq("id",parentModel.id)
+				}			}
 
-	})
-
-}
+		})
+	}
 
 	//Extended to support filters
 	@Override
@@ -82,6 +90,7 @@ class DataElementController extends BetterRestfulController{
 		if(params["filters"])
 			filters = JSON.parse(params.filters);
 
+
 		Model  parentModel = null
 		if(params["ModelId"]){
 			parentModel = Model.get(params?.ModelId)
@@ -89,7 +98,6 @@ class DataElementController extends BetterRestfulController{
 			if(parentModel == null)
 				return  0
 		}
-
 
 		def criteria = DataElement.createCriteria()
 		criteria.count({
@@ -100,6 +108,7 @@ class DataElementController extends BetterRestfulController{
 						ilike(key,"%"+value+"%")
 				}
 			}
+
 			if(parentModel){
 				model{
 					eq("id",parentModel.id)
