@@ -29,26 +29,29 @@ mainApp.config ($stateProvider, $urlRouterProvider) ->
 		templateUrl: '/' + grailsAppName + '/assets/angular/partials/search.html'
 
 
-	list =
-		name:'listStatus',
-		url:"/list",
+	dataElementList =
+		name:'dataElementListStatus',
+		url:"/model/:id/dataelement",
 		templateUrl: '/' + grailsAppName + '/assets/angular/partials/list.html'
-		controller : "testController",
+		controller : "ngTableController",
 		resolve:{
-			resourceName: () ->
-					return 'models'
+			resourceURLs: ($stateParams) ->
+				  #call to Grails REST API like models/1/dataelements
+					return {resource1:'models',id1:$stateParams.id,resource2:'dataelements',id2:null}
 		}
 
-	model =
-		name: 'modelStatus',
-		url: '/model',
-		templateUrl: '/' + grailsAppName + '/assets/angular/partials/model.html'
-		controller : "ngTableController",
-		resolve: {
-			RestURI: ($stateParams, UserService) ->
-		 		"api/models"
-		}
+
+#	model =
+#		name: 'modelStatus',
+#		url: '/model',
+#		templateUrl: '/' + grailsAppName + '/assets/angular/partials/model.html'
+#		controller : "ngTableController",
+#		resolve: {
+#			RestURI: ($stateParams, UserService) ->
+#		 		"api/models"
+#		}
 
 	$stateProvider.state(home)
-	$stateProvider.state(list)
-	$stateProvider.state(model)
+	$stateProvider.state(dataElementList)
+
+#	$stateProvider.state(model)

@@ -1,17 +1,17 @@
 <div>
-    {{resourceName}}
+    {{resourceURLs}}
     {{columns}}
 
     <div class="panel-body">
         <div >
             <table ng-table="tableParams" class="table" show-filter="true" show-sort="true">
                 <tr ng-repeat="item in $data">
+                    <td data-title="'Id'" sortable="catalogueId" filter="{ 'catalogueId': 'text' }" sortable="'catalogueId'">{{item.catalogueId}}</td>
                     <td data-title="'Name'" sortable="name" filter="{ 'name': 'text' }" sortable="'name'">{{item.name}}</td>
                     <td data-title="'Description'" sortable="description" filter="{ 'description': 'text' }" sortable="'description'">{{item.description}}</td>
+                    <td data-title="'Version'" sortable="catalogueVersion" filter="{ 'catalogueVersion': 'text' }" sortable="'catalogueVersion'">{{item.catalogueVersion}}</td>
                 </tr>
             </table>
         </div>
     </div>
-
-
 </div>

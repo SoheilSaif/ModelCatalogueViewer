@@ -116,6 +116,22 @@ class DataElementControllerSpec extends  Specification{
 	}
 
 
+	@Unroll
+	def "index is called to get all DataElements of a Model by passing ModelId and a filter"()
+	{
+		when:"index is called with modelId params"
+		def mcModel = Model.list()[0]
+		params.ModelId = mcModel.id
+		params["filters"] = "{name:'DE1'}"
+		controller.index()
+		def model = controller.modelAndView.model
+
+
+		then:"returns a list of dataElements of that specific model with that filter"
+		model.pagedResultListInstanceMap.total == 1
+	}
+
+
  	def "index returns no DataElements when called with ModelId which is not available"()
 	{
 		when:"index is called with no modelId params"

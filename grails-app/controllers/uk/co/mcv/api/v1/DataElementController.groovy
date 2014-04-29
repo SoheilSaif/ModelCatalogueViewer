@@ -31,6 +31,8 @@ class DataElementController extends BetterRestfulController{
 				offset: params.offset,
 				total: countResources(params)
 		]
+		println( params)
+		println(returnValue)
 		respond returnValue as Object, model: [("${resourceName}Count".toString()): countResources(params)]
 	}
 
