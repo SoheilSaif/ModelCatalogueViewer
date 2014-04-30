@@ -1,0 +1,20 @@
+<div class="panel-heading" id="NodePropertiesPanel">
+    Properties
+</div>
+<div class="panel-body">
+    <h4>{{ selectedNode.name || "empty" }}
+    </h4>
+    <p>{{ selectedNode.description || "empty" }}</p>
+
+    <div mc-thing-picker
+         widget-name="Data Elements"
+         selected-things="selectedNode.dataElements"
+         all-things-resource="allDataElementsResource"
+            ></div>
+
+    <!--<div mc-thing-picker-->
+         <!--widget-name="Forms"-->
+         <!--selected-things="selectedNode.forms"-->
+         <!--all-things-resource="allFormsResource"></div>-->
+
+</div>

@@ -11,11 +11,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <asset:stylesheet href="style.css"/>
+        <asset:stylesheet href="layout.css"/>
         <asset:stylesheet href="ng-table/ng-table.css"/>
         <asset:stylesheet href="bootstrap/dist/css/bootstrap.css"/>
         <asset:stylesheet href="angular-bootstrap-nav-tree/dist/anb_tree.css"/>
 
-    <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+        <asset:stylesheet href="angular-xeditable/dist/css/xeditable.css"/>
+        <asset:stylesheet href="application.css"/>
+        <asset:stylesheet href="jquery.layout/dist/jquery.layout-latest.css"/>
+
+
+        <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
         <g:layoutHead/>
 	</head>
 	<body>
@@ -47,16 +53,25 @@
         </div>
     </div>
 
-
-
    <div class="fullwidthContainer" style="margin-top: 70px;" role="main">
        <g:layoutBody/>
    </div>
  		<r:layoutResources />
 	</body>
 
-<asset:javascript src="angular/app.js"/>
-<asset:javascript src="test.js"/>
+
+
+
+%{--<asset:javascript src="test.js"/>--}%
+<asset:javascript src="jquery/dist/jquery.js"/>
+<asset:javascript src="jquery-ui/ui/jquery-ui.js"/>
 <asset:javascript src="bootstrap/dist/js/bootstrap.js"/>
+<asset:javascript src="datatables/media/js/jquery.dataTables.js"/>
+<asset:javascript src="jquery.layout/dist/jquery.layout-latest.js"/>
+
+<asset:javascript src="pathwaysLayout.js"/>
+
+%{--<asset:javascript src="angular/app.js"/>--}%
+<asset:javascript src="angular/pathway/app.js"/>
 
 </html>

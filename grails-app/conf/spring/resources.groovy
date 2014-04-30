@@ -1,7 +1,10 @@
 import uk.co.brc.mcv.marshaller.CustomObjectMarshallers
 import uk.co.brc.mcv.marshaller.DataElementMarshaller
 import uk.co.brc.mcv.marshaller.DataTypeMarshaller
+import uk.co.brc.mcv.marshaller.LinkMarshaller
 import uk.co.brc.mcv.marshaller.ModelMarshaller
+import uk.co.brc.mcv.marshaller.NodeMarshaller
+import uk.co.brc.mcv.marshaller.PathwayMarshaller
 import uk.co.brc.mcv.marshaller.ValueDomainMarshaller
 import uk.co.mcv.model.DataType
 import uk.co.mcv.model.ValueDomain
@@ -13,7 +16,10 @@ beans = {
                 new ModelMarshaller(),
 				new DataElementMarshaller(),
 				new DataTypeMarshaller(),
-				new ValueDomainMarshaller()
+				new ValueDomainMarshaller(),
+				new PathwayMarshaller(),
+				new LinkMarshaller(),
+				new NodeMarshaller()
         ]
     }
 }

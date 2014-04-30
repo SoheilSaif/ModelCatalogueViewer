@@ -8,6 +8,9 @@ class UrlMappings {
         }
 
 
+		"/pathways"(resources: "pathway")
+
+
 		//Model REST API
         "/api/models"(version:'1.0', resources:"Model", namespace:'v1')
 

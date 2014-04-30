@@ -49,7 +49,6 @@ grails.project.dependency.resolution = {
         mavenRepo "http://download.java.net/maven/2/"
         mavenRepo 'http://maven.restlet.org'
         mavenRepo "http://repo.grails.org/grails/core"
-        mavenRepo 'http://repo.spring.io/milestone'
 
         mavenRepo 'http://dl.bintray.com/modelcatalogue-core/ModelCatalogueCorePlugin/'
         mavenRepo 'http://dl.bintray.com/modelcatalogue-core/ModelCatalogueElasticSearchPlugin/'
@@ -87,6 +86,17 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
+
+
+		// Spring Security
+		compile ':spring-security-core:1.2.7.3'
+		compile ":spring-security-ui:0.2"
+		compile ":jquery:1.11.0"
+		compile ":jquery-ui:1.10.3"
+		compile ":famfamfam:1.0.1"
+		compile ":mail:1.0"
+
+
         // plugins for the build system only
         build ":tomcat:7.0.52.1"
 
@@ -121,10 +131,9 @@ grails.project.dependency.resolution = {
         //compile "org.modelcatalogue.plugins:grails-model-catalogue-elastic-search-plugin:0.1"
 
 
-        compile ":coffee-asset-pipeline:1.5.0"
-        compile ":less-asset-pipeline:1.5.3"
-        compile ":famfamfam:1.0.1"
-        compile ':asset-pipeline:1.6.1'
+		compile ":asset-pipeline:1.7.6"
+		compile ":coffee-asset-pipeline:1.7.0"
+		compile ":less-asset-pipeline:1.7.0"
 
-    }
+	}
 }
