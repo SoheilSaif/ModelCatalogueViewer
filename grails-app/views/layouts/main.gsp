@@ -14,7 +14,6 @@
 
         <asset:stylesheet href="bootstrap/dist/css/bootstrap.css"/>
         <asset:stylesheet href="angular-bootstrap-nav-tree/dist/anb_tree.css"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-animate.js"></script>
 
 
 
