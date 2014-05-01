@@ -30,7 +30,7 @@ class ModelControllerSpec extends  Specification{
     }
 
     @Unroll
-    def "index is called to get all Models for (total=#total , max=#max , offset=#offset , resultCount=#resultCount), it returns all Model"()  {
+    def "index is called to get all Models for (total=#total , max=#max , offset=#offset , resultCount=#resultCount, filter=#filters), it returns all Model"()  {
         given:"A number of Model is available"
         Model.list().size() == 18
 
@@ -38,6 +38,7 @@ class ModelControllerSpec extends  Specification{
         when:"index is called with total,max,offset and resultCount params"
         params.offset = offset
         params.max = max
+        params.filters = filters
         controller.index()
 		def model = controller.modelAndView.model
 
@@ -48,11 +49,17 @@ class ModelControllerSpec extends  Specification{
 		model.pagedResultListInstanceMap.objects.size() == resultCount
 
         where:
-        total   | max   | offset    | resultCount
-        36      |  10   |   0       | 10
-        36      |  10   |   30      | 6
-        36      |  20   |   31      | 5
+        total   | max   | offset    |	filters				| resultCount
+        36      |  10   |   0       |	"{}"				|	10
+        36      |  10   |   30      |	"{}"				|	6
+        36      |  20   |   31      | 	"{}"				|	5
+        20      |  10   |   0	    | 	"{'name':'Model1'}"	|	10
+        2       |  10   |   0	    | 	"{'name':'Model11'}"|	2
+
     }
+
+
+
 
     def "Check if ModelController is a readOnly Controller"() {
         when:"Save is called"
