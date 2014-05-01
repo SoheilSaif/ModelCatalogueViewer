@@ -24,7 +24,7 @@ class BootStrap {
             }
             test{
                 BuildTestData()
-				BuildSamplePathway()
+				//BuildSamplePathway()
 			}
             development {
                 BuildTestData()

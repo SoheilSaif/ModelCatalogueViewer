@@ -27,24 +27,6 @@ class ModelServiceISpec extends IntegrationSpec {
 			def dataElement = new DataElement(name:"DE${index}",version: "1",description:"Desc${index}",valueDomain:valueDomain,catalogueId:"Model${index}",catalogueVersion:"v1" )
 			Model.list()[0].addToDataElements(dataElement).save(failOnError: true)
 		}
-
-
-		//add some DataElements into Model[1]
-		(1..3).each { index ->
-			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",dataType: dataType,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def dataElement = new DataElement(name:"DE${index}",version: "1",description:"Desc${index}",valueDomain:valueDomain ,catalogueId:"Model${index}",catalogueVersion:"v1")
-			Model.list()[1].addToDataElements(dataElement).save(failOnError: true)
-		}
-
-		//add some DataElements into Model[2]
-		(1..2).each { index ->
-			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",dataType: dataType,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def dataElement = new DataElement(name:"DE${index}",version: "1",description:"Desc${index}",catalogueId:"Model${index}",catalogueVersion:"v1",valueDomain:valueDomain )
-			Model.list()[2].addToDataElements(dataElement).save(failOnError: true)
-		}
-
     }
 
 
