@@ -27,8 +27,7 @@
 
 
 
-        <g:set var="grailsParams" value="${params.collect { it.key + '=\'' + it.value + '\'' }.join('; ')}"/>
-    <div ng-app="viewerApp" class="row" ng-init="${grailsParams};grailsAppName='ModelCatalogueViewer'">
+    <div ng-app="viewerApp" class="row">
         <div class="col-md-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">NHIC Themes</div>

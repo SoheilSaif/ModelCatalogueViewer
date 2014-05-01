@@ -36,11 +36,10 @@ mainApp.config ($stateProvider, $urlRouterProvider) ->
 		templateUrl: '/' + grailsAppName + '/assets/angular/partials/list.html'
 		controller : "ngTableController",
 		resolve:{
-			resourceURLs: ($stateParams) ->
+			resourceDetails: ($stateParams) ->
 				  #call to Grails REST API like models/1/dataelements
-					return {resource1:'models',id1:$stateParams.id,resource2:'dataelements',id2:null}
+					return {resourceRestAPI:'models/'+$stateParams.id+'/dataelements',resourceId:null,resourceName:"dataelements",resourceState:"dataElement"}
 		}
-
 
 	dataElement =
 		name:'dataElement',
@@ -53,14 +52,15 @@ mainApp.config ($stateProvider, $urlRouterProvider) ->
 		}
 
 
+
 	modelList =
 		name: 'modelList',
 		url: '/model',
 		templateUrl: '/' + grailsAppName + '/assets/angular/partials/list.html'
 		controller : "ngTableController",
 		resolve: {
-			resourceURLs: ($stateParams) ->
-				return {resource1:'models',id1:null,resource2:null,id2:null}
+			resourceDetails: ($stateParams) ->
+				return {resourceRestAPI:'models',resourceId:null,resourceName:"models",resourceState:"model"}
 		}
 
 	$stateProvider.state(home)

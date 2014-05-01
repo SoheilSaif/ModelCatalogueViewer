@@ -13,7 +13,9 @@ utils.service 'Grails', ($resource) ->
 	# 	controller: the API endpoint, following "api/", e.g. 'pathways'
 	#	id: (optional) the ID of the resource to retrieve.
 	getRestAPIResource: (controller, id) ->
-		$resource "/:grailsAppName/api/:controller/:id.json", {grailsAppName: grailsAppName || '', controller: controller || '', id: id || ''}, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} }
+		path =  "/:grailsAppName/api/"+ controller + "/:id.json"
+		$resource path, {grailsAppName: grailsAppName , id: id || ''}, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} }
+		# $resource "/:grailsAppName/api/:controller/:id.json", {grailsAppName: grailsAppName || '', controller: controller || '', id: id || ''}, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} }
 		# if ID set -> GET, UPDATE, DELETE, all URL api/controller/id
 		# else 		-> GET, POST, all URL api/controller
 

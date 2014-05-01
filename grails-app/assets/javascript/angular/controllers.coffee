@@ -1,10 +1,12 @@
 viewerControllers = angular.module('viewerControllers',['ngTable','ngResource','viewerServices'])
 
 
-viewerControllers.controller('ngTableController',['$scope','ngTableParams','$resource','Grails','resourceURLs', '$state',($scope,ngTableParams,$resource,Grails,resourceURLs,$state)  ->
+viewerControllers.controller('ngTableController',['$scope','ngTableParams','$resource','Grails','resourceDetails', '$state',($scope,ngTableParams,$resource,Grails,resourceDetails,$state)  ->
 
-	$scope.resourceURLs = resourceURLs
-
+	$scope.resourceRestAPI = resourceDetails.resourceRestAPI
+	$scope.resourceId = resourceDetails.resourceId
+	$scope.resourceName = resourceDetails.resourceName
+	$scope.resourceState = resourceDetails.resourceState
 
 
 	$scope.tableParams = new ngTableParams(
@@ -16,7 +18,7 @@ viewerControllers.controller('ngTableController',['$scope','ngTableParams','$res
 	,
 		total: 0
 		getData: ($defer, params) ->
-			Grails.getNestedRestAPIResource($scope.resourceURLs.resource1,$scope.resourceURLs.id1,$scope.resourceURLs.resource2,$scope.resourceURLs.id2).get({max: params.count(),offset:(params.page() - 1) * params.count(),filters:params.filter()},(result, responseHeaders)->
+			Grails.getRestAPIResource($scope.resourceRestAPI,$scope.resourceId).get({max: params.count(),offset:(params.page() - 1) * params.count(),filters:params.filter()},(result, responseHeaders)->
 				params.total(result.total);
 				$defer.resolve result.objects
 				return
@@ -29,7 +31,7 @@ viewerControllers.controller('ngTableController',['$scope','ngTableParams','$res
 	)
 
 	$scope.go = (item) ->
-		$state.go("dataElement",{id:item.id})
+		$state.go($scope.resourceState,{id:item.id})
 		console.log item
 
 		return
