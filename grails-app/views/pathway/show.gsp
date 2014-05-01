@@ -11,6 +11,8 @@
 
     <parameter name="name" value="Pathway Editor"/>
 
+    <asset:stylesheet href="layout.css"/>
+    <asset:stylesheet href="application.css"/>
 
     <r:layoutResources/>
 

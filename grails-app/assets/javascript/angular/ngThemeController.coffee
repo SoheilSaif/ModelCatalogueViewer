@@ -19,13 +19,12 @@ angular.module('ngThemeControllerModule',['ngResource','viewerServices'])
 			$scope.themes.push {
 				label: object.name,
 				model: object
-				children:[],
+				children:[{label:"A"},{label:"A"},{label:"A"},{label:"A"}],
 				onSelect: (branch) ->
 					$scope.currentTheme = branch.model
-
 					$state.go("dataElementList",{id:branch.model.id})
-
 #					alert branch.label + ' ' +branch.model.id
 					return
 			}
+
 ])

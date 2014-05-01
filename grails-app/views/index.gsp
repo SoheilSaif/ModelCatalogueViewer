@@ -33,7 +33,7 @@
                 <div class="panel-heading">NHIC Themes</div>
                 <div class="panel-body">
                     <div  ng-controller="ngThemeController"  >
-                        <abn-tree tree-data="themes"  expand-level = "1"  >
+                        <abn-tree tree-data="themes"  expand-level = "1" icon-leaf = "fa fa-file"                >
                         </abn-tree>
                     </div>
                 </div>
@@ -63,6 +63,11 @@
             %{--</div>--}%
         </div>
     </div>
+
+
+
+
+
 
     <asset:javascript src="angular/app.js"/>
 

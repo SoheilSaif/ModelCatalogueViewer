@@ -1,6 +1,5 @@
 #= require angular/angular.js
 #= require angular-resource/angular-resource.js
-#= require angular-xeditable/dist/js/xeditable.js
 #= require angular-ui-router/release/angular-ui-router.js
 #= require ng-table/ng-table.js
 #= require angular/controllers.js
@@ -50,7 +49,6 @@ mainApp.config ($stateProvider, $urlRouterProvider) ->
 			catalogueElementId: ($stateParams) ->
 				return $stateParams.id
 		}
-
 
 
 	modelList =

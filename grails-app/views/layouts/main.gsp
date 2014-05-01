@@ -10,18 +10,23 @@
 		<title><g:layoutTitle default="Grails"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <asset:stylesheet href="style.css"/>
-        <asset:stylesheet href="layout.css"/>
-        <asset:stylesheet href="ng-table/ng-table.css"/>
+
+
         <asset:stylesheet href="bootstrap/dist/css/bootstrap.css"/>
         <asset:stylesheet href="angular-bootstrap-nav-tree/dist/anb_tree.css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-animate.js"></script>
 
-        <asset:stylesheet href="angular-xeditable/dist/css/xeditable.css"/>
-        <asset:stylesheet href="application.css"/>
-        <asset:stylesheet href="jquery.layout/dist/jquery.layout-latest.css"/>
 
 
         <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+
+        %{--Styles for ng-Table--}%
+        <asset:stylesheet href="style.css"/>
+        %{--ng-Table default Style--}%
+        <asset:stylesheet href="ng-table/ng-table.css"/>
+
+
         <g:layoutHead/>
 	</head>
 	<body>
@@ -35,7 +40,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/ModelCatalogueViewer">Home</a></li>
-                    <li><a href="/ModelCatalogueViewer"">Data Model</a></li>
+                    <li><a href="/ModelCatalogueViewer">Data Model</a></li>
                     <li><a href="/ModelCatalogueViewer/pathway/show/1/">Pathways</a></li>
                     <li><a href="#contact">Search</a></li>
                     <li class="dropdown">
