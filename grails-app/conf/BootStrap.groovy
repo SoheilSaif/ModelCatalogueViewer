@@ -23,7 +23,7 @@ class BootStrap {
 				BuildSamplePathway()
             }
             test{
-                BuildTestData()
+                //BuildTestData()
 				//BuildSamplePathway()
 			}
             development {
@@ -151,8 +151,24 @@ class BootStrap {
 		def nhicConDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain",catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
 
         Model model1 = new Model(name:"Ovarian Cancer",catalogueId:"1",catalogueVersion: "1",conceptualDomain: nhicConDomain).save(failOnError: true)
-        Model model2 = new Model(name:"Acute Coronary Syndromes",catalogueId:"2",catalogueVersion: "1",conceptualDomain: nhicConDomain  ).save(failOnError: true)
+        Model model11 = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model1).save(failOnError: true)
+        Model model12 = new Model(name:"12",catalogueId: "12",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model1).save(failOnError: true)
+        Model model13 = new Model(name:"13",catalogueId: "13",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model1).save(failOnError: true)
+		model1.addToSubModels(model11)
+		model1.addToSubModels(model12)
+		model1.addToSubModels(model13)
+		model1.save(failOnError: true)
+
+		Model model2 = new Model(name:"Acute Coronary Syndromes",catalogueId:"2",catalogueVersion: "1",conceptualDomain: nhicConDomain  ).save(failOnError: true)
+		Model model21 = new Model(name:"21",catalogueId: "21",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model2).save(failOnError: true)
+		model2.addToSubModels(model21)
+		model2.save(failOnError: true)
+
 		Model model3 = new Model(name:"Renal Transplantation",catalogueId:  "3",catalogueVersion: "1" ,conceptualDomain: nhicConDomain).save(failOnError: true)
+		Model model31 = new Model(name:"31",catalogueId: "31",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model3).save(failOnError: true)
+		model3.addToSubModels(model31)
+		model3.save(failOnError: true)
+
 		Model model4 = new Model(name:"Viral Hepatitis C/B", catalogueId:  "4",catalogueVersion: "1" ,conceptualDomain: nhicConDomain).save(failOnError: true)
 		Model model5 = new Model(name:"Intensive Care",catalogueId: "5",catalogueVersion: "1" ,conceptualDomain: nhicConDomain).save(failOnError: true)
 
