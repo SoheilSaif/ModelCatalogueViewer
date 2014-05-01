@@ -7,14 +7,8 @@ services.service 'Grails',($resource) ->
 	# 	controller: the API endpoint, following "api/", e.g. 'pathways'
 	#	id: (optional) the ID of the resource to retrieve.
 	getRestAPIResource: (controller, id) ->
-		$resource "/:grailsAppName/api/:controller/:id.json", {grailsAppName: grailsAppName || '', controller: controller || '', id: id || ''}, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} }
-
-	getNestedRestAPIResource: (controller1, id1,controller2,id2) ->
-		if(controller2 == null && id2 == null)
-			$resource "/:grailsAppName/api/:controller/:id.json", {grailsAppName: grailsAppName || '', controller: controller1 || '', id: id1 || ''}, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} }
-		else
-			$resource "/:grailsAppName/api/:controller1/:id1/:controller2/:id2.json", {grailsAppName: grailsAppName || '', controller1: controller1 || '', id1: id1 || '', controller2: controller2 || '', id2: id2 || ''}, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} }
-
+		path = "/:grailsAppName/api/" + controller + "/:id.json"
+		$resource path, {grailsAppName: grailsAppName || '', id: id || ''}, { 'get': { method: 'GET', isArray: false }, 'update': { method: 'PUT'} }
 
 	# if ID set -> GET, UPDATE, DELETE, all URL api/controller/id
 	# else 		-> GET, POST, all URL api/controller
