@@ -65,7 +65,9 @@
         </div>
     </div>
 
+    <asset:javascript src="angular/app.js"/>
 
 
     </body>
+
 </html>

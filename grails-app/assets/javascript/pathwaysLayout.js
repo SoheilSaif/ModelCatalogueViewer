@@ -4,6 +4,8 @@ $(document).ready(function () {
 
 	resizeWindows();
 
+	if( $('#container').length) {
+
 	mainLayout = $('#container').layout({
 		closable:			true,	// pane can open & close
         resizable:			true,	// when open, pane can be resized
@@ -13,6 +15,7 @@ $(document).ready(function () {
         west: { size: '20%' },
     east: { size: 200 }
 });
+	}
 
 	$(window).resize(function(){
 		resizeWindows();

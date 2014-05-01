@@ -35,7 +35,6 @@ viewerControllers.controller('ngTableController',['$scope','ngTableParams','$res
 		return
 ])
 
-
 viewerControllers.controller('dataElementController',['$scope','$resource','Grails','catalogueElementId',($scope,$resource,Grails,catalogueElementId)  ->
 
 	Grails.getRestAPIResource("dataelements",catalogueElementId).get({},(result, responseHeaders)->

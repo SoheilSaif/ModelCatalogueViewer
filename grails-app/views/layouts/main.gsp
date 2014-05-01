@@ -34,9 +34,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">Data Model</a></li>
-                    <li><a href="#about">Pathways</a></li>
+                    <li class="active"><a href="/ModelCatalogueViewer">Home</a></li>
+                    <li><a href="/ModelCatalogueViewer"">Data Model</a></li>
+                    <li><a href="/ModelCatalogueViewer/pathway/show/1/">Pathways</a></li>
                     <li><a href="#contact">Search</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
@@ -59,19 +59,6 @@
  		<r:layoutResources />
 	</body>
 
-
-
-
 %{--<asset:javascript src="test.js"/>--}%
-<asset:javascript src="jquery/dist/jquery.js"/>
-<asset:javascript src="jquery-ui/ui/jquery-ui.js"/>
-<asset:javascript src="bootstrap/dist/js/bootstrap.js"/>
-<asset:javascript src="datatables/media/js/jquery.dataTables.js"/>
-<asset:javascript src="jquery.layout/dist/jquery.layout-latest.js"/>
-
-<asset:javascript src="pathwaysLayout.js"/>
-
-%{--<asset:javascript src="angular/app.js"/>--}%
-<asset:javascript src="angular/pathway/app.js"/>
 
 </html>

@@ -13,7 +13,7 @@ public class PathwayMarshaller {
             return [
                 'id' : pathway.id,
                 'name': pathway?.name,
-                'userVersion': pathway?.userVersion,
+                'catalogueVersion': pathway?.userVersion,
                 'isDraft': pathway?.isDraft,
                 'description'	: pathway?.description,
                 'nodes' : pathway.getNodes(),
