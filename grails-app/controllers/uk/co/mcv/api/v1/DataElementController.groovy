@@ -22,20 +22,9 @@ class DataElementController extends BetterRestfulController{
 	 * @return
 	 */
 	def index(Integer max, Integer offset){
-		params.max = Math.min(max ?: 10, 100)
-		params.offset = offset ?: 0
-
-
 		params.sort  = "name"
 		params.order = "asc"
-
-		def returnValue = [
-				objects: listAllResources(params),
-				max: params.max,
-				offset: params.offset,
-				total: countResources(params)
-		]
-		respond returnValue as Object, model: [("${resourceName}Count".toString()): countResources(params)]
+		super.index(max,offset)
 	}
 
 	/*
@@ -51,9 +40,6 @@ class DataElementController extends BetterRestfulController{
 		if(params["filters"])
 			filters = JSON.parse(params.filters);
 
-		params.sort  = "name"
-		params.order = "asc"
-
 		Model  parentModel = null
 		if(params["ModelId"]){
 				parentModel = Model.get(params?.ModelId)
@@ -61,8 +47,6 @@ class DataElementController extends BetterRestfulController{
 				if(parentModel == null)
 					return  []
 		}
-
-
 
 		resource.findAll(params,{
 			if(filters.size()>0)

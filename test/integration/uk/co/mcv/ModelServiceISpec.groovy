@@ -1,6 +1,7 @@
 package uk.co.mcv
 
 import grails.test.spock.IntegrationSpec
+import org.dom4j.rule.Mode
 import uk.co.mcv.model.*
 
 /**
@@ -32,74 +33,108 @@ class ModelServiceISpec extends IntegrationSpec {
 	def "deleteModel will delete the model and all its dataElements"() {
 		given:"a model already exists"
 		def model = Model.list()[0]
-		def modelDe = model.dataElements.size()
-		def deBefore = DataElement.count()
+		def modelDeCount = model.dataElements.size()
+		def allDeCountBefore = DataElement.count()
 
 
 		when:"deleteModel is called"
 		modelService.deleteModel(model)
-		def deAfter = DataElement.count()
+		def allDeCountAfter = DataElement.count()
 
 		then:"the model and its dataElements are all removed"
 		!Model.exists(model.id)
-		deAfter ==  deBefore - modelDe
+		allDeCountAfter ==  allDeCountBefore - modelDeCount
 	}
 
 	def "deleteModel will delete the model and its subModels"() {
-		given:"a model already exists"
-		def nhicConDomain = ConceptualDomain.list()[0]
+
+		given:"a top model and two subModel already exist"
+		def conDomain = ConceptualDomain.list()[0]
 		Model parentModel = Model.list()[0]
-		Model subModel = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: parentModel).save(failOnError: true)
-		parentModel.addToSubModels(subModel)
+		Model subModel1 = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: conDomain,parentModel: parentModel).save(failOnError: true)
+		parentModel.addToSubModels(subModel1)
 		parentModel.save(failOnError: true)
+
+		Model subModel2 = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: conDomain,parentModel: parentModel).save(failOnError: true)
+		parentModel.addToSubModels(subModel2)
+		parentModel.save(failOnError: true)
+
 		def modelBefore = Model.count()
 
 
-		when:"deleteModel is called"
+		when:"deleteModel is called for parent model"
 		modelService.deleteModel(parentModel)
 		def modelAfter = Model.count()
 
-		then:"the model and its subModels are all removed"
+		then:"the parent model and its subModels are all removed"
 		!Model.exists(parentModel.id)
-		!Model.exists(subModel.id)
-		modelAfter ==  modelBefore - 2
+		!Model.exists(subModel1.id)
+		!Model.exists(subModel2.id)
+		modelAfter ==  modelBefore - 3
 	}
 
+
+	def "deleteModel will delete the model and its subModels hierarchy"() {
+
+		given:"a top model and two subModel already exist"
+		def conDomain = ConceptualDomain.list()[0]
+		Model parentModel = Model.list()[0]
+		//add a subModel
+		Model subModel1 = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: conDomain,parentModel: parentModel).save(failOnError: true)
+		parentModel.addToSubModels(subModel1)
+		parentModel.save(failOnError: true)
+
+		//add a subModel to the subModel
+		Model subModel11 = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: conDomain,parentModel: subModel1).save(failOnError: true)
+		subModel1.addToSubModels(subModel11)
+		subModel1.save(failOnError: true)
+
+		def modelBefore = Model.count()
+
+
+		when:"deleteModel is called for parent model"
+		modelService.deleteModel(parentModel)
+		def modelAfter = Model.count()
+
+		then:"the parent model and its subModel hierarchy are all removed"
+		!Model.exists(parentModel.id)
+		!Model.exists(subModel1.id)
+		!Model.exists(subModel11.id)
+		modelAfter ==  modelBefore - 3
+	}
 
 
 	def "addSubModel adds a subModel to a parent Model"(){
 
-		given:"parent and sub models exist"
-		def nhicConDomain = ConceptualDomain.list()[0]
+		setup:""
+		def conDomain = ConceptualDomain.list()[0]
 		Model topModel = Model.list()[0]
-		Model subModel1 = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: nhicConDomain).save(failOnError: true)
+		Model subModel = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: conDomain).save(failOnError: true)
 
 		when:"addSubModel is called"
-		modelService.addSubModel(topModel,subModel1)
+		modelService.addSubModel(topModel,subModel)
 
 		then:"the sub model is added to the parent model"
-		Model.list()[0].subModels
 		Model.list()[0].subModels.size() == 1
-		subModel1.parentModel.id == Model.list()[0].id
+		subModel.parentModel.id == Model.list()[0].id
 	}
 
 	def "getTopLevelModels will return parent models"(){
 
 		given:"parent and sub models exist"
-		def nhicConDomain = ConceptualDomain.list()[0]
+		//a subModel and a number of parent models already exists
+		def conDomain = ConceptualDomain.list()[0]
 		Model parentModel = Model.list()[0]
-		Model subModel = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel:parentModel).save(failOnError: true)
+		Model subModel = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: conDomain,parentModel:parentModel).save(failOnError: true)
 		parentModel.addToSubModels(subModel)
 		parentModel.save(failOnError: true)
-		new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: nhicConDomain).save(failOnError: true)
-
 
 
 		when:"getTopLevelModels is called"
 		def topLevelModels = modelService.getTopLevelModels()
 
-		then:"the sub model is added to the parent model"
-		topLevelModels.size() == 6
-		Model.list().size() == 7
+		then:"returns just top models"
+		topLevelModels.size() == 5
+		!topLevelModels.contains(subModel)
 	}
 }

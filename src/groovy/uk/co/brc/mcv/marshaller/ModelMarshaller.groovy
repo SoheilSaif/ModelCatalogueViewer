@@ -15,7 +15,8 @@ class ModelMarshaller {
                     description : model.description,
 					catalogueVersion: model.catalogueVersion,
 					catalogueId: model.catalogueId,
-					subModels: model.subModels
+					subModels: model.subModels,
+					parentModelId: model?.parentModel?.id
             ]
         }
     }
