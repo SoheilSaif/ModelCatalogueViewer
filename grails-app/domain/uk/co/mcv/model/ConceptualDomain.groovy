@@ -7,24 +7,16 @@ class ConceptualDomain   {
 	String catalogueId
 	String catalogueVersion
 
+	Set valueDomains = []
+	Set models = []
 
 	static hasMany = [valueDomains: ValueDomain, models:Model]
 
 	static constraints = {
-		valueDomains nullable:true
 		name blank: false
 	}
 
 	static mapping = {
 		description type: 'text'
-		valueDomains cascade: 'save-update'
-	}
-	static class DataElementLocal {
-
-		String name
-		String code
-
-		static constraints = {
-		}
 	}
 }

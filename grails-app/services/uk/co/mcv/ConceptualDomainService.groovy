@@ -2,18 +2,32 @@ package uk.co.mcv
 
 import grails.transaction.Transactional
 import uk.co.mcv.model.ConceptualDomain
+import uk.co.mcv.model.ValueDomain
 
 @Transactional
 class ConceptualDomainService {
 
-	def getNHIC() {
-		if(ConceptualDomain.count() == 0)
-			new ConceptualDomain(name: "NHIC",description: "NHIC Model Catalogue",catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
+	def modelService
 
-		return ConceptualDomain.first()
-	}
+	def deleteConceptualDomain(ConceptualDomain conceptualDomain) {
 
-	def getModels(ConceptualDomain conceptualDomain) {
-		conceptualDomain.models
+		//remove models (call modelService.deleteModel)
+		conceptualDomain.models.collect().each { model ->
+			conceptualDomain.removeFromModels(model)
+			modelService.deleteModel(model)
+		}
+		conceptualDomain.models.clear()
+
+		//remove valueDomains from conceptualDomain
+		//remove valueDomain from dataType
+		conceptualDomain.valueDomains.collect().each {ValueDomain vd ->
+			//remove valueDomain from its DataType
+			vd.dataType.removeFromValueDomains(vd)
+			conceptualDomain.removeFromValueDomains(vd)
+			vd.delete()
+		}
+		conceptualDomain.valueDomains.clear()
+
+		conceptualDomain.delete()
 	}
 }

@@ -8,20 +8,22 @@ class ValueDomain  {
     String regexDef
     String format
     String description
-    DataType dataType
-    Set dataElements = []
-    ConceptualDomain conceptualDomain
 	String catalogueVersion
 	String catalogueId
 
+	Set dataElements = []
+	DataType dataType
+	ConceptualDomain conceptualDomain
 
-	static hasMany = [dataElement: DataElement]
+
+	static hasMany = [dataElements: DataElement]
 
     static belongsTo = [conceptualDomain: ConceptualDomain]
 
     static constraints = {
-        conceptualDomain nullable:true
-        dataType nullable:true
+        conceptualDomain nullable:false
+        dataType nullable:false
+
         description nullable:true
         unitOfMeasure nullable:true
         regexDef nullable:true

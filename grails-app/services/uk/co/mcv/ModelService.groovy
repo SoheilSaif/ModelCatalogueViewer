@@ -7,12 +7,18 @@ import uk.co.mcv.model.Model
 class ModelService {
 
     def deleteModel(Model model) {
-		model.dataElements.collect().each { de ->
+
+		//remove dataElements from Model
+		model.dataElements?.collect().each { de ->
 			model.removeFromDataElements(de)
+			de.delete()
 		}
-		model.subModels.collect().each { subModel ->
-			model.removeFromSubModels(subModel)
+		//delete sub Models if any exists
+		//call deleteModel method recursively
+		model.subModels?.collect().each { subModel ->
+			deleteModel(subModel)
 		}
+		//remove model
 		model.delete()
 	}
 

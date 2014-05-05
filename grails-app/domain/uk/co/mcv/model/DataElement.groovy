@@ -2,25 +2,26 @@ package uk.co.mcv.model
 
 class DataElement  {
 
-	
 	String name
 	String description
 	String definition
 	String catalogueVersion
 	String catalogueId
 
-
 	DataElement parent
 	ValueDomain valueDomain
+	Model model
+	Set subElements = []
+
 
     static hasMany = [ subElements: DataElement]
-	
-	
 	static belongsTo = [parent: DataElement,model:Model]
 
-	
     static constraints = {
+		valueDomain nullable: false
+		model nullable: false
 		parent nullable: true
+
 		definition nullable: true
 		description nullable:true
 		name blank: false
@@ -29,11 +30,10 @@ class DataElement  {
 	static mapping = {
 		description type: 'text'
 		definition type: 'text'
-		subElements cascade: 'save-update'
 	}
 	
 
-	static final String HELP = "A data element describes a logical unit of data that has precise meaning or precise semantics." + 
+	static final String HELP = "A data element describes a logical unit of data that has precise meaning or precise semantics." +
 	"Alternatively one can understand a data element as something close to a column in a database table.  <br/>" +
 	"i.e. Address - City <br/>" +
 	"<br/>" +
@@ -52,6 +52,6 @@ class DataElement  {
 	"<br/>" +
 	"A data element can have a number of different <strong>value domains</strong><br/>" +
 	"A value domain expresses the set of allowed values for a data element."
-	
+
 	
 }
