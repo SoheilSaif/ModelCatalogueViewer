@@ -1,3 +1,4 @@
+import uk.co.brc.mcv.marshaller.ConceptualDomainMarshaller
 import uk.co.brc.mcv.marshaller.CustomObjectMarshallers
 import uk.co.brc.mcv.marshaller.DataElementMarshaller
 import uk.co.brc.mcv.marshaller.DataTypeMarshaller
@@ -6,6 +7,7 @@ import uk.co.brc.mcv.marshaller.ModelMarshaller
 import uk.co.brc.mcv.marshaller.NodeMarshaller
 import uk.co.brc.mcv.marshaller.PathwayMarshaller
 import uk.co.brc.mcv.marshaller.ValueDomainMarshaller
+import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.DataType
 import uk.co.mcv.model.ValueDomain
 
@@ -19,7 +21,8 @@ beans = {
 				new ValueDomainMarshaller(),
 				new PathwayMarshaller(),
 				new LinkMarshaller(),
-				new NodeMarshaller()
+				new NodeMarshaller(),
+				new ConceptualDomainMarshaller()
         ]
     }
 }

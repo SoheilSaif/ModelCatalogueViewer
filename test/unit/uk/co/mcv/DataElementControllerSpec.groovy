@@ -3,18 +3,9 @@ package uk.co.mcv
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import grails.test.spock.IntegrationSpec
-import org.codehaus.groovy.grails.web.json.JSONArray
-import org.spockframework.compiler.model.Spec
-import org.springframework.web.context.support.WebApplicationContextUtils
-import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
-import uk.co.brc.mcv.marshaller.DataElementMarshaller
-import uk.co.brc.mcv.marshaller.DataTypeMarshaller
-import uk.co.brc.mcv.marshaller.ModelMarshaller
-import uk.co.brc.mcv.marshaller.ValueDomainMarshaller
 import uk.co.mcv.api.v1.DataElementController
-import uk.co.mcv.api.v1.ModelController
 import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.DataElement
 import uk.co.mcv.model.DataType
@@ -28,42 +19,35 @@ import uk.co.mcv.model.ValueDomain
 @Mock([Model,ConceptualDomain,DataElement,DataType,ValueDomain])
 class DataElementControllerSpec extends  Specification{
 
-
-
 	def setup(){
 
-
-		def conDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain",catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
-
+		def conDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain",catalogueId: "1",catalogueVersion: "1").save(flush: true,failOnError: true)
 
 		//Create 5 sample Models
 		(1..5).each { index ->
-			new Model(name:"Model${index}",catalogueId:"Model${index}",catalogueVersion:"v1",conceptualDomain: conDomain  ).save(flush: true)
+			def model = new Model(name:"Model${index}",catalogueId:"Model${index}",catalogueVersion:"v1" )
+			conDomain.addToModels(model)
+			model.save(flush: true,failOnError: true)
 		}
 
-		//add some DataElements into Model[0]
-		(1..5).each { index ->
-			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",dataType: dataType,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def dataElement = new DataElement(name:"DEM1-${index}",version: "1",description:"Desc${index}",valueDomain:valueDomain,catalogueId:"Model${index}",catalogueVersion:"v1" )
-			Model.list()[0].addToDataElements(dataElement).save(failOnError: true)
-		}
+		addDataElements(5,Model.list()[0],"DEM1")
+		addDataElements(3,Model.list()[1],"DEM2")
+		addDataElements(2,Model.list()[2],"DEM3")
+	}
 
+	private def addDataElements(int count, Model model,String dePrefix){
 
-		//add some DataElements into Model[1]
-		(1..3).each { index ->
-			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",dataType: dataType,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def dataElement = new DataElement(name:"DE${index}",version: "1",description:"Desc${index}",valueDomain:valueDomain ,catalogueId:"Model${index}",catalogueVersion:"v1")
-			Model.list()[1].addToDataElements(dataElement).save(failOnError: true)
-		}
+		def conDomain = ConceptualDomain.list()[0]
+		(1..count).each { index ->
+			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(flush: true,failOnError: true)
+			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",catalogueId:"Model${index}",catalogueVersion:"v1",dataType: dataType)
+			conDomain.addToValueDomains(valueDomain)
+			valueDomain.save(failOnError: true,flush: true)
 
-		//add some DataElements into Model[2]
-		(1..2).each { index ->
-			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",dataType: dataType,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def dataElement = new DataElement(name:"DE${index}",version: "1",description:"Desc${index}",catalogueId:"Model${index}",catalogueVersion:"v1",valueDomain:valueDomain )
-			Model.list()[2].addToDataElements(dataElement).save(failOnError: true)
+			def dataElement = new DataElement(name:"${dePrefix}-${index}",version: "1",description:"Desc${index}",catalogueId:"Model${index}",catalogueVersion:"v1" )
+			valueDomain.addToDataElements(dataElement)
+			model.addToDataElements(dataElement)
+			dataElement.save(failOnError: true,flush: true)
 		}
 	}
 
@@ -105,9 +89,6 @@ class DataElementControllerSpec extends  Specification{
 		then:"returns a list of dataElements of that specific model"
 		model.pagedResultListInstanceMap.total == mcModel.dataElements.size()
 		model.pagedResultListInstanceMap.objects.size() == mcModel.dataElements.size()
-		model.pagedResultListInstanceMap.objects[0].id == mcModel.dataElements[0].id
-		model.pagedResultListInstanceMap.objects[0].valueDomain.id == mcModel.dataElements[0].valueDomain.id
-		model.pagedResultListInstanceMap.objects[0].valueDomain.dataType.id == mcModel.dataElements[0].valueDomain.dataType.id
 
 		where:
 		modelIndex	<< [0,1,2]
@@ -147,4 +128,7 @@ class DataElementControllerSpec extends  Specification{
 		model.pagedResultListInstanceMap.objects[0].name == des.first().name
 	}
 
+	/**
+	 * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
+	 */
 }

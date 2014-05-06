@@ -4,22 +4,14 @@ class DataType  {
 	
 	String name
 	Boolean enumerated
-	Map enumerations
 	String catalogueVersion
 	String catalogueId
+	Map enumerations
 
 
-
-	static auditable = true
-
-    static searchable = {
-        content: spellCheck 'include'
-    }
-
-    static constraints = {
+	static constraints = {
 		enumerations nullable: true
 		name blank: false
+		catalogueId nullable:false
     }
-	
-	static hasMany = [valueDomains: ValueDomain]
 }

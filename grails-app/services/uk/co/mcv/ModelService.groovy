@@ -1,31 +1,29 @@
 package uk.co.mcv
 
 import grails.transaction.Transactional
+import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.Model
 
 @Transactional
 class ModelService {
 
-    def deleteModel(Model model) {
-		model.dataElements.collect().each { de ->
-			model.removeFromDataElements(de)
-		}
-		model.subModels.collect().each { subModel ->
-			model.removeFromSubModels(subModel)
-		}
-		model.delete()
-	}
-
-
-	def addSubModel(Model parentModel,Model subModel){
-		subModel.parentModel = parentModel
+	/**
+	 * Adds a subModel to a parentModel
+	 * @param parentModel
+	 * @param subModel
+	 * @return
+	 */
+    def addSubModel(Model parentModel,Model subModel){
 		parentModel.addToSubModels(subModel)
-		subModel.save(failOnError: true)
-		parentModel.save(failOnError: true)
+		parentModel.save(flush: true)
 	}
 
-
-	def getTopLevelModels(){
-		Model.findAllByParentModelIsNull()
+	/**
+	 * A topLevel model is a model which its parent is Null
+	 * @return
+	 */
+	def getTopLevelModels(ConceptualDomain conceptualDomain){
+		Model.findAllByConceptualDomainAndParentModelIsNull(conceptualDomain)
 	}
+
 }
