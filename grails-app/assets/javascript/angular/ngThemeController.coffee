@@ -5,12 +5,20 @@ angular.module('ngThemeControllerModule',['ngResource','viewerServices'])
 	$scope.themes = []
 	$scope.currentTheme = null
 
-	resource = Grails.getRestAPIResource("models").get()
+	resource = Grails.getRestAPIResource("conceptualdomains").get()
 	resource.$promise.then((result,responseHeaders) ->
-			root = {subModels:result.objects,name:"NHIC"}
-			dd = filleThemes(root)
-			debugger
-			$scope.themes.push dd
+
+
+#			for each concepturalDomains, get its top models
+			for conceptualDomain in result.objects
+				topLevelModels = []
+				for model in conceptualDomain.models
+					if(model.parentModelId == null)
+						topLevelModels.push(model)
+
+#				build sub trees, based on the top level models
+				root = {subModels:topLevelModels,name:conceptualDomain.name,type:"ConceptualDomain"}
+				$scope.themes.push filleThemes(root)
 			return
 		,
 		(httpResponse) ->
@@ -25,7 +33,10 @@ angular.module('ngThemeControllerModule',['ngResource','viewerServices'])
 				children:[],
 				onSelect: (branch) ->
 					$scope.currentTheme = branch.model
-					$state.go("dataElementList",{id:branch.model.id})
+					if(root.type != "ConceptualDomain")
+						$state.go("dataElementList",{id:branch.model.id})
+					else
+						$state.go("homeStatus")
 					return
 				}
 			return item
@@ -36,7 +47,10 @@ angular.module('ngThemeControllerModule',['ngResource','viewerServices'])
 				children:[],
 				onSelect: (branch) ->
 					$scope.currentTheme = branch.model
-					$state.go("dataElementList",{id:branch.model.id})
+					if(root.type != "ConceptualDomain")
+						$state.go("dataElementList",{id:branch.model.id})
+					else
+						$state.go("homeStatus")
 					return
 				}
 			for child in root.subModels

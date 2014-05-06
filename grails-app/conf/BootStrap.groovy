@@ -206,16 +206,16 @@ class BootStrap {
 		valueDomain.save(flush: true, failOnError: true)
 
 		(1..30).each { index ->
-			def dataElement = new DataElement(name: "M1-Name${index}", description: "Description${index}", definition: "A${index}", catalogueId: "1", catalogueVersion: "1")
+			def dataElement = new DataElement(name: "M2-Name${index}", description: "Description${index}", definition: "A${index}", catalogueId: "1", catalogueVersion: "1")
 			valueDomain.addToDataElements(dataElement)
 			model1.addToDataElements(dataElement)
 			dataElement.save(flush: true, failOnError: true)
 		}
 
 		(1..30).each { index ->
-			def dataElement = new DataElement(name: "M2-Name${index}", description: "Description${index}", definition: "A${index}", catalogueId: "1", catalogueVersion: "1")
+			def dataElement = new DataElement(name: "M3-Name${index}", description: "Description${index}", definition: "A${index}", catalogueId: "1", catalogueVersion: "1")
 			valueDomain.addToDataElements(dataElement)
-			model1.addToDataElements(dataElement)
+			model2.addToDataElements(dataElement)
 			dataElement.save(flush: true, failOnError: true)
 		}
 	}
