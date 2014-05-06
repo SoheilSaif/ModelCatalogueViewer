@@ -4,7 +4,7 @@ import grails.rest.RestfulController
 import org.springframework.dao.DataIntegrityViolationException
 import uk.co.mcv.pathway.Pathway
 
-class PathwayController extends RestfulController<Pathway>{
+class PathwayController extends BetterRestfulController<Pathway>{
 
 	def pathwayService
 
@@ -18,6 +18,12 @@ class PathwayController extends RestfulController<Pathway>{
 	protected List<Pathway> listAllResources(Map params) {
 		pathwayService.topLevelPathways(params)
 	}
+
+	@Override
+	protected Integer countResources(params) {
+		pathwayService.topLevelPathways(params).size()
+	}
+
 
 	@Override
 	def show(){

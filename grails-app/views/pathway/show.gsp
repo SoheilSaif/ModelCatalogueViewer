@@ -7,7 +7,7 @@
     <meta name="layout" content="main">
     <g:set var="entityName"
            value="${message(code: 'pathway.label', default: 'Pathway')}"/>
-    <title>Pathway Editor</title>
+    <title>Pathway Browser</title>
 
     <parameter name="name" value="Pathway Editor"/>
 

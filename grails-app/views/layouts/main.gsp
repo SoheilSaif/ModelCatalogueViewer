@@ -40,7 +40,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/ModelCatalogueViewer">Home</a></li>
                     <li><a href="/ModelCatalogueViewer">Data Model</a></li>
-                    <li><a href="/ModelCatalogueViewer/pathway/show/1/">Pathways</a></li>
+                    <li><a href="/ModelCatalogueViewer/pathway/index">Pathways</a></li>
                     <li><a href="#contact">Search</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>

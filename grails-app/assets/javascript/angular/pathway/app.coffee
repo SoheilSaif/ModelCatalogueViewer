@@ -23,7 +23,7 @@ angular.module(angularAppName,
 		editableOptions.theme = 'bs3'# bootstrap3 theme. Can be also 'bs2', 'default'
 
 .config ($stateProvider, $urlRouterProvider) ->
-	$urlRouterProvider.otherwise "/"
+	$urlRouterProvider.otherwise "/list"
 
 	$stateProvider.state 'empty', {
 		url: "/"
@@ -42,4 +42,16 @@ angular.module(angularAppName,
 		url: "/link:linkId",
 		templateUrl: '/' + grailsAppName + '/assets/angular/pathway/partials/pathway-editor/properties-link.html'
 		controller: 'LinkPropertiesCtrl'
+	}
+
+	$stateProvider.state 'list', {
+			name:'pathwayList',
+			url: '/list',
+			templateUrl: '/' + grailsAppName + '/assets/angular/pathway/partials/pathwayList.html',
+			controller : 'pathwaylistController',
+			resolve:{
+				resourceDetails: ($stateParams) ->
+					#call to Grails REST API like models/1/dataelements
+					return {resourceRestAPI:'pathways',resourceId:null,resourceName:"pathways",resourceState:"pathway"}
+			}
 	}

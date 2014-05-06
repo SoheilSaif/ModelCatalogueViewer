@@ -9,6 +9,7 @@ class UrlMappings {
 
 
 		"/pathways"(resources: "pathway")
+		"/api/pathways"(resources: "pathway")
 
 
 		//ConceptualDomain REST API
