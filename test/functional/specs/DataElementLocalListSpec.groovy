@@ -4,6 +4,7 @@ import geb.Browser
 import geb.spock.GebReportingSpec
 import org.apache.tools.ant.taskdefs.WaitFor
 import org.openqa.selenium.Dimension
+import spock.lang.Ignore
 
 /**
  * Created by soheil on 06/04/2014.
@@ -15,6 +16,7 @@ class DataElementLocalListSpec extends GebReportingSpec{
         driver.manage().window().setSize(new Dimension(1028, 768))
     }
 
+	@Ignore
     def "go to DataElementList home screen and show DataElement list"(){
 
         when: "At DataElementList"

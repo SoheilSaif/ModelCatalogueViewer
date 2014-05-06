@@ -8,37 +8,37 @@ import uk.co.mcv.pathway.*
 
 class BootStrap {
 
-    def init = { servletContext ->
+	def init = { servletContext ->
 
-        def springContext = WebApplicationContextUtils.getWebApplicationContext(servletContext)
-        springContext.getBean( "customObjectMarshallers" ).register()
+		def springContext = WebApplicationContextUtils.getWebApplicationContext(servletContext)
+		springContext.getBean("customObjectMarshallers").register()
 
-        environments {
-            production {
-                //createBaseRoles()
-                //createAdminAccount()
-            }
-            staging{
-                BuildTestData()
+		environments {
+			production {
+				//createBaseRoles()
+				//createAdminAccount()
+			}
+			staging {
+				BuildTestData()
 				BuildSamplePathway()
-            }
-            test{
-                //BuildTestData()
+			}
+			test {
+				//BuildTestData()
 				//BuildSamplePathway()
 			}
-            development {
-                BuildTestData()
+			development {
+				BuildTestData()
 				BuildSamplePathway()
 			}
-        }
+		}
 
-    }
-    def destroy = {
-    }
+	}
+	def destroy = {
+	}
 
 
-	def BuildSamplePathway(){
-		if(!Pathway.count()){
+	def BuildSamplePathway() {
+		if (!Pathway.count()) {
 
 			//Add a form to the pathways
 			def pathway1 = new Pathway(
@@ -56,7 +56,7 @@ class BootStrap {
 					x: '325px',
 					y: '330px',
 					parent: pathway1,
-			).save(failOnError:true)
+			).save(failOnError: true)
 
 			Node node1 = new Node(
 					name: 'Guard Patient',
@@ -84,14 +84,14 @@ class BootStrap {
 					pathway: subPathway1,
 					source: node1,
 					target: node2,
-			).save(failOnError:true)
+			).save(failOnError: true)
 
 			def link2 = new Link(
 					name: 'TM2',
 					pathway: subPathway1,
 					source: node2,
 					target: node3,
-			).save(failOnError:true)
+			).save(failOnError: true)
 
 			subPathway1.addToNodes(node1)
 			subPathway1.addToNodes(node2)
@@ -104,7 +104,7 @@ class BootStrap {
 					x: '455px',
 					y: '0px',
 					description: 'transfer patient to the Operating Room',
-			).save(flush:true)
+			).save(flush: true)
 
 
 			def node22 = new Node(
@@ -112,7 +112,7 @@ class BootStrap {
 					x: '115px',
 					y: '110px',
 					description: 'perform the operation',
-			).save(flush:true)
+			).save(flush: true)
 
 
 			def dataElements = DataElement.list().collect()
@@ -128,14 +128,14 @@ class BootStrap {
 					source: node21,
 					target: node22,
 					pathway: pathway1,
-			).save(flush:true)
+			).save(flush: true)
 
 			def link22 = new Link(
 					name: 'TM22',
 					source: node22,
 					target: subPathway1,
 					pathway: pathway1,
-			).save(flush:true)
+			).save(flush: true)
 
 
 			pathway1.addToNodes(node21)
@@ -146,55 +146,77 @@ class BootStrap {
 		}
 	}
 
-    def  BuildTestData()
-    {
-		def nhicConDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain",catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
+	def BuildTestData() {
+		def nhicConDomain = new ConceptualDomain(name: "NHIC", description: "NHIC conceptual domain", catalogueId: "1", catalogueVersion: "1").save(flush: true, failOnError: true)
+		def cosdConDomain = new ConceptualDomain(name: "COSD", description: "COSD conceptual domain", catalogueId: "1", catalogueVersion: "1").save(flush: true, failOnError: true)
 
-        Model model1 = new Model(name:"Ovarian Cancer",catalogueId:"1",catalogueVersion: "1",conceptualDomain: nhicConDomain).save(failOnError: true)
-        Model model11 = new Model(name:"11",catalogueId: "11",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model1).save(failOnError: true)
-        Model model12 = new Model(name:"12",catalogueId: "12",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model1).save(failOnError: true)
-        Model model13 = new Model(name:"13",catalogueId: "13",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model1).save(failOnError: true)
-		model1.addToSubModels(model11)
-		model1.addToSubModels(model12)
-		model1.addToSubModels(model13)
-		model1.save(failOnError: true)
+		Model cosdModel1 = new Model(name: "COSD MODEL1", catalogueId: "1", catalogueVersion: "1")
+		cosdConDomain.addToModels(cosdModel1)
+		cosdModel1.save(flush: true, failOnError: true)
 
-		Model model2 = new Model(name:"Acute Coronary Syndromes",catalogueId:"2",catalogueVersion: "1",conceptualDomain: nhicConDomain  ).save(failOnError: true)
-		Model model21 = new Model(name:"21",catalogueId: "21",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model2).save(failOnError: true)
+
+
+		Model model1 = new Model(name: "Ovarian Cancer", catalogueId: "1", catalogueVersion: "1")
+		nhicConDomain.addToModels(model1)
+		model1.save(flush: true, failOnError: true)
+
+		(1..3).each { index ->
+			Model subModel = new Model(name: "1${index}", catalogueId: "11", catalogueVersion: "V1")
+			nhicConDomain.addToModels(subModel)
+			model1.addToSubModels(subModel)
+			subModel.save(flush: true, failOnError: true)
+		}
+
+
+
+		Model model2 = new Model(name: "Acute Coronary Syndromes", catalogueId: "2", catalogueVersion: "1")
+		nhicConDomain.addToModels(model2)
+		model2.save(flush: true, failOnError: true)
+
+		Model model21 = new Model(name: "21", catalogueId: "21", catalogueVersion: "V1")
+		nhicConDomain.addToModels(model21)
 		model2.addToSubModels(model21)
-		model2.save(failOnError: true)
+		model21.save(flush: true, failOnError: true)
 
-		Model model3 = new Model(name:"Renal Transplantation",catalogueId:  "3",catalogueVersion: "1" ,conceptualDomain: nhicConDomain).save(failOnError: true)
-		Model model31 = new Model(name:"31",catalogueId: "31",catalogueVersion: "V1",conceptualDomain: nhicConDomain,parentModel: model3).save(failOnError: true)
+
+		Model model3 = new Model(name: "Renal Transplantation", catalogueId: "3", catalogueVersion: "1")
+		nhicConDomain.addToModels(model3)
+		model3.save(flush: true, failOnError: true)
+
+
+		Model model31 = new Model(name: "31", catalogueId: "31", catalogueVersion: "V1")
 		model3.addToSubModels(model31)
-		model3.save(failOnError: true)
+		nhicConDomain.addToModels(model31)
+		model31.save(flush: true, failOnError: true)
 
-		Model model4 = new Model(name:"Viral Hepatitis C/B", catalogueId:  "4",catalogueVersion: "1" ,conceptualDomain: nhicConDomain).save(failOnError: true)
-		Model model5 = new Model(name:"Intensive Care",catalogueId: "5",catalogueVersion: "1" ,conceptualDomain: nhicConDomain).save(failOnError: true)
 
-		def dataType = new DataType(name:"TestDataType", enumerated: false,catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
-		def valueDomain = new ValueDomain(name:"TestValueDomain", dataType: dataType,catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
 
-		(1..30).each {index ->
-			def dataElement = new DataElement(name:"M1-Name${index}", description:"Description${index}", definition:"A${index}", valueDomain:valueDomain,catalogueId: "1",catalogueVersion: "1")
+		Model model4 = new Model(name: "Viral Hepatitis C/B", catalogueId: "4", catalogueVersion: "1")
+		nhicConDomain.addToModels(model4)
+		model4.save(flush: true, failOnError: true)
+
+		Model model5 = new Model(name: "Intensive Care", catalogueId: "5", catalogueVersion: "1")
+		nhicConDomain.addToModels(model5)
+		model5.save(flush: true, failOnError: true)
+
+
+		def dataType = new DataType(name: "TestDataType", enumerated: false, catalogueId: "1", catalogueVersion: "1").save(failOnError: true)
+		def valueDomain = new ValueDomain(name: "TestValueDomain", dataType: dataType, catalogueId: "1", catalogueVersion: "1")
+		nhicConDomain.addToValueDomains(valueDomain)
+		valueDomain.save(flush: true, failOnError: true)
+
+		(1..30).each { index ->
+			def dataElement = new DataElement(name: "M1-Name${index}", description: "Description${index}", definition: "A${index}", catalogueId: "1", catalogueVersion: "1")
+			valueDomain.addToDataElements(dataElement)
 			model1.addToDataElements(dataElement)
+			dataElement.save(flush: true, failOnError: true)
 		}
-        model1.save(failOnError: true)
 
-
-
-		(1..30).each {index ->
-			def dataElement = new DataElement(name:"M2-Name${index}", description:"Description${index}", definition:"A${index}", valueDomain:valueDomain,catalogueId: "1",catalogueVersion: "1")
-			model2.addToDataElements(dataElement)
+		(1..30).each { index ->
+			def dataElement = new DataElement(name: "M2-Name${index}", description: "Description${index}", definition: "A${index}", catalogueId: "1", catalogueVersion: "1")
+			valueDomain.addToDataElements(dataElement)
+			model1.addToDataElements(dataElement)
+			dataElement.save(flush: true, failOnError: true)
 		}
-		model2.save(failOnError: true)
-
-
-
-
-
-
-
-  }
-
+	}
 }

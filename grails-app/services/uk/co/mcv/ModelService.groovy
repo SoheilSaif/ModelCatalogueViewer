@@ -1,6 +1,7 @@
 package uk.co.mcv
 
 import grails.transaction.Transactional
+import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.Model
 
 @Transactional
@@ -21,8 +22,8 @@ class ModelService {
 	 * A topLevel model is a model which its parent is Null
 	 * @return
 	 */
-	def getTopLevelModels(){
-		Model.findAllByParentModelIsNull()
+	def getTopLevelModels(ConceptualDomain conceptualDomain){
+		Model.findAllByConceptualDomainAndParentModelIsNull(conceptualDomain)
 	}
 
 }

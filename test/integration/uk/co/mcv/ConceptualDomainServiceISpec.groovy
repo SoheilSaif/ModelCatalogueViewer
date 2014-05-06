@@ -6,6 +6,11 @@ import grails.test.spock.IntegrationSpec
 import spock.lang.Specification
 import uk.co.mcv.model.*
 
+
+/**
+ * we can have this test as Unit Test, but GORM could not handle the deletion, faced stack overflow!
+ * so I decided to write the tests in Integration, we may move this into Unit in the future
+ */
 class ConceptualDomainServiceISpec extends IntegrationSpec {
 
 	def conceptualDomainService

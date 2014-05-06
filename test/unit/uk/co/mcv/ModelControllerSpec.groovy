@@ -89,25 +89,24 @@ class ModelControllerSpec extends  Specification{
 
 
 
-	@Unroll
-	def "index with topLevels params returns all topLevel Models"()  {
-
-		given:"a number of top level model exists"
-		def topLevelModels = []
-		(1..5).each {
-			topLevelModels.add(new Model(name:"model"))
-		}
-
-		when:"index is called"
-		params.topLevels = true
-		controller.index()
-		def model = controller.modelAndView.model
-
-		then:"returns a list of top level models"
-		1 * controller.modelService.getTopLevelModels() >> { return topLevelModels }
-		model.modelCount == topLevelModels.size()
-		model.arrayListInstanceMap.total == topLevelModels.size()
-		model.arrayListInstanceMap.objects.size() == topLevelModels.size()
-	}
-
+//	@Unroll
+//	def "index with topLevels params returns all topLevel Models"()  {
+//
+//		given:"a number of top level model exists"
+//		def topLevelModels = []
+//		(1..5).each {
+//			topLevelModels.add(new Model(name:"model"))
+//		}
+//
+//		when:"index is called"
+//		params.topLevels = true
+//		controller.index()
+//		def model = controller.modelAndView.model
+//
+//		then:"returns a list of top level models"
+//		1 * controller.modelService.getTopLevelModels() >> { return topLevelModels }
+//		model.modelCount == topLevelModels.size()
+//		model.arrayListInstanceMap.total == topLevelModels.size()
+//		model.arrayListInstanceMap.objects.size() == topLevelModels.size()
+//	}
 }

@@ -19,63 +19,35 @@ import uk.co.mcv.model.ValueDomain
 @Mock([Model,ConceptualDomain,DataElement,DataType,ValueDomain])
 class DataElementControllerSpec extends  Specification{
 
-
-
 	def setup(){
 
-
-		def conDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain",catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
-
+		def conDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain",catalogueId: "1",catalogueVersion: "1").save(flush: true,failOnError: true)
 
 		//Create 5 sample Models
 		(1..5).each { index ->
 			def model = new Model(name:"Model${index}",catalogueId:"Model${index}",catalogueVersion:"v1" )
 			conDomain.addToModels(model)
-			model.save(flush: true)
-
+			model.save(flush: true,failOnError: true)
 		}
 
-		//add some DataElements into Model[0]
-		(1..5).each { index ->
-			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",catalogueId:"Model${index}",catalogueVersion:"v1")
+		addDataElements(5,Model.list()[0],"DEM1")
+		addDataElements(3,Model.list()[1],"DEM2")
+		addDataElements(2,Model.list()[2],"DEM3")
+	}
+
+	private def addDataElements(int count, Model model,String dePrefix){
+
+		def conDomain = ConceptualDomain.list()[0]
+		(1..count).each { index ->
+			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(flush: true,failOnError: true)
+			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",catalogueId:"Model${index}",catalogueVersion:"v1",dataType: dataType)
 			conDomain.addToValueDomains(valueDomain)
-			dataType.addToValueDomains(valueDomain)
-			valueDomain.save(failOnError: true)
+			valueDomain.save(failOnError: true,flush: true)
 
-			def dataElement = new DataElement(name:"DEM1-${index}",version: "1",description:"Desc${index}",catalogueId:"Model${index}",catalogueVersion:"v1" )
+			def dataElement = new DataElement(name:"${dePrefix}-${index}",version: "1",description:"Desc${index}",catalogueId:"Model${index}",catalogueVersion:"v1" )
 			valueDomain.addToDataElements(dataElement)
-			Model.list()[0].addToDataElements(dataElement)
-			dataElement.save(failOnError: true)
-		}
-
-
-		//add some DataElements into Model[1]
-		(1..3).each { index ->
-			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",catalogueId:"Model${index}",catalogueVersion:"v1")
-			conDomain.addToValueDomains(valueDomain)
-			dataType.addToValueDomains(valueDomain)
-			valueDomain.save(failOnError: true)
-
-			def dataElement = new DataElement(name:"DEM2-${index}",version: "1",description:"Desc${index}",catalogueId:"Model${index}",catalogueVersion:"v1" )
-			valueDomain.addToDataElements(dataElement)
-			Model.list()[1].addToDataElements(dataElement)
-			dataElement.save(failOnError: true)
-		}
-
-		//add some DataElements into Model[2]
-		(1..2).each { index ->
-			def dataType = new DataType(name:"DT${index}",version: "1",enumerated: false,catalogueId:"Model${index}",catalogueVersion:"v1").save(failOnError: true)
-			def valueDomain = new ValueDomain(name:"VD${index}",version: "1",catalogueId:"Model${index}",catalogueVersion:"v1")
-			conDomain.addToValueDomains(valueDomain)
-			dataType.addToValueDomains(valueDomain)
-			valueDomain.save(failOnError: true)
-
-			def dataElement = new DataElement(name:"DEM3-${index}",version: "1",description:"Desc${index}",catalogueId:"Model${index}",catalogueVersion:"v1" )
-			valueDomain.addToDataElements(dataElement)
-			Model.list()[2].addToDataElements(dataElement)
-			dataElement.save(failOnError: true)
+			model.addToDataElements(dataElement)
+			dataElement.save(failOnError: true,flush: true)
 		}
 	}
 
