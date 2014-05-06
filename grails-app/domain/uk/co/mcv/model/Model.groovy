@@ -7,11 +7,6 @@ class Model   {
 	String catalogueVersion
 	String catalogueId
 
-	ConceptualDomain conceptualDomain
-	Model parentModel
-	Set dataElements = []
-	Set subModels = []
-
 	static hasMany = [dataElements: DataElement, subModels:Model]
 	static belongsTo = [conceptualDomain: ConceptualDomain,parentModel:Model]
 
@@ -20,6 +15,8 @@ class Model   {
 		parentModel nullable: true
 
 		name nullable:false
-        description nullable: true
+        description nullable: true, type: 'text'
+
+		catalogueId nullable:false
     }
 }

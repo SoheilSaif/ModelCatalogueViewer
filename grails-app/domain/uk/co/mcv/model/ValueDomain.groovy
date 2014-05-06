@@ -11,9 +11,7 @@ class ValueDomain  {
 	String catalogueVersion
 	String catalogueId
 
-	Set dataElements = []
 	DataType dataType
-	ConceptualDomain conceptualDomain
 
 
 	static hasMany = [dataElements: DataElement]
@@ -23,9 +21,9 @@ class ValueDomain  {
     static constraints = {
         conceptualDomain nullable:false
         dataType nullable:false
+        description nullable:true, type: 'text'
 
-        description nullable:true
-        unitOfMeasure nullable:true
+		unitOfMeasure nullable:true
         regexDef nullable:true
         name blank: false
         format nullable:true

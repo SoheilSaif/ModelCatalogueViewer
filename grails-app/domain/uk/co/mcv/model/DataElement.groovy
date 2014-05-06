@@ -8,10 +8,7 @@ class DataElement  {
 	String catalogueVersion
 	String catalogueId
 
-	DataElement parent
 	ValueDomain valueDomain
-	Model model
-	Set subElements = []
 
 
     static hasMany = [ subElements: DataElement]
@@ -28,8 +25,9 @@ class DataElement  {
     }
 	
 	static mapping = {
-		description type: 'text'
-		definition type: 'text'
+		description nullable: true, type: 'text'
+		description nullable: true, type: 'text'
+		catalogueId nullable:false
 	}
 	
 

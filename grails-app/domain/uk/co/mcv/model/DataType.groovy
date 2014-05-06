@@ -8,16 +8,10 @@ class DataType  {
 	String catalogueId
 	Map enumerations
 
-	Set valueDomains = []
-
-	static hasMany = [valueDomains: ValueDomain]
 
 	static constraints = {
 		enumerations nullable: true
 		name blank: false
-
+		catalogueId nullable:false
     }
-	
-
-
 }

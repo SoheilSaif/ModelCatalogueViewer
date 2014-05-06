@@ -7,9 +7,6 @@ class ConceptualDomain   {
 	String catalogueId
 	String catalogueVersion
 
-	Set valueDomains = []
-	Set models = []
-
 	static hasMany = [valueDomains: ValueDomain, models:Model]
 
 	static constraints = {
@@ -17,6 +14,7 @@ class ConceptualDomain   {
 	}
 
 	static mapping = {
-		description type: 'text'
+		description type: 'text', nullable: true
+		catalogueId nullable:false
 	}
 }

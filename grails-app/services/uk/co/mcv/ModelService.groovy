@@ -6,32 +6,23 @@ import uk.co.mcv.model.Model
 @Transactional
 class ModelService {
 
-    def deleteModel(Model model) {
-
-		//remove dataElements from Model
-		model.dataElements?.collect().each { de ->
-			model.removeFromDataElements(de)
-			de.delete()
-		}
-		//delete sub Models if any exists
-		//call deleteModel method recursively
-		model.subModels?.collect().each { subModel ->
-			deleteModel(subModel)
-		}
-		//remove model
-		model.delete()
-	}
-
-
-	def addSubModel(Model parentModel,Model subModel){
-		subModel.parentModel = parentModel
+	/**
+	 * Adds a subModel to a parentModel
+	 * @param parentModel
+	 * @param subModel
+	 * @return
+	 */
+    def addSubModel(Model parentModel,Model subModel){
 		parentModel.addToSubModels(subModel)
-		subModel.save(failOnError: true)
-		parentModel.save(failOnError: true)
+		parentModel.save(flush: true)
 	}
 
-
+	/**
+	 * A topLevel model is a model which its parent is Null
+	 * @return
+	 */
 	def getTopLevelModels(){
 		Model.findAllByParentModelIsNull()
 	}
+
 }
