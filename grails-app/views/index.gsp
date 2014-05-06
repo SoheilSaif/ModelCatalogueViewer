@@ -30,10 +30,10 @@
     <div ng-app="viewerApp" class="row">
         <div class="col-md-3">
             <div class="panel panel-primary">
-                <div class="panel-heading">NHIC Themes</div>
+                <div class="panel-heading">Themes</div>
                 <div class="panel-body">
                     <div  ng-controller="ngThemeController"  >
-                        <abn-tree tree-data="themes"  expand-level = "1" icon-leaf = "fa fa-file"                >
+                        <abn-tree tree-data="themes"  expand-level = "2" icon-leaf = "fa fa-file"                >
                         </abn-tree>
                     </div>
                 </div>

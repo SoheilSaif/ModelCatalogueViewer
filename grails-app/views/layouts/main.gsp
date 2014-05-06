@@ -13,7 +13,7 @@
 
 
         <asset:stylesheet href="bootstrap/dist/css/bootstrap.css"/>
-        <asset:stylesheet href="angular-bootstrap-nav-tree/dist/anb_tree.css"/>
+        <asset:stylesheet href="angular-bootstrap-nav-tree/dist/abn_tree.css"/>
 
 
 
