@@ -6,14 +6,24 @@ import uk.co.mcv.model.ConceptualDomain
 @Transactional
 class ConceptualDomainService {
 
-	def getNHIC() {
-		if(ConceptualDomain.count() == 0)
-			new ConceptualDomain(name: "NHIC",description: "NHIC Model Catalogue",catalogueId: "1",catalogueVersion: "1").save(failOnError: true)
+	def modelService
 
-		return ConceptualDomain.first()
+	def delete(ConceptualDomain conceptualDomain){
+
+		conceptualDomain.models.collect().each { model ->
+
+			model.dataElements.collect().each { de ->
+				model.removeFromDataElements(de)
+				de.delete()
+			}
+
+			model.delete()
+			conceptualDomain.removeFromModels(model)
+
+		}
+
+		conceptualDomain.save()
+		//conceptualDomain.delete()
 	}
 
-	def getModels(ConceptualDomain conceptualDomain) {
-		conceptualDomain.models
-	}
 }
