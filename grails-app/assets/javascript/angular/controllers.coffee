@@ -18,7 +18,17 @@ viewerControllers.controller('ngTableController',['$scope','ngTableParams','$res
 	,
 		total: 0
 		getData: ($defer, params) ->
-			Grails.getRestAPIResource($scope.resourceRestAPI,$scope.resourceId).get({max: params.count(),offset:(params.page() - 1) * params.count(),filters:params.filter()},(result, responseHeaders)->
+			parameters = {}
+			parameters.max =  params.count()
+			parameters.offset = (params.page() - 1) * params.count()
+
+#			Add all search criteria as properities of the params
+#			like params["name"]="CD"
+			filters = params.filter()
+			for key of filters
+				parameters[key] = filters[key]
+
+			Grails.getRestAPIResource($scope.resourceRestAPI,$scope.resourceId).get(parameters,(result, responseHeaders)->
 				params.total(result.total);
 				$defer.resolve result.objects
 				return
