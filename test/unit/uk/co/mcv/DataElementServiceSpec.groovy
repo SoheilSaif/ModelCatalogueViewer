@@ -10,10 +10,14 @@ import uk.co.mcv.model.*
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
 @TestFor(DataElementService)
-@Mock([ConceptualDomain,Model,DataElement,ValueDomain,DataType])
+@Mock([ConceptualDomain,Model,DataElement,ValueDomain,DataType,MeasurementUnit])
 class DataElementServiceSpec extends Specification {
 
+	def dataElementValueDomainService
+
 	def setup(){
+
+		dataElementValueDomainService = Mock(DataElementValueDomainService)
 
 		def conDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain", catalogueId: "1", catalogueVersion: "1").save(flush:true,failOnError: true)
 
@@ -26,23 +30,27 @@ class DataElementServiceSpec extends Specification {
 		model2.save(flush:true, failOnError: true)
 
 
+		def measurementUnit  = new MeasurementUnit(name: "centimeter",symbol: "cm").save(flush: true)
 		def dataType = new DataType(enumerated: false, name: "d",catalogueId: "d", catalogueVersion: "d").save(flush:true,failOnError: true)
-		def valueDomain = new ValueDomain(name: "d", catalogueId: "d", catalogueVersion: "d",dataType: dataType)
+		def valueDomain = new ValueDomain(name: "d", catalogueId: "d", catalogueVersion: "d")
+		dataType.addToValueDomains(valueDomain)
+		measurementUnit.addToValueDomains(valueDomain)
 		conDomain.addToValueDomains(valueDomain)
 		valueDomain.save(flush:true, failOnError: true)
 
 		(1..5).each {index->
 			def dataElement = new DataElement(name:"DE${index}", description:"this is dataelement${index}" ,catalogueId: "d", catalogueVersion: "d")
-			valueDomain.addToDataElements(dataElement)
 			model1.addToDataElements(dataElement)
 			dataElement.save(flush:true,failOnError: true)
+			dataElementValueDomainService.link(dataElement,valueDomain)
+
 		}
 
 		(1..20).each {index->
 			def dataElement = new DataElement(name:"DE${index}", catalogueId: "d", catalogueVersion: "d")
-			valueDomain.addToDataElements(dataElement)
 			model2.addToDataElements(dataElement)
 			dataElement.save(flush:true,failOnError: true)
+			dataElementValueDomainService.link(dataElement,valueDomain)
 		}
 	}
 
@@ -160,4 +168,5 @@ class DataElementServiceSpec extends Specification {
 		0			|	[]													|	"InvalidInput"
 
 	}
+
 }

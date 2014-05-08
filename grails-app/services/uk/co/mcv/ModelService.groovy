@@ -15,7 +15,6 @@ class ModelService {
 		Model.findAllByConceptualDomainAndParentModelIsNull(conceptualDomain)
 	}
 
-
 	def listAll(Map params) {
 		def models
 
