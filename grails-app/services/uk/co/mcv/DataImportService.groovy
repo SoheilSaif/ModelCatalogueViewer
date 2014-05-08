@@ -108,7 +108,6 @@ class DataImportService {
 
 	def ingestRow(ImportRow row, ConceptualDomain conceptualDomain) {
 
-
 		def dataTypeResult = matchOrAddDataType(row.dataElementName, row.dataType)
 		//has some error
 		if (!dataTypeResult[0]) {
@@ -122,23 +121,35 @@ class DataImportService {
 		if(!modelResult[0]){
 			row.status = false
 			row.statusMessage = modelResult[2]// get error message
+			return
 		}
 
 		//def measurementUnit = matchOrAddMeasurementUnit(row.measurementUnitName, row.measurementSymbol)
-		def dataElement = addDataElement(row.dataElementName, row.dataElementDescription, row.dataElementCode, row.metadata, model, dataType,row.measurementUnitName, row.measurementSymbol)
+		def dataElement = addDataElement(row.dataElementName, row.dataElementDescription, row.dataElementCode, row.metadata, model, dataType,row.measurementUnitName)
 
 	}
 
 
-	def addDataElement(name, description, catalogueId, metadata, Model model, DataType dataType,unitOfMeasure) {
+	def addDataElement(dataElementName,dataElementDesc, dataElementCatalogueId, Map metadata, Model model, DataType dataType,measurementUnit,ConceptualDomain conceptualDomain) {
 
-//		ValueDomain valueDomain = new ValueDomain()
-//
-//		DataElement dataElement = new DataElement(name:name,description:description,catalogueId:catalogueId)
-//		model.addToDataElements(dataElement)
-
+		ValueDomain valueDomain = new ValueDomain(name:dataElementName,description: dataType.name,measurementUnit: measurementUnit,dataType:dataType)
+		conceptualDomain.addToValueDomains(valueDomain)
+		valueDomain.save(failOnError: true)
 
 
+		DataElement dataElement = new DataElement(name:dataElementName,description:dataElementDesc,catalogueId:dataElementCatalogueId)
+		model.addToDataElements(dataElement)
+		valueDomain.addToDataElements(dataElement)
+
+		//add extension to dataElement extension
+		metadata.each { key , value ->
+			if(dataElement.extensions.containsKey(key))
+				dataElement[key] = value
+			else
+				dataElement.extensions.put(key,value)
+		}
+		dataElement.save(failOnError: true)
+		[true,dataElement,""]
 	}
 
 	def matchOrAddMeasurementUnit(name, symbol) {
