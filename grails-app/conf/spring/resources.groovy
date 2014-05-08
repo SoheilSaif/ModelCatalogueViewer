@@ -3,6 +3,7 @@ import uk.co.brc.mcv.marshaller.CustomObjectMarshallers
 import uk.co.brc.mcv.marshaller.DataElementMarshaller
 import uk.co.brc.mcv.marshaller.DataTypeMarshaller
 import uk.co.brc.mcv.marshaller.LinkMarshaller
+import uk.co.brc.mcv.marshaller.MeasurementUnitMarshaller
 import uk.co.brc.mcv.marshaller.ModelMarshaller
 import uk.co.brc.mcv.marshaller.NodeMarshaller
 import uk.co.brc.mcv.marshaller.PathwayMarshaller
@@ -22,7 +23,8 @@ beans = {
 				new PathwayMarshaller(),
 				new LinkMarshaller(),
 				new NodeMarshaller(),
-				new ConceptualDomainMarshaller()
+				new ConceptualDomainMarshaller(),
+				new MeasurementUnitMarshaller()
         ]
     }
 }

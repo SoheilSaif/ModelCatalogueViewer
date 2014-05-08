@@ -3,6 +3,7 @@ import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.DataElement
 import uk.co.mcv.model.DataElementValueDomain
 import uk.co.mcv.model.DataType
+import uk.co.mcv.model.MeasurementUnit
 import uk.co.mcv.model.Model
 import uk.co.mcv.model.ValueDomain
 import uk.co.mcv.pathway.*
@@ -200,9 +201,10 @@ class BootStrap {
 		nhicConDomain.addToModels(model5)
 		model5.save(flush: true, failOnError: true)
 
-
+		def measurementUnit  = new MeasurementUnit(name: "centimeter",symbol: "cm").save(flush: true)
 		def dataType = new DataType(name: "TestDataType", enumerated: false, catalogueId: "1", catalogueVersion: "1").save(failOnError: true)
 		def valueDomain = new ValueDomain(name: "TestValueDomain",catalogueId: "1", catalogueVersion: "1")
+		measurementUnit.addToValueDomains(valueDomain)
 		dataType.addToValueDomains(valueDomain)
 		nhicConDomain.addToValueDomains(valueDomain)
 		valueDomain.save(flush: true, failOnError: true)

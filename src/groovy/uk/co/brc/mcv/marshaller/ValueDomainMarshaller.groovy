@@ -15,7 +15,7 @@ class ValueDomainMarshaller {
             return [
                     id : valueDomain.id,
                     name : valueDomain.name,
-					unitOfMeasure: valueDomain.unitOfMeasure,
+					measurementUnit: valueDomain.measurementUnit,
 					regexDef: valueDomain.regexDef,
 					format: valueDomain.format,
 					description: valueDomain.description,
