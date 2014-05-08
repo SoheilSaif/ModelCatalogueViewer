@@ -12,6 +12,7 @@ class DataType  {
 	static constraints = {
 		enumerations nullable: true
 		name blank: false
-		catalogueId nullable:false
+		catalogueId nullable:true
+		catalogueVersion nullable: true
     }
 }

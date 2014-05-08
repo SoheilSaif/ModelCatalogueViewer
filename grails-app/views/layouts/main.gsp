@@ -45,7 +45,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Import</a></li>
+                            <li>  <g:link controller="DataImporter" action="index">Import</g:link> </li>
                             <li><a href="#">Export</a></li>
                             <li class="divider"></li>
                             <li class="dropdown-header"></li>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-   <div class="fullwidthContainer" style="margin-top: 70px;" role="main">
+   <div class="fullwidthContainer" style="margin-top: 70px;  " role="main">
        <g:layoutBody/>
    </div>
  		<r:layoutResources />

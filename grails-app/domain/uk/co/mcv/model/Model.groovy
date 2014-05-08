@@ -18,5 +18,6 @@ class Model   {
         description nullable: true, type: 'text'
 
 		catalogueId nullable:false
+		catalogueVersion nullable: true
     }
 }

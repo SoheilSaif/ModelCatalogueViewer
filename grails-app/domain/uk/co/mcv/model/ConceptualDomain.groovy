@@ -15,6 +15,7 @@ class ConceptualDomain   {
 
 	static mapping = {
 		description type: 'text', nullable: true
-		catalogueId nullable:false
+		catalogueId nullable:true
+		catalogueVersion nullable:true
 	}
 }
