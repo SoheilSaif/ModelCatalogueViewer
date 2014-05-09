@@ -9,14 +9,11 @@ class DataElement  {
 	String catalogueId
 	Map extensions
 
-	ValueDomain valueDomain
+    static hasMany = [ subElements: DataElement,dataElementValueDomains: DataElementValueDomain]
 
-
-    static hasMany = [ subElements: DataElement]
 	static belongsTo = [parent: DataElement,model:Model]
 
     static constraints = {
-		valueDomain nullable: false
 		model nullable: false
 		parent nullable: true
 

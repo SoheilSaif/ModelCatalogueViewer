@@ -12,9 +12,12 @@ class ValueDomain  {
 	String catalogueId
 
 	DataType dataType
+	MeasurementUnit measurementUnit
+
+	Set dataElementValueDomains = []
 
 
-	static hasMany = [dataElements: DataElement]
+	static hasMany = [dataElementValueDomains: DataElementValueDomain]
 
     static belongsTo = [conceptualDomain: ConceptualDomain]
 

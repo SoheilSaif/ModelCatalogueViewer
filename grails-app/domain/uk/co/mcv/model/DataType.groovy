@@ -8,6 +8,7 @@ class DataType  {
 	String catalogueId
 	Map enumerations
 
+	static hasMany = [valueDomains: ValueDomain]
 
 	static constraints = {
 		enumerations nullable: true
@@ -15,4 +16,5 @@ class DataType  {
 		catalogueId nullable:true
 		catalogueVersion nullable: true
     }
+
 }
