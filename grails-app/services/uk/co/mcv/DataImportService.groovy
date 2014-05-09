@@ -1,19 +1,24 @@
 package uk.co.mcv
 
 import grails.transaction.Transactional
+import org.springframework.transaction.interceptor.TransactionAspectSupport
 import uk.co.mcv.importer.HeadersMap
 import uk.co.mcv.importer.ImportRow
 import uk.co.mcv.importer.Importer
 import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.DataElement
 import uk.co.mcv.model.DataType
+import uk.co.mcv.model.MeasurementUnit
 import uk.co.mcv.model.Model
 import uk.co.mcv.model.ValueDomain
 
+@Transactional
 class DataImportService {
 
 	def sessionFactory
 	static transactional = true
+	def dataElementValueDomainService
+	def conceptualDomainService
 
 	//the import script accepts and array of headers these should include the following:
 	//Data Item Name, Data Item Description, Parent Section, Section, Measurement Unit, Data type
@@ -37,9 +42,6 @@ class DataImportService {
 
 		//get indexes of the appropriate sections
 		def totalCounter = 0
-		parentModels.add(0, "ModelCatalogue")
-
-		def newImporter = new Importer(parentModels: parentModels)
 
 		def dataItemNameIndex = headers.indexOf(headersMap.dataElementNameRow)
 		def dataItemCodeIndex = headers.indexOf(headersMap.dataElementCodeRow)
@@ -50,23 +52,42 @@ class DataImportService {
 		def modelCodeIndex = headers.indexOf(headersMap.containingModelCodeRow)
 		def unitsIndex = headers.indexOf(headersMap.measurementUnitNameRow)
 		def dataTypeIndex = headers.indexOf(headersMap.dataTypeRow)
-
 		def metadataStartIndex = headers.indexOf(headersMap.metadataRow) + 1
 		def metadataEndIndex = headers.size() - 1
 
-		def elements = []
-		if (dataItemNameIndex == -1)
-			throw new Exception("Can not find 'Data Item Name' column")
 
 
-		def conceptualDomain = addConceptualDomain(conceptualDomainName, conceptualDomainDescription)
+		//do all the operation in a transactional way
+//		ConceptualDomain.withTransaction { status ->
+//			try	{
+//
+//
+//			}
+//			catch (Exception ex){
+//				status.setRollbackOnly()
+//			}
+//
+//		}
+
+		//remove the old conceptualDomain if exists
+		def oldCd = ConceptualDomain.findByNameIlike(conceptualDomainName.trim())
+		if(oldCd)	{
+			def removeCdResult = deleteOldConceptualDomain(conceptualDomainName)
+			//can not remove the old conceptualDomain
+			if(!removeCdResult[0]){
+				return removeCdResult
+			}
+		}
+
+		//Create a new ConceptualDomain
+		def conceptualDomain = addConceptualDomain(conceptualDomainName.trim(), conceptualDomainDescription.trim())
+
 
 		//iterate through the rows and import each line
 		rows.eachWithIndex { def row, int i ->
 
 			ImportRow importRow = new ImportRow()
-
-			importRow.dataElementName = (dataItemNameIndex != -1) ? row[dataItemNameIndex] : null
+			importRow.dataElementName = (dataItemCodeIndex != -1) ? row[dataItemNameIndex] : null
 			importRow.dataElementCode = (dataItemCodeIndex != -1) ? row[dataItemCodeIndex] : null
 			importRow.parentModelName = (parentModelIndex != -1) ? row[parentModelIndex] : null
 			importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : null
@@ -75,12 +96,12 @@ class DataImportService {
 			importRow.dataType = (dataTypeIndex != -1) ? row[dataTypeIndex] : null
 			importRow.dataElementDescription = (dataItemDescriptionIndex != -1) ? row[dataItemDescriptionIndex] : null
 			importRow.measurementUnitName = (unitsIndex != -1) ? row[unitsIndex] : null
-
 			importRow.conceptualDomainName = conceptualDomainName
 			importRow.conceptualDomainDescription = conceptualDomainDescription
 
 			importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : null
 
+			//build dataElement extensions (meta-data)
 			def counter = metadataStartIndex
 			def metadataColumns = [:]
 			while (counter <= metadataEndIndex) {
@@ -89,26 +110,35 @@ class DataImportService {
 			}
 			importRow.metadata = (metadataColumns) ? metadataColumns : null
 
+
+			//refresh GORM cache, as it will slow down the import process
 			if (totalCounter > 40) {
 				sessionFactory.currentSession.flush()
 				sessionFactory.currentSession.clear()
-				counter = 0
+				totalCounter = 0
 			} else {
 				totalCounter++
 			}
 
-			newImporter.ingestRow(importRow)
+			ingestRow(importRow,conceptualDomain)
+			//failure in importing this row, so rollback
+			if(!importRow.status){
+				throw new RuntimeException("")
+			}
+				//TransactionAspectSupport.currentTransactionInfo().roll
+
 		}
 
-		newImporter.actionPendingModels()
 		sessionFactory.currentSession.flush()
 		sessionFactory.currentSession.clear()
+		return [true,rows,""]
 	}
 
 
 	def ingestRow(ImportRow row, ConceptualDomain conceptualDomain) {
 
 		def dataTypeResult = matchOrAddDataType(row.dataElementName, row.dataType)
+		DataType dataType = dataTypeResult[1]
 		//has some error
 		if (!dataTypeResult[0]) {
 			row.status = false
@@ -116,7 +146,9 @@ class DataImportService {
 			return
 		}
 
+
 		def modelResult = addModel(row.parentModelCode, row.parentModelName, row.containingModelCode, row.containingModelName, conceptualDomain)
+		Model model = modelResult[1]
 		//has some error
 		if(!modelResult[0]){
 			row.status = false
@@ -124,23 +156,64 @@ class DataImportService {
 			return
 		}
 
-		//def measurementUnit = matchOrAddMeasurementUnit(row.measurementUnitName, row.measurementSymbol)
-		def dataElement = addDataElement(row.dataElementName, row.dataElementDescription, row.dataElementCode, row.metadata, model, dataType,row.measurementUnitName)
+		def measurementUnitResult = matchOrAddMeasurementUnit(row.measurementUnitName, row.measurementSymbol)
+		MeasurementUnit measurementUnit = measurementUnitResult[1]
+		//has some error
+		if(!measurementUnitResult[0]){
+			row.status = false
+			row.statusMessage = measurementUnitResult[2]// get error message
+			return
+		}
 
+		def valueDomainResult = addValueDomain(row.dataElementName,dataType.name,measurementUnit,conceptualDomain)
+		ValueDomain valueDomain = valueDomainResult[1]
+		if(!valueDomainResult[0]){
+			row.status = false
+			row.statusMessage = valueDomainResult[2]// get error message
+			return
+		}
+
+		def dataElementResult = addDataElement(row.dataElementName, row.dataElementDescription, row.dataElementCode, row.metadata, model, dataType,measurementUnit,conceptualDomain)
+		DataElement dataElement = dataElementResult[1]
+		if(!dataElementResult[0]){
+			row.status = false
+			row.statusMessage = dataElementResult[2]// get error message
+			return
+		}
+
+		//link valueDomain and dataElement
+		def deVd = 	dataElementValueDomainService.link(dataElement,valueDomain)
+
+		row.status = true
+		row.statusMessage = "Successful"
 	}
 
 
-	def addDataElement(dataElementName,dataElementDesc, dataElementCatalogueId, Map metadata, Model model, DataType dataType,measurementUnit,ConceptualDomain conceptualDomain) {
+	def deleteOldConceptualDomain(ConceptualDomain conceptualDomain){
+		try{
+			conceptualDomainService.delete(conceptualDomain)
+			return [true,null,""]
+		}
+		catch (Exception ex){
+			return [ false,null,"Can not delete conceptualDomain ${conceptualDomain?.name} , Error:${ex.message}"]
+		}
+	}
 
-		ValueDomain valueDomain = new ValueDomain(name:dataElementName,description: dataType.name,measurementUnit: measurementUnit,dataType:dataType)
+
+	def addValueDomain(vdName,vdDescription, DataType dataType,MeasurementUnit measurementUnit,ConceptualDomain conceptualDomain) {
+
+		ValueDomain valueDomain = new ValueDomain(name:vdName,description:vdDescription)
+		dataType.addToValueDomains(valueDomain)
+		measurementUnit.addToValueDomains(valueDomain)
 		conceptualDomain.addToValueDomains(valueDomain)
 		valueDomain.save(failOnError: true)
+		return [true,valueDomain,""]
+	}
 
+	def addDataElement(dataElementName,dataElementDesc, dataElementCatalogueId, Map metadata, Model model) {
 
 		DataElement dataElement = new DataElement(name:dataElementName,description:dataElementDesc,catalogueId:dataElementCatalogueId)
 		model.addToDataElements(dataElement)
-		valueDomain.addToDataElements(dataElement)
-
 		//add extension to dataElement extension
 		metadata.each { key , value ->
 			if(dataElement.extensions.containsKey(key))
@@ -153,7 +226,10 @@ class DataImportService {
 	}
 
 	def matchOrAddMeasurementUnit(name, symbol) {
-
+		MeasurementUnit measurementUnit = MeasurementUnit.findByNameIlike(name)
+		if (!measurementUnit) {
+			measurementUnit = new MeasurementUnit(name:name,symbol:symbol).save() }
+		return [true,measurementUnit,""]
 	}
 
 	def addModel(String parentCode, String parentName,String  modelCode,String  modelName, ConceptualDomain conceptualDomain) {
@@ -241,6 +317,8 @@ class DataImportService {
 	}
 
 	def addConceptualDomain(name, description) {
+
+		ConceptualDomain
 		new ConceptualDomain(name: name, description: description, catalogueId: "", catalogueVersion: "").save(failOnError: true, flush: true)
 	}
 
@@ -331,20 +409,28 @@ class DataImportService {
 		return headersMap
 	}
 
+	/*
+	 * check if excel headers are all as expected,
+	 * it should contain the headersMap, headers, otherwise it is rejected
+	 */
 	def validateHeaders(ArrayList<String> inputHeaders) {
 
 		boolean result = true
 		StringBuilder message = new StringBuilder("")
-		HeadersMap headersMap = getHeaders()
-		def actualHeaders = headersMap.getHeadersStringValue()
 
-		actualHeaders.each { header ->
+		//HeadersMap: header manager class
+		HeadersMap headersMap = getHeaders()
+
+		//get expected headers as an array of string
+		def expectedHeaders = headersMap.getHeadersStringValue()
+
+		//check if each all expectedHeaders ar all in inputHeaders
+		expectedHeaders.each { header ->
 			if (!inputHeaders.contains(header)) {
 				result = false
 				message.append(header + ", ")
 			}
 		}
-
 		def messageString = ""
 		if (!result)
 			messageString = message.substring(0, message.lastIndexOf(", "))

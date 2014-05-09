@@ -6,7 +6,9 @@ import spock.lang.Specification
 import spock.lang.Unroll
 import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.DataElement
+import uk.co.mcv.model.DataElementValueDomain
 import uk.co.mcv.model.DataType
+import uk.co.mcv.model.MeasurementUnit
 import uk.co.mcv.model.Model
 import uk.co.mcv.model.ValueDomain
 
@@ -17,8 +19,14 @@ import java.lang.reflect.Array
  */
 
 @TestFor(DataImportService)
-@Mock([Model, ConceptualDomain, DataType,ValueDomain,DataElement])
+
+@Mock([Model, ConceptualDomain, DataType,ValueDomain,DataElement,DataElementValueDomain,MeasurementUnit])
 class DataImportServiceSpec extends Specification {
+
+
+	def setup(){
+		service.conceptualDomainService = Mock(ConceptualDomainService)
+	}
 
 
 	def "getHeaders returns default valid headers"() {
@@ -168,32 +176,103 @@ class DataImportServiceSpec extends Specification {
 		conDomain.addToModels(model)
 		model.save(flush:true, failOnError: true)
 
-		def dataType = new DataType(enumerated: false, name: "d",catalogueId: "d", catalogueVersion: "d").save(flush:true,failOnError: true)
-		def valueDomain = new ValueDomain(name: "d", catalogueId: "d", catalogueVersion: "d",dataType: dataType)
-		conDomain.addToValueDomains(valueDomain)
-		valueDomain.save(flush:true, failOnError: true)
-
 		def dataElement = new DataElement(name:"De-Name", description:"this is dataelement" ,catalogueId: "DE1", catalogueVersion: "d")
-		valueDomain.addToDataElements(dataElement)
 		model.addToDataElements(dataElement)
 		dataElement.save(flush:true,failOnError: true)
 
 		def deCountBefore = DataElement.count()
-		def vdCountBefore = ValueDomain.count()
 
 		when:"addDataElement is called"
-		def deResult = service.addDataElement(name, description, catalogueId, [:], model, dataType,"measurementUnitName",conDomain)
+		def deResult = service.addDataElement(name, description, catalogueId, [:], model)
 
 		then:"a new dataElement is added"
 		deResult[0] == result
 		deResult[1]?.name == name
 		deResult[1]?.description == description
+		deResult[1]?.model.id == model.id  //it is associated to the model properly
 		deResult[2] == message
 		DataElement.count() == 1  + deCountBefore
-		ValueDomain.count() == 1  + vdCountBefore
 
 		where:""
 		catalogueId	|	name  |	description	|result	| message
 		"DE2"		|	"DE2" |	"DE2-Desc"	| true	| ""
 	}
+
+
+	def "addValueDomain adds a new ValueDomain"(){
+
+		given:"A conceptualDomain,DataType and MeasurementUnit already exists"
+		def conDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain", catalogueId: "1", catalogueVersion: "1").save(flush:true,failOnError: true)
+		def dataType = new DataType(enumerated: false, name: "d",catalogueId: "d", catalogueVersion: "d").save(flush:true,failOnError: true)
+		def measurementUnit  = new MeasurementUnit(name: "centimeter",symbol: "cm").save(flush: true)
+
+		when:"addValueDomain is called"
+		def vdCountBefore = ValueDomain.count()
+		def valueDomainResult = service.addValueDomain("Test-ValueDomain","Test-Desc",dataType,measurementUnit,conDomain)
+
+		then:"a new valueDomain is added"
+		valueDomainResult[0] == true
+		ValueDomain.count() == vdCountBefore + 1
+		valueDomainResult[1].id == ValueDomain.list()[0].id
+	}
+
+
+	def "matchOrAddMeasurementUnit match existing MeasurementUnit"(){
+
+		given:"A measurementUnit already exists"
+		MeasurementUnit expected = new MeasurementUnit(name:"centimeter",symbol: "cm").save(flush: true)
+
+		when:"matchOrAddMeasurementUnit is called"
+		def result = service.matchOrAddMeasurementUnit("centimeter","cm")
+
+		then:"it returns the available measurementUnit"
+		result[1].id == expected.id
+	}
+
+
+	def "matchOrAddMeasurementUnit creates a new one for not available MeasurementUnit"(){
+
+		given:"MeasurementUnit does not exist"
+		MeasurementUnit.countByName("centimeter") == 0
+
+		when:"matchOrAddMeasurementUnit is called"
+		def result = service.matchOrAddMeasurementUnit("centimeter","cm")
+
+		then:"it creates a new measurementUnit"
+		MeasurementUnit.count() == 1
+		result[0] == true
+		MeasurementUnit.list()[0].id == result[1].id
+	}
+
+
+	def "deleteOldConceptualDomain will delete available conceptualDomain"(){
+
+		given:"A conceptualDomain exists"
+		def conceptualDomain = new ConceptualDomain(name:"NHIC", description: "NHIC conceptual domain", catalogueId: "1", catalogueVersion: "1").save(flush:true,failOnError: true)
+
+		when:"deleteOldConceptualDomain is called"
+		def result = service.deleteOldConceptualDomain(conceptualDomain)
+
+		then:"the conceptualDomain will be removed"
+		1 * service.conceptualDomainService.delete(conceptualDomain) >> {}
+		result[0] == true
+		result[1] == null
+		result[2] == ""
+	}
+
+	def "deleteOldConceptualDomain will return appropriate message if fails"(){
+
+		given:""
+		def con = new ConceptualDomain(name:"nhic",description: "test")
+
+		when:"deleteOldConceptualDomain is called"
+		def result = service.deleteOldConceptualDomain(con)
+
+		then:"the conceptualDomain will be removed"
+		1 * service.conceptualDomainService.delete(con) >> { throw new Exception("Error in delete!!!")}
+		result[0] == false
+		result[1] == null
+		result[2] == "Can not delete conceptualDomain nhic , Error:Error in delete!!!"
+	}
+
 }

@@ -20,19 +20,19 @@ class ConceptualDomainService {
 		//when we delete a conceptualDomain, all its models, subModels, dataElements and ValueDomains will be deleted
 
 		//remove all valueDomains from it's dataType
-		conceptualDomain.valueDomains.collect().each {vd->
+		conceptualDomain?.valueDomains.collect().each {vd->
 			vd.dataType.removeFromValueDomains(vd)
 		}
 
 
 		//remove all valueDomains from it's measurementUnit
-		conceptualDomain.valueDomains.collect().each {vd->
+		conceptualDomain?.valueDomains.collect().each {vd->
 			vd.measurementUnit.removeFromValueDomains(vd)
 		}
 
 
 		//remove all DataElementValueDomain from dataElement (ie. unlink)
-		conceptualDomain.models.collect().each { m ->
+		conceptualDomain?.models.collect().each { m ->
 			m.dataElements.each { de ->
 				de.dataElementValueDomains.collect().each { dv->
 					dataElementValueDomainService.unlink(dv)

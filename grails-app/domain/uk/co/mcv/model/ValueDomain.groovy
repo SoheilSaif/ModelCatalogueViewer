@@ -4,7 +4,6 @@ package uk.co.mcv.model
 class ValueDomain  {
 
     String name
-    String measurementUnit
     String regexDef
     String format
     String description
