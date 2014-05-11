@@ -53,6 +53,18 @@ class ConceptualDomainServiceISpec extends IntegrationSpec {
 		def dataElementValueDomain2 = 	dataElementValueDomainService.link(subDataElement,valueDomain1)
 
 
+
+		//valueDomain with null measurement unit
+		def vdWithoutMeasurement = new ValueDomain(name: "d", catalogueId: "d", catalogueVersion: "d")
+		dataType.addToValueDomains(vdWithoutMeasurement)
+		conDomain.addToValueDomains(vdWithoutMeasurement)
+		vdWithoutMeasurement.save(flush:true, failOnError: true)
+
+		def dataElement2 = new DataElement(name:"DE", catalogueId: "d", catalogueVersion: "d")
+ 		def model2 = Model.list()[0]
+		model2.addToDataElements(dataElement2)
+		dataElement2.save(flush:true,failOnError: true)
+		dataElementValueDomainService.link(dataElement2,vdWithoutMeasurement)
 	}
 
 
@@ -82,13 +94,13 @@ class ConceptualDomainServiceISpec extends IntegrationSpec {
 		!Model.list().containsAll(modelsBefore)
 
 		//all dataElements related to models should be deleted
-		DataElement.count() == deBefore - 2
+		DataElement.count() == deBefore - 3
 
 		//all its valueDomains should be deleted
-		ValueDomain.count() == vdBefore - 1
+		ValueDomain.count() == vdBefore - 2
 
 		//all its dataElementValueDomain will be deleted
-		DataElementValueDomain.count() == dataElementValueDomainBefore - 2
+		DataElementValueDomain.count() == dataElementValueDomainBefore - 3
 
 		//no dataType should be deleted
 		dtBefore == 1
@@ -99,3 +111,6 @@ class ConceptualDomainServiceISpec extends IntegrationSpec {
 		muBefore == MeasurementUnit.count()
 	}
 }
+
+
+

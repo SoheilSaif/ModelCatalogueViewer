@@ -21,13 +21,13 @@ class ConceptualDomainService {
 
 		//remove all valueDomains from it's dataType
 		conceptualDomain?.valueDomains.collect().each {vd->
-			vd.dataType.removeFromValueDomains(vd)
+			vd?.dataType?.removeFromValueDomains(vd)
 		}
 
 
 		//remove all valueDomains from it's measurementUnit
 		conceptualDomain?.valueDomains.collect().each {vd->
-			vd.measurementUnit.removeFromValueDomains(vd)
+			vd?.measurementUnit?.removeFromValueDomains(vd)
 		}
 
 

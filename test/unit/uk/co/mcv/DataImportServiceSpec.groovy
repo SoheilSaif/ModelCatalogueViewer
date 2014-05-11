@@ -142,7 +142,7 @@ class DataImportServiceSpec extends Specification {
 
 
 	@Unroll
-	def "addModel adds a new model for fixture:#fixtureId"() {
+	def "addModel adds a new model for fixture: #fixtId"() {
 		given: "A number of models already exist"
 		def conDomain = new ConceptualDomain(name: "A", description: "A", catalogueId: "1", catalogueVersion: "1").save(flush: true, failOnError: true)
 
@@ -172,21 +172,29 @@ class DataImportServiceSpec extends Specification {
 
 
 		where: ""
-		fixtureId | parentCode      | parentName  | modelCode      | modelName  | status | modelCatalogueId | parentCatalogueId | message
-		1         | ""              | ""          | ""             | ""         | false  | null             | null              | "Parent Model Code or Model Code should be defined."
-		2         | "Model1-CId"    | "Model1"    | ""             | ""         | true   | "Model1-CId"     | null              | ""
-		3         | "ModelNEW-CId"  | "ModelNEW"  | ""             | ""         | true   | "ModelNEW-CId"   | null              | ""
+		fixtId | parentCode      | parentName  | modelCode      | modelName  | status | modelCatalogueId | parentCatalogueId | message
 
-		4         | ""              | ""          | "Model1-CId"   | "Model1"   | true   | "Model1-CId"     | null              | ""
-		5         | ""              | ""          | "ModelNEW-CId" | "ModelNEW" | true   | "ModelNEW-CId"   | null              | ""
+		1      | ""              | ""          | ""             | ""         | false  | null             | null              | "Parent Model Code or Model Code should be defined."
 
-		6         | "Model1-CId"    | "Model1"    | "Model11-CId"  | "Model11"  | true   | "Model11-CId"    | "Model1-CId"      | ""
-		7         | "Model2-CId"    | "Model2"    | "Model11-CId"  | "Model11"  | false  | null             | null              | "Model has a different parent! you can not change parent model."
 
-		8         | "Model1-CId"    | "Model1"    | "ModelNEW-CId" | "ModelNEW" | true   | "ModelNEW-CId"   | "Model1-CId"      | ""
+		2      | "Model1-CId"    | "Model1"    | ""             | ""         | true   | "Model1-CId"     | null              | ""
+		3      | "ModelNEW-CId"  | "ModelNEW"  | ""             | ""         | true   | "ModelNEW-CId"   | null              | ""
 
-		9         | "ModelPNEW-CId" | "ModelPNEW" | "ModelNEW-CId" | "ModelNEW" | true   | "ModelNEW-CId"   | "ModelPNEW-CId"   | ""
-		10        | "ModelPNEW-CId" | "ModelPNEW" | "Model11-CId"  | "Model11"  | false  | null             | null              | "Model has a different parent! you can not change parent model."
+		4      | ""              | ""          | "Model1-CId"   | "Model1"   | true   | "Model1-CId"     | null              | ""
+		5      | ""              | ""          | "ModelNEW-CId" | "ModelNEW" | true   | "ModelNEW-CId"   | null              | ""
+
+		6      | "Model1-CId"    | "Model1"    | "Model11-CId"  | "Model11"  | true   | "Model11-CId"    | "Model1-CId"      | ""
+		7      | "Model2-CId"    | "Model2"    | "Model11-CId"  | "Model11"  | false  | null             | null              | "Model has a different parent! you can not change parent model."
+
+		8      | "Model1-CId"    | "Model1"    | "ModelNEW-CId" | "ModelNEW" | true   | "ModelNEW-CId"   | "Model1-CId"      | ""
+
+		9      | "ModelPNEW-CId" | "ModelPNEW" | "ModelNEW-CId" | "ModelNEW" | true   | "ModelNEW-CId"   | "ModelPNEW-CId"   | ""
+		10     | "ModelPNEW-CId" | "ModelPNEW" | "Model11-CId"  | "Model11"  | false  | null             | null              | "Model has a different parent! you can not change parent model."
+
+		11     | ""              | ""          | ""			    | "ModelNEW" | false  | null			 | null              | "Parent Model Code or Model Code should be defined."
+
+		12     | "Model1-CId"    | ""	       | ""             | ""         | false  | null			 | null              | "Parent Model Name should be defined."
+		13     |  ""			 | ""	       | "Model1-CId"   | ""         | false  | null			 | null              | "Model Name should be defined."
 
 	}
 

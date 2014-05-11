@@ -87,21 +87,57 @@ class DataImportService {
 			for (int i = 0; i < rows.size(); i++) {
 				def row = rows[i]
 				ImportRow importRow = new ImportRow()
-				importRow.dataElementName = (dataItemCodeIndex != -1) ? row[dataItemNameIndex] : null
-				importRow.dataElementCode = (dataItemCodeIndex != -1) ? row[dataItemCodeIndex] : null
-				importRow.parentModelName = (parentModelIndex != -1) ? row[parentModelIndex] : null
-				importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : null
-				importRow.containingModelName = (modelIndex != -1) ? row[modelIndex] : null
-				importRow.containingModelCode = (modelCodeIndex != -1) ? row[modelCodeIndex] : null
-				importRow.dataType = (dataTypeIndex != -1) ? row[dataTypeIndex] : null
-				importRow.dataElementDescription = (dataItemDescriptionIndex != -1) ? row[dataItemDescriptionIndex] : null
-				importRow.measurementUnitName = (unitsIndex != -1) ? row[unitsIndex] : null
+
+				importRow.dataElementName = (dataItemCodeIndex != -1) ? row[dataItemNameIndex] : ""
+				if(!importRow.dataElementName)
+					importRow.dataElementName = ""
+
+				importRow.dataElementCode = (dataItemCodeIndex != -1) ? row[dataItemCodeIndex] : ""
+				if(!importRow.dataElementCode)
+					importRow.dataElementCode = ""
+
+				importRow.parentModelName = (parentModelIndex != -1) ? row[parentModelIndex] : ""
+				if(!importRow.parentModelName)
+					importRow.parentModelName = ""
+
+
+				importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : ""
+				if(!importRow.parentModelCode)
+					importRow.parentModelCode = ""
+
+
+				importRow.containingModelName = (modelIndex != -1) ? row[modelIndex] : ""
+				if(!importRow.containingModelName)
+					importRow.containingModelName = ""
+
+
+				importRow.containingModelCode = (modelCodeIndex != -1) ? row[modelCodeIndex] : ""
+				if(!importRow.containingModelCode)
+					importRow.containingModelCode = ""
+
+				importRow.dataType = (dataTypeIndex != -1) ? row[dataTypeIndex] : ""
+				if(!importRow.dataType)
+					importRow.dataType = ""
+
+
+				importRow.dataElementDescription = (dataItemDescriptionIndex != -1) ? row[dataItemDescriptionIndex] : ""
+				if(!importRow.dataElementDescription)
+					importRow.dataElementDescription = ""
+
+				importRow.measurementUnitName = (unitsIndex != -1) ? row[unitsIndex] : ""
+				if(!importRow.measurementUnitName)
+					importRow.measurementUnitName = ""
+
 				importRow.measurementSymbol = ""
 
 				importRow.conceptualDomainName = conceptualDomainName
+
 				importRow.conceptualDomainDescription = conceptualDomainDescription
 
-				importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : null
+				importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : ""
+				if(!importRow.parentModelCode)
+					importRow.parentModelCode = ""
+
 
 				//build dataElement extensions (meta-data)
 				def counter = metadataStartIndex
@@ -239,10 +275,10 @@ class DataImportService {
 
 	def addDataElement(String dataElementName, String dataElementDesc, String dataElementCatalogueId, Map metadata, Model model) {
 
-		if (dataElementName == null || dataElementName.isEmpty())
+		if (!dataElementName || (dataElementName && dataElementName.isEmpty()))
 			return [false, null, "Blank DataElementName is not accepted."]
 
-		if (dataElementCatalogueId == null || dataElementCatalogueId.isEmpty())
+		if (!dataElementCatalogueId || (dataElementCatalogueId && dataElementCatalogueId.isEmpty()))
 			return [false, null, "Blank DataElementUniqueCode is not accepted."]
 
 		DataElement dataElement = new DataElement(name: dataElementName, description: dataElementDesc, catalogueId: dataElementCatalogueId)
@@ -274,11 +310,29 @@ class DataImportService {
 
 	def addModel(String parentCode, String parentName, String modelCode, String modelName, ConceptualDomain conceptualDomain) {
 
+		//if parentCode and modelCode are both empty,
+		//it is rejected, as least one should be defined
+		if (parentCode.isEmpty() && modelCode.isEmpty()) {
+			return [false, null, "Parent Model Code or Model Code should be defined."]
+		}
+
+		//if parentCode is provided, then its name should be also provided
+		if(!parentCode.isEmpty() && parentName.isEmpty()){
+			return [false, null, "Parent Model Name should be defined."]
+		}
+
+
+		//if modelCode is provided, then its name should also be provided
+		if(!modelCode.isEmpty() && modelName.isEmpty()){
+			return [false, null, "Model Name should be defined."]
+		}
+
+
 		Model model = Model.findByConceptualDomainAndCatalogueId(conceptualDomain, modelCode)
 		Model parentModel = Model.findByConceptualDomainAndCatalogueId(conceptualDomain, parentCode)
 
 		//parent is Not empty and model is empty
-		if (!parentName.isEmpty() && modelName.isEmpty()) {
+		if (!parentCode.isEmpty() && modelCode.isEmpty()) {
 			if (parentModel)
 				return [true, parentModel, ""]
 			model = new Model(name: parentName, catalogueId: parentCode)
@@ -288,7 +342,7 @@ class DataImportService {
 		}
 
 		//parent is empty and model is Not
-		if (parentName.isEmpty() && !modelName.isEmpty()) {
+		if (parentCode.isEmpty() && !modelCode.isEmpty()) {
 			if (model)
 				return [true, model, ""]
 			model = new Model(name: modelName, catalogueId: modelCode)
@@ -298,7 +352,7 @@ class DataImportService {
 		}
 
 		//parent is Not empty and model is Not empty
-		if (!parentName.isEmpty() && !modelName.isEmpty()) {
+		if (!parentCode.isEmpty() && !modelCode.isEmpty()) {
 
 			//they both exists
 			if (parentModel && model) {
@@ -348,11 +402,7 @@ class DataImportService {
 			}
 		}
 
-		//if parentName and modelName are both empty,
-		//it is rejected, as least one should be defined
-		if (parentName.isEmpty() && modelName.isEmpty()) {
-			return [false, null, "Parent Model Code or Model Code should be defined."]
-		}
+
 	}
 
 	def addConceptualDomain(name, description) {
@@ -381,7 +431,7 @@ class DataImportService {
 
 		def name = dataTypeStringValue
 		//if dataTypeStringValue in excel imported file is empty, use dataElement name
-		if (name.isEmpty())
+		if (!name || (name && name.isEmpty()))
 			name = DataElementName
 		//check it this simple dataType already exists
 		dataType = DataType.findByNameIlike(name)

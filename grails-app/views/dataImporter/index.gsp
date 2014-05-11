@@ -8,7 +8,8 @@
 <body>
 <div id="main" style="margin-left: 50px;">
 
-    <g:form class="form-horizontal" method="post" action="upload" controller="dataImport" enctype="multipart/form-data"
+    <g:form class="form-horizontal" method="post" action="upload" controller="dataImporter"
+            enctype="multipart/form-data"
             encoding="multipart/form-data" role="form">
         <div class="form-group">
             <label for="conceptualDomainName">Conceptual Domain Name</label></br>
@@ -17,10 +18,6 @@
         <div class="form-group">
             <label for="conceptualDomainDescription"> Conceptual Domain Description</label></br>
             <input type="text" id="conceptualDomainDescription" name="conceptualDomainDescription"/>
-        </div>
-        <div class="form-group">
-            <label for="parentModels">Parent Models</label></br>
-            <input type="text" id="parentModels" name="parentModels"/> (i.e. COSD, CORE)
         </div>
         <div class="form-group">
             <label for="excelFile">Please select files</label></br>
@@ -35,6 +32,35 @@
 </g:if>
 <g:if test="${flash.message}">
     <div class="message" style="display: block">${flash.message}</div>
+</g:if>
+
+
+<g:if test="${flash.processError}">
+
+    <table class="table  table-hover table-bordered ">
+        <thead>
+        <tr>
+            <th>Index</th>
+            <th>DataElement Name</th>
+            <th>Status</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        <g:each in="${rows}" var="row" status="index">
+            <g:if test="${!row.status}">
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${row.dataElementName}</td>
+                    <td>${row.status}</td>
+                    <td>${row.statusMessage}</td>
+                </tr>
+            </g:if>
+
+        </g:each>
+        </tbody>
+    </table>
+
 </g:if>
 
 </body>
