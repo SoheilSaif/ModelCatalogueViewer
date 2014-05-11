@@ -3,6 +3,7 @@ import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.DataElement
 import uk.co.mcv.model.DataElementValueDomain
 import uk.co.mcv.model.DataType
+import uk.co.mcv.model.EnumeratedType
 import uk.co.mcv.model.MeasurementUnit
 import uk.co.mcv.model.Model
 import uk.co.mcv.model.ValueDomain
@@ -202,7 +203,13 @@ class BootStrap {
 		model5.save(flush: true, failOnError: true)
 
 		def measurementUnit  = new MeasurementUnit(name: "centimeter",symbol: "cm").save(flush: true)
-		def dataType = new DataType(name: "TestDataType", enumerated: false, catalogueId: "1", catalogueVersion: "1").save(failOnError: true)
+		def dataType = new EnumeratedType(name: "TestDataType", catalogueId: "1", catalogueVersion: "1")
+		def enums = [:]
+		enums.put("0","male")
+		enums.put("1","female")
+		dataType.enumerations = enums
+		dataType.save(failOnError: true)
+
 		def valueDomain = new ValueDomain(name: "TestValueDomain",catalogueId: "1", catalogueVersion: "1")
 		measurementUnit.addToValueDomains(valueDomain)
 		dataType.addToValueDomains(valueDomain)

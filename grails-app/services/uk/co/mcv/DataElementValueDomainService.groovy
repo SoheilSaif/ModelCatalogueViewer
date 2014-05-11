@@ -14,7 +14,7 @@ class DataElementValueDomainService {
 			m = new DataElementValueDomain()
 			DataElement?.addToDataElementValueDomains(m)
 			ValueDomain?.addToDataElementValueDomains(m)
-			m.save()
+			m.save(failOnError: true)
 		}
 		return m
 	}

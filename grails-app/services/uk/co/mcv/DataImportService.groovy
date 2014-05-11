@@ -8,6 +8,7 @@ import uk.co.mcv.importer.Importer
 import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.DataElement
 import uk.co.mcv.model.DataType
+import uk.co.mcv.model.EnumeratedType
 import uk.co.mcv.model.MeasurementUnit
 import uk.co.mcv.model.Model
 import uk.co.mcv.model.ValueDomain
@@ -57,81 +58,89 @@ class DataImportService {
 
 
 
-		//do all the operation in a transactional way
-//		ConceptualDomain.withTransaction { status ->
-//			try	{
-//
-//
-//			}
-//			catch (Exception ex){
-//				status.setRollbackOnly()
-//			}
-//
-//		}
+		boolean importStatus = true
+		def importMessage = ""
+		def importedRows = []
 
-		//remove the old conceptualDomain if exists
-		def oldCd = ConceptualDomain.findByNameIlike(conceptualDomainName.trim())
-		if(oldCd)	{
-			def removeCdResult = deleteOldConceptualDomain(conceptualDomainName)
-			//can not remove the old conceptualDomain
-			if(!removeCdResult[0]){
-				return removeCdResult
+		//do all the operation in a transaction
+		ConceptualDomain.withTransaction { status ->
+
+			//remove the old conceptualDomain if exists
+			def oldCd = ConceptualDomain.findByNameIlike(conceptualDomainName.trim())
+			if (oldCd) {
+				def removeCdResult = deleteOldConceptualDomain(oldCd)
+
+				//error in deleting old conceptualDomain
+				if (!removeCdResult[0]) {
+					status.setRollbackOnly()
+					importStatus = false
+					importedRows = []
+					importMessage = removeCdResult[2]
+					return // exit the transaction
+				}
+			}
+
+			//Create a new ConceptualDomain
+			def conceptualDomain = addConceptualDomain(conceptualDomainName.trim(), conceptualDomainDescription.trim())
+
+			//iterate through the rows and import each line
+			for (int i = 0; i < rows.size(); i++) {
+				def row = rows[i]
+				ImportRow importRow = new ImportRow()
+				importRow.dataElementName = (dataItemCodeIndex != -1) ? row[dataItemNameIndex] : null
+				importRow.dataElementCode = (dataItemCodeIndex != -1) ? row[dataItemCodeIndex] : null
+				importRow.parentModelName = (parentModelIndex != -1) ? row[parentModelIndex] : null
+				importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : null
+				importRow.containingModelName = (modelIndex != -1) ? row[modelIndex] : null
+				importRow.containingModelCode = (modelCodeIndex != -1) ? row[modelCodeIndex] : null
+				importRow.dataType = (dataTypeIndex != -1) ? row[dataTypeIndex] : null
+				importRow.dataElementDescription = (dataItemDescriptionIndex != -1) ? row[dataItemDescriptionIndex] : null
+				importRow.measurementUnitName = (unitsIndex != -1) ? row[unitsIndex] : null
+				importRow.measurementSymbol = ""
+
+				importRow.conceptualDomainName = conceptualDomainName
+				importRow.conceptualDomainDescription = conceptualDomainDescription
+
+				importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : null
+
+				//build dataElement extensions (meta-data)
+				def counter = metadataStartIndex
+				def metadataColumns = [:]
+				while (counter <= metadataEndIndex) {
+					metadataColumns.put(headers[counter], row[counter])
+					counter++
+				}
+				importRow.metadata = (metadataColumns) ? metadataColumns : null
+
+				//refresh GORM cache, as it will slow down the import process
+				if (totalCounter > 40) {
+					sessionFactory.currentSession.flush()
+					sessionFactory.currentSession.clear()
+					totalCounter = 0
+				} else {
+					totalCounter++
+				}
+
+				ingestRow(importRow, conceptualDomain)
+				importedRows.add(importRow)
+
+				//failure in importing this row, so rollback and return
+				if (!importRow.status) {
+					importStatus = false
+					status.setRollbackOnly()
+					//throw new RuntimeException()
+					return // break the loop and exit
+				}
+
 			}
 		}
 
-		//Create a new ConceptualDomain
-		def conceptualDomain = addConceptualDomain(conceptualDomainName.trim(), conceptualDomainDescription.trim())
-
-
-		//iterate through the rows and import each line
-		rows.eachWithIndex { def row, int i ->
-
-			ImportRow importRow = new ImportRow()
-			importRow.dataElementName = (dataItemCodeIndex != -1) ? row[dataItemNameIndex] : null
-			importRow.dataElementCode = (dataItemCodeIndex != -1) ? row[dataItemCodeIndex] : null
-			importRow.parentModelName = (parentModelIndex != -1) ? row[parentModelIndex] : null
-			importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : null
-			importRow.containingModelName = (modelIndex != -1) ? row[modelIndex] : null
-			importRow.containingModelCode = (modelCodeIndex != -1) ? row[modelCodeIndex] : null
-			importRow.dataType = (dataTypeIndex != -1) ? row[dataTypeIndex] : null
-			importRow.dataElementDescription = (dataItemDescriptionIndex != -1) ? row[dataItemDescriptionIndex] : null
-			importRow.measurementUnitName = (unitsIndex != -1) ? row[unitsIndex] : null
-			importRow.conceptualDomainName = conceptualDomainName
-			importRow.conceptualDomainDescription = conceptualDomainDescription
-
-			importRow.parentModelCode = (parentModelCodeIndex != -1) ? row[parentModelCodeIndex] : null
-
-			//build dataElement extensions (meta-data)
-			def counter = metadataStartIndex
-			def metadataColumns = [:]
-			while (counter <= metadataEndIndex) {
-				metadataColumns.put(headers[counter], row[counter])
-				counter++
-			}
-			importRow.metadata = (metadataColumns) ? metadataColumns : null
-
-
-			//refresh GORM cache, as it will slow down the import process
-			if (totalCounter > 40) {
-				sessionFactory.currentSession.flush()
-				sessionFactory.currentSession.clear()
-				totalCounter = 0
-			} else {
-				totalCounter++
-			}
-
-			ingestRow(importRow,conceptualDomain)
-			//failure in importing this row, so rollback
-			if(!importRow.status){
-				throw new RuntimeException("")
-			}
-				//TransactionAspectSupport.currentTransactionInfo().roll
-
+		if (sessionFactory) {
+			sessionFactory.currentSession.flush()
+			sessionFactory.currentSession.clear()
 		}
-
-		sessionFactory.currentSession.flush()
-		sessionFactory.currentSession.clear()
-		return [true,rows,""]
+		//return imported rows
+		return [importStatus, importedRows, importMessage]
 	}
 
 
@@ -150,249 +159,281 @@ class DataImportService {
 		def modelResult = addModel(row.parentModelCode, row.parentModelName, row.containingModelCode, row.containingModelName, conceptualDomain)
 		Model model = modelResult[1]
 		//has some error
-		if(!modelResult[0]){
+		if (!modelResult[0]) {
 			row.status = false
 			row.statusMessage = modelResult[2]// get error message
 			return
 		}
 
+
 		def measurementUnitResult = matchOrAddMeasurementUnit(row.measurementUnitName, row.measurementSymbol)
 		MeasurementUnit measurementUnit = measurementUnitResult[1]
 		//has some error
-		if(!measurementUnitResult[0]){
+		if (!measurementUnitResult[0]) {
 			row.status = false
 			row.statusMessage = measurementUnitResult[2]// get error message
 			return
 		}
 
-		def valueDomainResult = addValueDomain(row.dataElementName,dataType.name,measurementUnit,conceptualDomain)
+		def valueDomainResult = addValueDomain(row.dataElementName, row.dataElementDescription, dataType, measurementUnit, conceptualDomain)
 		ValueDomain valueDomain = valueDomainResult[1]
-		if(!valueDomainResult[0]){
+		//has some error
+		if (!valueDomainResult[0]) {
 			row.status = false
 			row.statusMessage = valueDomainResult[2]// get error message
 			return
 		}
 
-		def dataElementResult = addDataElement(row.dataElementName, row.dataElementDescription, row.dataElementCode, row.metadata, model, dataType,measurementUnit,conceptualDomain)
+		def dataElementResult = addDataElement(row.dataElementName, row.dataElementDescription, row.dataElementCode, row.metadata, model)
 		DataElement dataElement = dataElementResult[1]
-		if(!dataElementResult[0]){
+		//has some error
+		if (!dataElementResult[0]) {
 			row.status = false
 			row.statusMessage = dataElementResult[2]// get error message
 			return
 		}
 
 		//link valueDomain and dataElement
-		def deVd = 	dataElementValueDomainService.link(dataElement,valueDomain)
-
+		try {
+			dataElementValueDomainService.link(dataElement, valueDomain)
+		}
+		catch (Exception ex) {
+			//has some error
+			row.status = false
+			row.statusMessage = ex.message// get error message
+			return
+		}
 		row.status = true
 		row.statusMessage = "Successful"
 	}
 
 
-	def deleteOldConceptualDomain(ConceptualDomain conceptualDomain){
-		try{
+	def deleteOldConceptualDomain(ConceptualDomain conceptualDomain) {
+		try {
 			conceptualDomainService.delete(conceptualDomain)
-			return [true,null,""]
+			return [true, null, ""]
 		}
-		catch (Exception ex){
-			return [ false,null,"Can not delete conceptualDomain ${conceptualDomain?.name} , Error:${ex.message}"]
+		catch (Exception ex) {
+			return [false, null, "Can not delete conceptualDomain ${conceptualDomain?.name} , Error:${ex.message}"]
 		}
 	}
 
 
-	def addValueDomain(vdName,vdDescription, DataType dataType,MeasurementUnit measurementUnit,ConceptualDomain conceptualDomain) {
+	def addValueDomain(String vdName, String vdDescription, DataType dataType, MeasurementUnit measurementUnit, ConceptualDomain conceptualDomain) {
+		if (vdName && !vdName.isEmpty()) {
+			ValueDomain valueDomain = new ValueDomain(name: vdName, description: vdDescription)
+			dataType.addToValueDomains(valueDomain)
 
-		ValueDomain valueDomain = new ValueDomain(name:vdName,description:vdDescription)
-		dataType.addToValueDomains(valueDomain)
-		measurementUnit.addToValueDomains(valueDomain)
-		conceptualDomain.addToValueDomains(valueDomain)
-		valueDomain.save(failOnError: true)
-		return [true,valueDomain,""]
+			//it may not have measurementUnit
+			if (measurementUnit)
+				measurementUnit.addToValueDomains(valueDomain)
+
+			conceptualDomain.addToValueDomains(valueDomain)
+			valueDomain.save(failOnError: true)
+			return [true, valueDomain, ""]
+		} else {
+			return [false, null, "Blank DataElementName is not accepted."]
+		}
 	}
 
-	def addDataElement(dataElementName,dataElementDesc, dataElementCatalogueId, Map metadata, Model model) {
 
-		DataElement dataElement = new DataElement(name:dataElementName,description:dataElementDesc,catalogueId:dataElementCatalogueId)
+	def addDataElement(String dataElementName, String dataElementDesc, String dataElementCatalogueId, Map metadata, Model model) {
+
+		if (dataElementName == null || dataElementName.isEmpty())
+			return [false, null, "Blank DataElementName is not accepted."]
+
+		if (dataElementCatalogueId == null || dataElementCatalogueId.isEmpty())
+			return [false, null, "Blank DataElementUniqueCode is not accepted."]
+
+		DataElement dataElement = new DataElement(name: dataElementName, description: dataElementDesc, catalogueId: dataElementCatalogueId)
+		dataElement.extensions = [:]
 		model.addToDataElements(dataElement)
 		//add extension to dataElement extension
-		metadata.each { key , value ->
-			if(dataElement.extensions.containsKey(key))
-				dataElement[key] = value
+		metadata.each { key, value ->
+			if (dataElement.extensions.containsKey(key))
+				dataElement.extensions[key] = value
 			else
-				dataElement.extensions.put(key,value)
+				dataElement.extensions.put(key, value)
 		}
 		dataElement.save(failOnError: true)
-		[true,dataElement,""]
+		[true, dataElement, ""]
 	}
 
-	def matchOrAddMeasurementUnit(name, symbol) {
-		MeasurementUnit measurementUnit = MeasurementUnit.findByNameIlike(name)
-		if (!measurementUnit) {
-			measurementUnit = new MeasurementUnit(name:name,symbol:symbol).save() }
-		return [true,measurementUnit,""]
+	def matchOrAddMeasurementUnit(String name, String symbol) {
+
+		if (name && !name.isEmpty()) {
+			MeasurementUnit measurementUnit = MeasurementUnit.findByNameIlike(name)
+			if (!measurementUnit) {
+				measurementUnit = new MeasurementUnit(name: name, symbol: symbol).save()
+			}
+			return [true, measurementUnit, ""]
+		}
+		else
+			return[true,null,""]
 	}
 
-	def addModel(String parentCode, String parentName,String  modelCode,String  modelName, ConceptualDomain conceptualDomain) {
+	def addModel(String parentCode, String parentName, String modelCode, String modelName, ConceptualDomain conceptualDomain) {
 
 		Model model = Model.findByConceptualDomainAndCatalogueId(conceptualDomain, modelCode)
 		Model parentModel = Model.findByConceptualDomainAndCatalogueId(conceptualDomain, parentCode)
 
 		//parent is Not empty and model is empty
-		if(!parentName.isEmpty() && modelName.isEmpty()){
-			if(parentModel)
-				return [true,parentModel,""]
-			model = new Model(name:parentName ,catalogueId: parentCode)
+		if (!parentName.isEmpty() && modelName.isEmpty()) {
+			if (parentModel)
+				return [true, parentModel, ""]
+			model = new Model(name: parentName, catalogueId: parentCode)
 			conceptualDomain.addToModels(model)
 			model.save(failOnError: true)
-			return [true,model,""]
+			return [true, model, ""]
 		}
 
 		//parent is empty and model is Not
-		if(parentName.isEmpty() && !modelName.isEmpty()){
-			if(model)
-				return [true,model,""]
-			model = new Model(name:modelName ,catalogueId: modelCode)
+		if (parentName.isEmpty() && !modelName.isEmpty()) {
+			if (model)
+				return [true, model, ""]
+			model = new Model(name: modelName, catalogueId: modelCode)
 			conceptualDomain.addToModels(model)
 			model.save(failOnError: true)
-			return [true,model,""]
+			return [true, model, ""]
 		}
 
-
 		//parent is Not empty and model is Not empty
-		if(!parentName.isEmpty() && !modelName.isEmpty()){
+		if (!parentName.isEmpty() && !modelName.isEmpty()) {
 
 			//they both exists
-			if(parentModel && model){
+			if (parentModel && model) {
 				//ERROR, model has a different parent, can not change parent of an existing model
-				if (model.parentModel?.id != parentModel?.id){
-					return [false,null,"Model has a different parent! can not change model parent."]
-				}else{
-					return [true,model,""]
+				if (model.parentModel?.id != parentModel?.id) {
+					return [false, null, "Model has a different parent! you can not change parent model."]
+				} else {
+					return [true, model, ""]
 				}
 			}
 
 			//they both do NOT exist
-			if(!parentModel && !model){
+			if (!parentModel && !model) {
 
-				parentModel = new Model(name:parentName,catalogueId: parentCode)
+				parentModel = new Model(name: parentName, catalogueId: parentCode)
 				conceptualDomain.addToModels(parentModel)
-				parentModel.save(failOnError: true,flush: true)
+				parentModel.save(failOnError: true, flush: true)
 
-				model = new Model(name:modelName ,catalogueId: modelCode)
+				model = new Model(name: modelName, catalogueId: modelCode)
 				parentModel.addToSubModels(model)
 				conceptualDomain.addToModels(model)
 				model.save(failOnError: true)
-				return [true,model,""]
+				return [true, model, ""]
 			}
 
 			//parent exists, but model does NOT
-			if(parentModel && !model){
-				model = new Model(name:modelName ,catalogueId: modelCode)
+			if (parentModel && !model) {
+				model = new Model(name: modelName, catalogueId: modelCode)
 				parentModel.addToSubModels(model)
 				conceptualDomain.addToModels(model)
 				model.save(failOnError: true)
-				return [true,model,""]
+				return [true, model, ""]
 			}
 
 			//parent does not exist but model exists !!
-			if(!parentModel && model){
+			if (!parentModel && model) {
 				//ERROR, can not change parent of an existing model
-				if (model.parentModel){
-					return [false,null,"Model has a different parent! can not change model parent."]
-				}else{ //model does not have parent, so add this parent and update the model
-					parentModel = new Model(name:parentName,catalogueId: parentCode)
+				if (model.parentModel) {
+					return [false, null, "Model has a different parent! you can not change parent model."]
+				} else { //model does not have parent, so add this parent and update the model
+					parentModel = new Model(name: parentName, catalogueId: parentCode)
 					conceptualDomain.addToModels(parentModel)
 					parentModel.addToSubModels(model)
-					parentModel.save(failOnError: true,flush: true)
-					return [true,model,""]
+					parentModel.save(failOnError: true, flush: true)
+					return [true, model, ""]
 				}
 			}
 		}
 
 		//if parentName and modelName are both empty,
 		//it is rejected, as least one should be defined
-		if(parentName.isEmpty() && modelName.isEmpty()){
-			return [false,null,"Parent Model Code or Model Code should be defined."]
+		if (parentName.isEmpty() && modelName.isEmpty()) {
+			return [false, null, "Parent Model Code or Model Code should be defined."]
 		}
 	}
 
 	def addConceptualDomain(name, description) {
-
-		ConceptualDomain
 		new ConceptualDomain(name: name, description: description, catalogueId: "", catalogueVersion: "").save(failOnError: true, flush: true)
 	}
 
+
 	def matchOrAddDataType(String DataElementName, String dataTypeStringValue) {
 
-		DataType dataType
-		Map enums = [:]
-		boolean isEnum = false
+		if (!dataTypeStringValue || (dataTypeStringValue && dataTypeStringValue.isEmpty()))
+			return [false, null, "Blank DataType is not accepted."]
 
-		//if DataType already exists, return it
-		dataType = DataType.findByNameIlike(DataElementName)
-		if (dataType) {
-			return [true, dataType]
-		} else
-			dataType = new DataType();
-
-		//it is an enumerated DataType as contains "|"
-		if (dataTypeStringValue.contains("|")) {
-			def lines = dataTypeStringValue.split("\\|")
-
-			boolean isValid = true
-			lines.each { line ->
-				String[] keyValue = line.split(":")
-				//it should contain exactly one : like "1:male"
-				if (keyValue.size() == 2) {
-					isEnum = true
-					enums.put(keyValue[0], keyValue[1])
-				} else {
-					isValid = false
-				}
-			}
-			if (!isValid)
-				return [false, null, "Invalid format for DataType enum"];
-
-			dataType.name = DataElementName
-		}//it is an enumerated DataType as contains ";"
-		else if (dataTypeStringValue.contains(";")) {
-			def lines = dataTypeStringValue.split(";")
-
-			boolean isValid = true
-			lines.each { line ->
-				String[] keyValue = line.split(":")
-				//it should contain exactly one : like "1:male"
-				if (keyValue.size() == 2) {
-					isEnum = true
-					enums.put(keyValue[0], keyValue[1])
-				} else {
-					isValid = false
-				}
-			}
-			if (!isValid)
-				return [false, null, "Invalid format for DataType enum"];
-
-			dataType.name = DataElementName
+		//it is an enumerated DataType as contains "|" or ";"
+		if (dataTypeStringValue.contains("|") || dataTypeStringValue.contains(";")) {
+			return matchOrAddEnumDataType(DataElementName, dataTypeStringValue)
 		}
-		//just have one ":", so it is not enum, it is an XML type like xsd:string
-		else if (dataTypeStringValue.lastIndexOf(":") == dataTypeStringValue.indexOf(":")) {
-			dataType.name = dataTypeStringValue
-		}
-		//has no '|' and has no single ':' , it should be a simple text dataType
+		//has no '|' or ";" , it should be a simple  dataType
 		else {
-			dataType.name = dataTypeStringValue
+			return matchOrAddSimpleDataType(DataElementName, dataTypeStringValue)
 		}
-		//if dataType property is empty, use dataElement name
-		if (dataType.name.isEmpty())
-			dataType.name = DataElementName
 
-		dataType.enumerated = isEnum
-		dataType.enumerations = enums
-		dataType.save(failOnError: true)
+	}
+
+	private def matchOrAddSimpleDataType(String DataElementName, String dataTypeStringValue) {
+		DataType dataType
+
+		def name = dataTypeStringValue
+		//if dataTypeStringValue in excel imported file is empty, use dataElement name
+		if (name.isEmpty())
+			name = DataElementName
+		//check it this simple dataType already exists
+		dataType = DataType.findByNameIlike(name)
+		if (!dataType)
+			dataType = new DataType(name: name).save()
 
 		return [true, dataType, ""]
 	}
 
+	private def matchOrAddEnumDataType(String DataElementName, String dataTypeStringValue) {
+		def lines
+		DataType dataType
+
+		def containsPipe = dataTypeStringValue.contains("|")
+		if (containsPipe)
+			lines = dataTypeStringValue.split("\\|")
+		else
+			lines = dataTypeStringValue.split(";")
+
+		Map enums = [:]
+		boolean isValid = true
+		lines.each { line ->
+			String[] keyValue = line.split(":")
+			//it should contain exactly one : like "1:male"
+			if (keyValue.size() == 2) {
+				def key = keyValue[0]
+				def value = keyValue[1]
+				if (value.size() > 244) {
+					value = value[0..244]
+				}
+				enums.put(key.trim(), value.trim())
+			} else {
+				isValid = false
+			}
+		}
+		if (!isValid)
+			return [false, null, "Invalid format for DataType enum."];
+
+		//has some enums
+		if (!enums.isEmpty()) {
+			String enumString = enums.sort() collect { key, val ->
+				"${key}:${val}"
+			}.join('|')
+			//check if enum dataType already exists
+			dataType = EnumeratedType.findWhere(enumAsString: enumString)
+			//if it does not exit, create it
+			if (!dataType) {
+				dataType = new EnumeratedType(name: DataElementName, enumerations: enums).save()
+			}
+		}
+		return [true, dataType, ""]
+	}
 
 	HeadersMap getHeaders() {
 		def headersMap = new HeadersMap()
@@ -413,6 +454,7 @@ class DataImportService {
 	 * check if excel headers are all as expected,
 	 * it should contain the headersMap, headers, otherwise it is rejected
 	 */
+
 	def validateHeaders(ArrayList<String> inputHeaders) {
 
 		boolean result = true

@@ -13,8 +13,8 @@ class DataTypeMarshaller {
             return [
                     id : dataType.id,
 					name: dataType.name,
-					enumerated: dataType.enumerated,
-					enumerations: dataType.enumerations,
+					//enumerated: dataType.enumerated,
+					//enumerations: dataType.enumerations,
 					catalogueVersion: dataType.catalogueVersion,
 					catalogueId: dataType.catalogueId
 			]
