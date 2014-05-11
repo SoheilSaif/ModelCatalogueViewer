@@ -14,6 +14,7 @@ import uk.co.mcv.model.*
 class ConceptualDomainServiceISpec extends IntegrationSpec {
 
 	def conceptualDomainService
+	def dataElementValueDomainService
 
 	def setup() {
 
@@ -28,11 +29,11 @@ class ConceptualDomainServiceISpec extends IntegrationSpec {
 		subModel.save(flush:true, failOnError: true)
 
 		def dataType = new DataType(enumerated: false, name: "d",catalogueId: "d", catalogueVersion: "d").save(flush:true,failOnError: true)
+		def measurementUnit  = new MeasurementUnit(name: "centimeter",symbol: "cm").save(flush: true)
 
-		//as ValueDomain has a DataType, but DataType does not have hasMany relation to valueDomain
-		//so to relating a valueDomain with a DataTye, we just add it in ValueDomain constructor
-		//and do not do like dt.addToValueDomains(dvd)
-		def valueDomain = new ValueDomain(name: "d", catalogueId: "d", catalogueVersion: "d",dataType: dataType)
+		def valueDomain = new ValueDomain(name: "d", catalogueId: "d", catalogueVersion: "d")
+		dataType.addToValueDomains(valueDomain)
+		measurementUnit.addToValueDomains(valueDomain)
 		conDomain.addToValueDomains(valueDomain)
 		valueDomain.save(flush:true, failOnError: true)
 
@@ -40,15 +41,30 @@ class ConceptualDomainServiceISpec extends IntegrationSpec {
 		def dataElement = new DataElement(name:"DE", catalogueId: "d", catalogueVersion: "d")
 		def valueDomain1 = ValueDomain.list()[0]
 		def model1 = Model.list()[0]
-		valueDomain1.addToDataElements(dataElement)
 		model1.addToDataElements(dataElement)
 		dataElement.save(flush:true,failOnError: true)
+		def dataElementValueDomain1 = dataElementValueDomainService.link(dataElement,valueDomain1)
+
 
 		def subDataElement = new DataElement(name:"sub-DE", catalogueId: "d", catalogueVersion: "d")
-		valueDomain1.addToDataElements(subDataElement)
 		model1.addToDataElements(subDataElement)
 		dataElement.addToSubElements(subDataElement)
 		subDataElement.save(flush:true,failOnError: true)
+		def dataElementValueDomain2 = 	dataElementValueDomainService.link(subDataElement,valueDomain1)
+
+
+
+		//valueDomain with null measurement unit
+		def vdWithoutMeasurement = new ValueDomain(name: "d", catalogueId: "d", catalogueVersion: "d")
+		dataType.addToValueDomains(vdWithoutMeasurement)
+		conDomain.addToValueDomains(vdWithoutMeasurement)
+		vdWithoutMeasurement.save(flush:true, failOnError: true)
+
+		def dataElement2 = new DataElement(name:"DE", catalogueId: "d", catalogueVersion: "d")
+ 		def model2 = Model.list()[0]
+		model2.addToDataElements(dataElement2)
+		dataElement2.save(flush:true,failOnError: true)
+		dataElementValueDomainService.link(dataElement2,vdWithoutMeasurement)
 	}
 
 
@@ -59,9 +75,11 @@ class ConceptualDomainServiceISpec extends IntegrationSpec {
 		def mlCountBefore = Model.count()
 		def conDomain = ConceptualDomain.list()[0]
 		def dtBefore = DataType.count()
+		def muBefore = MeasurementUnit.count()
 		def vdBefore = ValueDomain.count()
 		def deBefore = DataElement.count()
 		def modelsBefore = conDomain.models.collect()
+		def dataElementValueDomainBefore = DataElementValueDomain.count()
 
 		when:"delete is called for a conceptualDomain"
 		conceptualDomainService.delete(ConceptualDomain.list()[0])
@@ -76,12 +94,23 @@ class ConceptualDomainServiceISpec extends IntegrationSpec {
 		!Model.list().containsAll(modelsBefore)
 
 		//all dataElements related to models should be deleted
-		DataElement.count() == deBefore - 2
+		DataElement.count() == deBefore - 3
 
 		//all its valueDomains should be deleted
-		ValueDomain.count() == vdBefore - 1
+		ValueDomain.count() == vdBefore - 2
+
+		//all its dataElementValueDomain will be deleted
+		DataElementValueDomain.count() == dataElementValueDomainBefore - 3
 
 		//no dataType should be deleted
+		dtBefore == 1
 		dtBefore == DataType.count()
+
+		//no measurementUnit should be deleted
+		muBefore == 1
+		muBefore == MeasurementUnit.count()
 	}
 }
+
+
+

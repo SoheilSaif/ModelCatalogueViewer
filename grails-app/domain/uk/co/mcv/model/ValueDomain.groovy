@@ -4,7 +4,6 @@ package uk.co.mcv.model
 class ValueDomain  {
 
     String name
-    String unitOfMeasure
     String regexDef
     String format
     String description
@@ -12,9 +11,12 @@ class ValueDomain  {
 	String catalogueId
 
 	DataType dataType
+	MeasurementUnit measurementUnit
+
+	Set dataElementValueDomains = []
 
 
-	static hasMany = [dataElements: DataElement]
+	static hasMany = [dataElementValueDomains: DataElementValueDomain]
 
     static belongsTo = [conceptualDomain: ConceptualDomain]
 
@@ -23,10 +25,13 @@ class ValueDomain  {
         dataType nullable:false
         description nullable:true, type: 'text'
 
-		unitOfMeasure nullable:true
+		measurementUnit nullable:true
         regexDef nullable:true
         name blank: false
         format nullable:true
+
+		catalogueId nullable:true
+		catalogueVersion nullable:true
     }
 
     static mapping = {

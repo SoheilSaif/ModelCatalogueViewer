@@ -1,6 +1,7 @@
 package uk.co.mcv
 
 import grails.transaction.Transactional
+import uk.co.mcv.model.ConceptualDomain
 import uk.co.mcv.model.DataElement
 
 @Transactional
@@ -71,4 +72,5 @@ class DataElementService {
 		}
 		return  dataElements
 	}
+
 }

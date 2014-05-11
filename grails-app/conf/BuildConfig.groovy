@@ -62,8 +62,10 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
 
-
         compile 'com.googlecode.json-simple:json-simple:1.1.1'
+
+		compile "org.apache.poi:poi:3.8"
+		compile "org.apache.poi:poi-ooxml:3.8"
 
 
         // Selenium WebDriver, for use in Geb

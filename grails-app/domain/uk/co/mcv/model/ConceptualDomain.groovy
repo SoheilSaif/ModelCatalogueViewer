@@ -11,10 +11,12 @@ class ConceptualDomain   {
 
 	static constraints = {
 		name blank: false
+		description nullable: true
+		catalogueId nullable:true
+		catalogueVersion nullable:true
 	}
 
 	static mapping = {
-		description type: 'text', nullable: true
-		catalogueId nullable:false
+		description type: 'text'
 	}
 }
