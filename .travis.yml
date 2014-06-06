@@ -20,7 +20,7 @@ branches:
   - master
   - develop
 
-deploy:tra
+deploy:
    edge: true
    provider: cloudfoundry
    username: soheil.saifipour@ndm.ox.ac.uk
