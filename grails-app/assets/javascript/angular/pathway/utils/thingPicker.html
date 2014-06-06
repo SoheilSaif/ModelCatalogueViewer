@@ -1,0 +1,21 @@
+<div class="thing-picker">
+    <h5>{{widgetName}}
+        <i class="fa fa-caret-down pull-right" ng-click="compress = false" ng-show="compress"></i>
+        <i class="fa fa-caret-up pull-right" ng-click="compress = true" ng-hide="compress"></i>
+    </h5>
+
+    <div ng-hide="compress">
+    <div>
+        <div ng-hide="selectedThings && !!selectedThings.length">
+            <p >No items</p>
+        </div>
+        <div ng-show="selectedThings && !!selectedThings.length">
+            <table ng-table="tableParams" class="table">
+                <tr ng-repeat="thing in $data">
+                    <td ata-title="'Name'">{{thing.name}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>

@@ -2,19 +2,39 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
+		<title>Model Catalogue Browser</title>
 	</head>
 	<body>
-		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
-			</div>
-		</div>
-	</body>
+
+
+    <div class="container-fluid">
+        <div ng-app="viewerApp"  class="row">
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Themes</div>
+                    <div class="panel-body">
+                        <div  ng-controller="ngThemeController"  >
+                            <abn-tree tree-data="themes"  expand-level = "2" icon-leaf = "fa fa-file"                >
+                            </abn-tree>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Data Elements</div>
+                    <div class="panel-body">
+                        <div ui-view>
+                        </div>
+                    </div>
+                </div>
+             </div>
+            </div>
+        </div>
+    </div>
+
+    <asset:javascript src="angular/app.js"/>
+
+    </body>
+
 </html>

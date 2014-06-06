@@ -12,7 +12,6 @@ grails.project.fork = [
     //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
         test:false,
 //        run: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256], // configure settings for the run-app JVM
-//        war: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256], // configure settings for the run-war JVM
 ]
 
 grails.project.dependency.resolver = "maven" // or ivy
@@ -49,7 +48,6 @@ grails.project.dependency.resolution = {
         mavenRepo "http://download.java.net/maven/2/"
         mavenRepo 'http://maven.restlet.org'
         mavenRepo "http://repo.grails.org/grails/core"
-        mavenRepo 'http://repo.spring.io/milestone'
 
         mavenRepo 'http://dl.bintray.com/modelcatalogue-core/ModelCatalogueCorePlugin/'
         mavenRepo 'http://dl.bintray.com/modelcatalogue-core/ModelCatalogueElasticSearchPlugin/'
@@ -63,6 +61,11 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+
+        compile 'com.googlecode.json-simple:json-simple:1.1.1'
+
+		compile "org.apache.poi:poi:3.8"
+		compile "org.apache.poi:poi-ooxml:3.8"
 
 
         // Selenium WebDriver, for use in Geb
@@ -84,6 +87,17 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
+
+
+		// Spring Security
+		compile ':spring-security-core:1.2.7.3'
+		compile ":spring-security-ui:0.2"
+		compile ":jquery:1.11.0"
+		compile ":jquery-ui:1.10.3"
+		compile ":famfamfam:1.0.1"
+		compile ":mail:1.0"
+
+
         // plugins for the build system only
         build ":tomcat:7.0.52.1"
 
@@ -113,14 +127,14 @@ grails.project.dependency.resolution = {
         test ":geb:0.9.2"
 
 
-        compile "org.modelcatalogue.plugins:grails-model-catalogue-core-plugin:0.1"
-        compile "org.modelcatalogue.plugins:grails-model-catalogue-elastic-search-plugin:0.1"
+        //ModelCatalogue Core Pllugin
+        //compile "org.modelcatalogue.plugins:grails-model-catalogue-core-plugin:0.1"
+        //compile "org.modelcatalogue.plugins:grails-model-catalogue-elastic-search-plugin:0.1"
 
 
-        compile ":coffee-asset-pipeline:1.5.0"
-        compile ":less-asset-pipeline:1.5.3"
-        compile ":famfamfam:1.0.1"
-        compile ':asset-pipeline:1.6.1'
+		compile ":asset-pipeline:1.7.6"
+		compile ":coffee-asset-pipeline:1.7.0"
+		compile ":less-asset-pipeline:1.7.0"
 
-    }
+	}
 }

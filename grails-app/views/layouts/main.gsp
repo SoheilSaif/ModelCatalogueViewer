@@ -9,61 +9,60 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title><g:layoutTitle default="Grails"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
         <asset:stylesheet href="bootstrap/dist/css/bootstrap.css"/>
+        <asset:stylesheet href="angular-bootstrap-nav-tree/dist/abn_tree.css"/>
+
+
+
         <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+
+        %{--Styles for ng-Table--}%
+        <asset:stylesheet href="style.css"/>
+        %{--ng-Table default Style--}%
+        <asset:stylesheet href="ng-table/ng-table.css"/>
+
+
         <g:layoutHead/>
 	</head>
 	<body>
 
-    <div class="container">
-        <div class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">ModelCatalogue Viewer</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">DataElement</a></li>
-                        <li><a href="#">ValueDomain</a></li>
-                        <li><a href="#">DataTypes</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Action<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Import</a></li>
-                                <li><a href="#">Export</a></li>
-                                <li><a href="#">Data Visualization</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="">Log out</a></li>
-                    </ul>
-                </div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ModelCatalogue Browser</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/ModelCatalogueViewer">Home</a></li>
+                    <li><a href="/ModelCatalogueViewer">Data Model</a></li>
+                    <li><a href="/ModelCatalogueViewer/pathway/index">Pathways</a></li>
+                    <li><a href="#contact">Search</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>  <g:link controller="DataImporter" action="index">Import</g:link> </li>
+                            <li><a href="#">Export</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header"></li>
+                            <li><a href="#">Data Visualization</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
-
-        <div class="jumbotron">
-            <h2>ModelCatalogue Viewer</h2>
-            <p>ModelCatalogue Viewer, Read-Only view of DataElements, ValueDoamins, Pahtways and ...</p>
-            <p>
-                <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs »</a>
-            </p>
-        </div>
-        <g:layoutBody/>
     </div>
-		<r:layoutResources />
 
-
+   <div class="fullwidthContainer" style="margin-top: 70px;  " role="main">
+       <g:layoutBody/>
+   </div>
+ 		<r:layoutResources />
 	</body>
 
-<asset:javascript src="angular/app.js"/>
-<asset:javascript src="test.js"/>
-<asset:javascript src="bootstrap/dist/js/bootstrap.js"/>
+%{--<asset:javascript src="test.js"/>--}%
 
 </html>

@@ -9,9 +9,7 @@ addons:
 before_script:
 - npm install -g bower
 - bower install
-script: ! 'npm install && bower install && ./grailsw refresh-dependencies && ./grailsw
-  test-app unit: && ./grailsw test-app integration: && ./grailsw test-app functional:
-  -Dgeb.env=sauceChromeLinux && ./grailsw test-app functional: -Dgeb.env=sauceChromeWindows '
+script: ! 'npm install && bower install && ./grailsw refresh-dependencies && ./grailsw test-app unit: && ./grailsw test-app integration: && ./grailsw test-app functional: -Dgeb.env=sauceChromeLinux '
 env:
   global:
   - secure: N4EJHKFrkWbuiErvU+3hYJFKCV/DbEvx6ZYs7Y0KUPk6V+1/H7XfXw93KutErdxGbQkfK8mirqaI8sFxYqZbM9HBfBAzez16miLmWRRjOtnHoZH2Xvni8keN/9DY5plK1j5Gyo160xGQ5KplRsvLd6q7FhuYo0Z1IC/7oOne9p8=
@@ -25,6 +23,7 @@ deploy:
   api_key:
     secure: SiUI5KcYAqf2mFbzdZ0+y5cwEZqHuoiLX2qASJPLTXThamxNWOKeAUZjFuiEcr2s5yEFHV8RBDt8SNttSqNwKwe8xW17pI/BuAXVmWpOR5EyxxEfkXUsFmcRWuXaIGd2YsV2LKbN9ynSf89kF/AM8Ml3EdSRR2s+PXQplFH1AQs=
   app: modelcatalogueviewer
+  strategy: git
   on:
     repo: SoheilSaif/ModelCatalogueViewer
     branch: develop
